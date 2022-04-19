@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+:root {
+    --headerfooter: rgba(186, 211, 232, 0.53);
+}
+
+html, body {
+    line-height: 1.5;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    margin: 0px;
+    padding: 0px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    flex: 1;
+}
+
+header, footer {
+    display: flex;
+    background-color: #111;
+    font-family: 'Varela Round', sans-serif;
+    flex-direction: column;
+}
+
+#headerTop {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    padding: 10px;
+}
+
+#headerTop > div {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+#headerBottom {
+    padding: 5px;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 30px;
+    padding: 10px;
+    background-color: #342f2f;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+#bouton {
+    /** Ces directives indiquent au lien de ressembler à un bouton pour les principaux moteurs de rendu **/
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    /**Les directives en dessous enlèvent l'apparence par défaut en bleu et avec du texte souligné pour un lien hypertexte **/
+    text-decoration: none;
+    color: initial;
+}
+
+#boxCenter, #boxLeft, #boxRight {
+    display: flex;
+}
+
+#boxRight {
+    justify-content: flex-end;
+    flex: 1;
+    gap: 30px;
+    margin-right: 10px;
+}
+
+#boxCenter {
+    width: 100%;
+    gap: 30px;
+    margin-left: 30px;
+}
+
+#boxLeft {
+    margin-left: 10px;
+}
+
+a:hover {
+    color: #c42c2c;
+}
+
+#boxLeft img {
+    width: 80px;
+    margin: 3px;
+}
+
+footer {
+    display: flex;
+    background-color: #111;
+    font-family: 'Varela Round', sans-serif;
+    text-align: center;
+    color: white;
+}

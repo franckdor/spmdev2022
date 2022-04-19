@@ -3,6 +3,7 @@ session_start();
 
 //Require all controllers.
 require_once File::build_path(array("controller", "ControllerAdmin.php"));
+require_once File::build_path(array("controller", "ControllerNomenclature_espece.php"));
 
 $controller_default = 'Admin';
 
@@ -15,7 +16,7 @@ if (isset($_GET['controller'])) {
 // Verification that the controller exists
 $controller_class = 'Controller' . ucfirst($controller);
 if (!class_exists($controller_class)) {
-    ControllerAdmimn::errorPageIntrouvable();
+    ControllerAdmin::errorPageIntrouvable();
     exit();
 }
 

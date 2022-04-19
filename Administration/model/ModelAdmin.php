@@ -78,7 +78,7 @@ class ModelAdmin extends Model{
 
     public static function getIdByLogAndMdp($login, $mdp_hash){
         $sql="SELECT DISTINCT id FROM admin WHERE login=:login AND mdp=:mdp";
-        $values = array(
+        $data = array(
             'login' => $login,
             'mdp'=> $mdp_hash,
         );
@@ -87,7 +87,7 @@ class ModelAdmin extends Model{
 
         //Request execution
         try{
-            $req_prep->execute($values);
+            $req_prep->execute($data);
             $tab = $req_prep->fetchAll();
             if (sizeof($tab)==1) { //If we got a result, we continue the action
                 return $tab[0]['id'];

@@ -83,19 +83,19 @@ class ModelAdmin extends Model{
             'mdp'=> $mdp_hash,
         );
         $req_prep = Model::getPDO()->prepare($sql);
+        //Prepared request to protect from SQL injection
 
-
-        //on execute la requete
+        //Request execution
         try{
             $req_prep->execute($values);
             $tab = $req_prep->fetchAll();
-            if (sizeof($tab)==1) { //si on a un résultat, la connexion peut se poursuivre
+            if (sizeof($tab)==1) { //If we got a result, we continue the action
                 return $tab[0]['id'];
             }
         }catch(PDOException $e){
             if (Conf::getDebug()) {
                 echo $sql;
-                echo $e->getMessage(); // affiche un message d'erreur
+                echo $e->getMessage(); // Shows an error message
             } else {
                 echo 'Une erreur est survenue <a href=""> retour a la page d\'accueil </a>';
             }

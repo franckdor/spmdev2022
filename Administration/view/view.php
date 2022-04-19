@@ -7,13 +7,20 @@
     <body>
         <div id="boxCenter">
                 <a href="index.php?action=readAll">Admin list</a>
-                <a href="index.php?action=create">CREER UN ADMIN</a>
                 <a href="index.php?action=signIn">Se co</a>
+                <a href="index.php?action=home">home</a>
+                <?php
+                if (isset($_SESSION['id'])) {
+                    echo '<a href="index.php?action=signOut&controller=admin">Se déconnecter</a>';
+                    echo '<br>';
+                    echo '<a href="index.php?action=create&controller=admin">CREER UN ADMIN</a>';
+                }
+                ?>
         </div>
 <?php
 
-// Si $controleur='voiture' et $view='list',
-// alors $filepath="/chemin_du_site/view/voiture/list.php"
+// If $controller='Admin' et $view='list',
+// Then $filepath="/chemin_du_site/view/Admin/list.php"
 $filepath = File::build_path(array("view", static::$object, "$view.php"));
 require $filepath;
 ?>

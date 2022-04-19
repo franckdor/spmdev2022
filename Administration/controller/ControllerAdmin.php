@@ -5,8 +5,16 @@ require_once File::build_path(array("lib", "Security.php"));
 
 class ControllerAdmin {
 
-    //Object 
     protected static $object = 'Admin';
+
+    public static function home()
+    {
+        //renvoyer sur l'affichage du compte si connecté
+        //proposer la connexion et l'inscription si non
+        $view = 'home';
+        $pagetitle = 'Connexion';
+        require_once File::build_path(array('view', 'view.php'));
+    }
 
     public static function readAll() {
         $view="list";
@@ -54,11 +62,11 @@ class ControllerAdmin {
     {
         $log = $_POST['login'];
         $mdp_hash = Security::hacher($_POST['mdp']);
-        //$validUser = ModelClients::checkPassword($log, $mdp_hash);
+        $validUser = ModelAdmin::checkPasswd($log, $mdp_hash);
 //        $codeClient = ModelClients::getCodeClientByEmailAndPassword($emailClient, $mdp_hash);
-        //if (!$validUser){//|| !ModelClients::checkNonce(ModelClients::getCodeClientByEmailAndPassword($emailClient, $mdp_hash))) {
-        //    self::signInError();
-        //} else {
+        if (!$validUser){//|| !ModelClients::checkNonce(ModelClients::getCodeClientByEmailAndPassword($emailClient, $mdp_hash))) {
+            self::signInError();
+        } else {
             $view = "home";
             $pagetitle = 'Profil Utilisateur';
             //open client session
@@ -66,7 +74,7 @@ class ControllerAdmin {
             $ad = ModelAdmin::select($_SESSION['id']);
             $_SESSION['login'] = $ad->get('login');
             require_once File::build_path(array('view', 'view.php'));
-        //}
+        }
     }
 
     
@@ -81,6 +89,24 @@ class ControllerAdmin {
         $view = "signIn";
         $pagetitle = 'Connexion';
         $wrongInformations = false;
+        require_once File::build_path(array('view', 'view.php'));
+    }
+
+    public static function signOut()
+    {
+        if (isset($_SESSION['id'])) {
+            unset($_SESSION['id']);
+            unset($_SESSION['login']);
+            session_destroy();
+        }
+        return static::home();
+    }
+
+    public static function signInError()
+    {
+        $view = "signIn";
+        $pagetitle = 'Connexion';
+        $wrongInformations = true;
         require_once File::build_path(array('view', 'view.php'));
     }
 

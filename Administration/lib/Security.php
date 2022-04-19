@@ -8,7 +8,4 @@ class Security {
 	}
 }
 
-$mot_passe_en_clair = 'apple';
-$mot_passe_hache = Security::hacher($mot_passe_en_clair);
-echo $mot_passe_hache;
 ?>

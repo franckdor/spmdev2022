@@ -7,15 +7,19 @@
     <body>
         <div id="boxCenter">
                 <a href="index.php?action=readAll">Admin list</a>
-                <a href="index.php?action=signIn">Se co</a>
-                <a href="index.php?action=home">home</a>
-                <?php
+                <a href="index.php?action=home">Home</a>
+                <?php if (!isset($_SESSION['id'])) {
+                    echo '<a href="index.php?action=signIn">Se co</a>';
+                }    
                 if (isset($_SESSION['id'])) {
-                    echo '<a href="index.php?action=signOut&controller=admin">Se déconnecter</a>';
                     echo '<br>';
-                    echo '<a href="index.php?action=create&controller=admin">CREER UN ADMIN</a>';
+                    echo '<a href="index.php?action=create&controller=admin">Add Admin</a>';
+                    echo " ";
+                    echo '<a href="index.php?action=signOut&controller=admin">Se déconnecter</a>';
                 }
                 ?>
+                
+                
         </div>
 <?php
 

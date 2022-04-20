@@ -33,7 +33,8 @@ function videEspece() {
 
 let requete;
 function requeteAJAX(stringEspece, callback) {
-    let url = "index.php?controller=nomenclature_espece&action=requete.php&espece=" + encodeURIComponent(stringEspece);
+    let url = "index.php?controller=nomenclature_espece&action=requete&espece=" + encodeURIComponent(stringEspece);
+    console.log(url);
     if (requete && requete.readyState !== XMLHttpRequest.DONE) {
       requete.abort();
     }
@@ -50,7 +51,7 @@ function callback_1(req) {
 }
 
 function callback_4(req) {
-    let tab = JSON.parse(req);
+    let tab = JSON.parse(JSON.stringify(req));
     let tab2 = [];
     tab.forEach(element => {
       tab2.push(element.name);
@@ -59,5 +60,5 @@ function callback_4(req) {
 }
 
 function maRequeteAJAX(stringEspece) {
-    requeteAJAX(stringEspece, callback_1);
+    requeteAJAX(stringEspece, callback_4);
 }

@@ -17,21 +17,26 @@ class ControllerNomenclature_espece {
     public static function requete() {
         $view="requete";
         $pagetitle="Liste des espèces";
-        if (isset($_GET['espece'])) {
-            $espece = $_GET['espece'];
-        
+        if (empty($_GET['espece'])) {
+            echo "help";
+        } else {
+            $tab = ModelNomenclature_espece::selectByName($_GET['espece']);
+            sleep(1);
+            echo $tab;
+            $tab = json_encode($tab);
+        }
         // lancement de la requête SQL avec selectByName et
         // récupération du résultat de la requête SQL
-        $tab = ModelNomenclature_espece::selectByName($espece);
+        
 
         // délai fictif
         // sleep(1);
-        sleep(1);
+        
 
         // affichage en format JSON du résultat précédent
         // ...
-        $tab = json_encode($tab);
-        }
+        
+        
         require_once File::build_path(array("view", "view.php"));
     }
     

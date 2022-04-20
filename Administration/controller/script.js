@@ -33,7 +33,7 @@ function videEspece() {
 
 let requete;
 function requeteAJAX(stringEspece, callback) {
-    let url = "index.php?controller=nomenclature_espece&action=requete&espece=" + encodeURIComponent(stringEspece);
+    let url = "controller/requete.php?espece=" + encodeURIComponent(stringEspece);
     console.log(url);
     if (requete && requete.readyState !== XMLHttpRequest.DONE) {
       requete.abort();
@@ -53,9 +53,10 @@ function callback_1(req) {
 function callback_4(req) {
     let tab = JSON.parse(JSON.stringify(req));
     let tab2 = [];
-    tab.forEach(element => {
-      tab2.push(element.name);
-    });
+    for (let i=0; i<tab.length; i++) {
+      tab2.push(tab[i].value);
+    }
+    console.log(tab2);
     afficheEspece(tab2);
 }
 

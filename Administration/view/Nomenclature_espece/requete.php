@@ -5,6 +5,4 @@
 </div>
 
 <?php
-if (isset($tab)) {
-    echo $tab;
-}
+var_dump($tab);

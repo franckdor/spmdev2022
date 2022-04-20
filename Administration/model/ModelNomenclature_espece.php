@@ -1,4 +1,10 @@
 <?php
+
+/*
+Nomenclatures acts :
+*/
+
+
 require_once File::build_path(array("config", "Conf.php"));
 require_once File::build_path(array("model" ,"Model.php"));
 
@@ -42,7 +48,30 @@ class ModelNomenclature_espece extends Model {
         }
     }
 
+    public static function selectByName($name) {
+        try {
+            // préparation de la requête
+            $sql = "SELECT * FROM nomenclature_espece WHERE nom_espece LIKE :name_tag LIMIT 5";
+            $req_prep = Model::getPDO()->prepare($sql);
+            // passage de la valeur de name_tag
+            $values = array("name_tag" => $name."%");
+            // exécution de la requête préparée
+            $req_prep->execute($values);
+            $req_prep->setFetchMode(PDO::FETCH_OBJ);
+            $tabResults = $req_prep->fetchAll();
+            // renvoi du tableau de résultats
+            return $tabResults;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la base de données.");
+        }
+    }
+
     public function get($attribute) {
         return $this->$attribute;
+    }
+
+    public function set($attribute) {
+        $this->$attribute = $attribute;
     }
 }

@@ -5,7 +5,7 @@ require_once File::build_path(array("config", "Conf.php"));
 class Model {
     
     private static $pdo = NULL;
-
+//Connection to the database.
     public static function init() {
 
         $hostname = Conf::getHostname();
@@ -28,7 +28,7 @@ class Model {
     }
 
     
-
+//Function called by all Models/ModelsXXX function to connect the DB
     public static function getPDO() {
         if (is_null(self::$pdo)) {
             self::init();

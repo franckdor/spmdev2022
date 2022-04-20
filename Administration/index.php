@@ -1,3 +1,5 @@
+<!-- We load JS here -->
+<script type="text/javascript" src="view/js/script.js" defer></script>
 <?php
 //The pages that lauches automatically 
 $DS = DIRECTORY_SEPARATOR;

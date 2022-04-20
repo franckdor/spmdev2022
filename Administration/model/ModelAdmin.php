@@ -4,10 +4,11 @@ require_once File::build_path(array("config", "Conf.php"));
 require_once File::build_path(array("model" ,"Model.php"));
 
 class ModelAdmin extends Model{
-
+    //Have to be the same as the DB
     private $id;
     private $login;
     private $mdp;
+    //Permet d'appeler les fonctions de model whit these attributes
     protected static $object = "admin";
     protected static $primary='id';
 

@@ -1,6 +1,7 @@
 <?php
 class Conf {
    
+    //Displays WARNINGS and Errors
     static private $debug = True;
 
     static private $databases = array(

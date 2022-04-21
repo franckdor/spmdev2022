@@ -14,19 +14,18 @@ class ControllerNomenclature_espece {
         require_once File::build_path(array("view", "view.php"));
     }
     
+    //Species form
     public static function requete() {
         $view="requete";
         $pagetitle="Liste des espèces";
-        if (isset($_GET['espece'])) {
-            if (is_null($_GET['espece'])) {
-                $espece = $GET['espece'];
-                $tab = ModelNomenclature_espece::selectByName($espece);
-                sleep(1);
-                $tab = json_encode($tab);
-            }
-        }
         require_once File::build_path(array("view", "view.php"));
-        
+    }
+
+    //Action for JS autocompletion :
+    public static function autocomplete() {
+        $tab = ModelNomenclature_espece::selectByName($_GET['espece']);
+        sleep(1);
+        echo json_encode($tab);
     }
     
 }

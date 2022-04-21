@@ -38,7 +38,7 @@ function videEspece() {
 
 let requete;
 function requeteAJAX(stringEspece, callback) {
-    let url = "controller/requete.php?espece=" + encodeURIComponent(stringEspece);
+    let url = "index.php?controller=nomenclature_espece&action=autocomplete&espece=" + encodeURIComponent(stringEspece);
     if (requete && requete.readyState !== XMLHttpRequest.DONE) {
       requete.abort();
     }

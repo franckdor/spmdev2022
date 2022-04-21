@@ -3,7 +3,6 @@
 //same for rawurlencode
 
     foreach ($tab_admin as $a)
-    var_dump($a);
         echo '<p> Admin ' . htmlspecialchars($a->getLogin()) . " <a href=?action=read&login=" . rawurlencode($a->getLogin()). ">Details</a> .</p>";
 
 

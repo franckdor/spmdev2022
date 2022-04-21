@@ -1,8 +1,7 @@
 <?php
-
-require_once ("../model/ModelNomenclature_espece");
-    $_GET['espece'] = "januae";
+require_once("../lib/File.php");
+require_once("../model/ModelNomenclature_espece.php");
     $tab = ModelNomenclature_espece::selectByName($_GET['espece']);
     sleep(1);
-    $tab = json_encode($tab);
-    echo $tab;
+    echo json_encode($tab);
+    

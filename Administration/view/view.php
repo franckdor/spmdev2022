@@ -19,7 +19,7 @@
                     //echo " ";
                     echo '<a href="index.php?action=signOut&controller=admin">Deconnect</a>';
                     echo '<a href="index.php?action=readAll&controller=nomenclature_espece">Species</a>';
-                    echo '<a href="index.php?action=requete&controller=nomenclature_espece">Species TEST</a>';
+                    echo '<a href="requete.html">Species TEST</a>';
                 }
                 ?>
                 
@@ -31,7 +31,12 @@
         // If $controller='Admin' and $view='list',
         // Then $filepath="/site_path/view/Admin/list.php"
         $filepath = File::build_path(array("view", static::$object, "$view.php"));
-        require $filepath;
+        if (file_exists($filepath)) {
+            require $filepath;
+        } else {
+            $filepath = File::build_path(array("view", static::$object, "$view.html")); 
+            require $filepath;
+        }
     ?>
 </main>    
     </body>

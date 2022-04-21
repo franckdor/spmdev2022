@@ -17,9 +17,10 @@ class ControllerNomenclature_espece {
     public static function requete() {
         $view="requete";
         $pagetitle="Liste des espèces";
-        $espece = "januae";
         if (isset($_GET['espece'])) {
-            $espece = $_GET['espece'];
+            $espece = $GET['espece'];
+            sleep(1);
+            echo json_encode($tab);
         }
         $tab = ModelNomenclature_espece::selectByName($espece);
         require_once File::build_path(array("view", "view.php"));

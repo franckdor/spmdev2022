@@ -47,15 +47,15 @@ function requeteAJAX(stringEspece, callback) {
 }
 
 function callback_1(req) {
-    console.log(req.responseText);
+    console.log(req.response);
 }
 
 function callback_4(req) {
-    let tab = JSON.parse(JSON.stringify(req));
+    let tab = JSON.parse(req.response);
     let tab2 = [];
-    for (let i=0; i<tab.length; i++) {
-      tab2.push(tab[i].value);
-    }
+    tab.forEach(element => {
+      tab2.push(element.nom_espece);
+    });
     console.log(tab2);
     afficheEspece(tab2);
 }

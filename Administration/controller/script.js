@@ -5,7 +5,7 @@ let timeout;
 videEspece();
 
 espece.addEventListener("input", () => {
-    if (espece.value.length > 2) {
+    if (espece.value.length > 1) {
       if (!timeout) {
         clearTimeout();
       }
@@ -13,6 +13,11 @@ espece.addEventListener("input", () => {
       maRequeteAJAX(espece.value);
     }, 200);
   }
+});
+
+auto.addEventListener("click", function(e)  {
+  videEspece();
+  espece.value = e.target.innerText;
 });
   
 
@@ -34,7 +39,6 @@ function videEspece() {
 let requete;
 function requeteAJAX(stringEspece, callback) {
     let url = "controller/requete.php?espece=" + encodeURIComponent(stringEspece);
-    console.log(url);
     if (requete && requete.readyState !== XMLHttpRequest.DONE) {
       requete.abort();
     }

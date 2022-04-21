@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="view/style.css">
+        <link rel="stylesheet" type="text/css" href="view/completion.css">
         <title><?php echo $pagetitle; ?></title>
     </head>
     <body>

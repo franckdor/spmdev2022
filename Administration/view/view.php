@@ -19,7 +19,7 @@
                     //echo " ";
                     echo '<a href="index.php?action=signOut&controller=admin">Deconnect</a>';
                     echo '<a href="index.php?action=readAll&controller=nomenclature_espece">Species</a>';
-                    echo '<a href="requete.html">Species TEST</a>';
+                    echo '<a href="index.php?action=requete&controller=nomenclature_espece&espece=">Species TEST</a>';
                 }
                 ?>
                 

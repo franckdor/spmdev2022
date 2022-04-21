@@ -114,7 +114,7 @@ function callback_ESP(req) {
 
 function callback_GEN(req) {
     let tab = JSON.parse(req.response);
-    console.log(tab);
+    console.log(req);
     let tab2 = [];
     tab.forEach(element => {
       tab2.push(element.nom_genre);
@@ -124,7 +124,7 @@ function callback_GEN(req) {
 }
 
 function maRequeteGEN(stringGender) {
-  requeteESP(stringGender, callback_GEN);
+  requeteGEN(stringGender, callback_GEN);
 }
 
 function maRequeteESP(stringEspece) {

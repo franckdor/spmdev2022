@@ -48,10 +48,10 @@ class ModelNomenclature_genre extends Model {
     public static function selectByName($name) {
         try {
             // préparation de la requête
-            $sql = "SELECT DISTINCT nom_genre FROM nomenclature_genre WHERE nom_genre LIKE :name_tag LIMIT 5";
+            $sql = "SELECT DISTINCT * FROM nomenclature_genre WHERE nom_genre LIKE :name_tag LIMIT 5";
             $req_prep = Model::getPDO()->prepare($sql);
-            // passage de la valeur de name_tag
-            $values = array("name_tag" => $name."%");
+            // passage de la valeur de name_tag 
+            $values = array("name_tag" => ucfirst($name)."%");//UCFIRST Bc you enter in lowercase from form but in Uppercase from DB
             // exécution de la requête préparée
             $req_prep->execute($values);
             $req_prep->setFetchMode(PDO::FETCH_OBJ);

@@ -17,6 +17,15 @@ class ModelGenre_valide extends Model {
 
     private $id_note;
 
+
+    protected static $object = "genre_valide";
+    protected static $primary='id_genre_valide';
+
+
+    public function get($nom_attribut){
+        return $this->$nom_attribut;
+    }
+
     public function __construct($id=NULL, $nomg=NULL, $ref=NULL, $codebibli=NULL, $idclas=NULL, $idn=NULL) {
         if (!is_null($id) && !is_null($nomg) && !is_null($nome) && !is_null($aut) && !is_null($idn) && !is_null($ref)
         && !is_null($codebibli) && !is_null($boll) && !is_null($idgv)) {

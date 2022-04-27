@@ -3,6 +3,8 @@
 <script type="text/javascript" src="controller/js/scriptEsp.js" defer></script>
 <script type="text/javascript" src="controller/js/scriptStat.js" defer></script>
 <script type="text/javascript" src="controller/js/scriptAut.js" defer></script>
+<script type="text/javascript" src="controller/js/scriptEspV.js" defer></script>
+<script type="text/javascript" src="controller/js/scriptGenV.js" defer></script>
 <!-- Library for INPUT SELECTOR -->
 <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
@@ -42,6 +44,14 @@
             
             </div>
         </div>
+        <label for="select-espece-valide">Espece Valide : </label>
+        <select id="select-espece-valide" name="espece_valide" required></select>
+
+
+        <label for="select-genre-valide">Genre Valide : </label>  
+        <select id="select-genre-valide" name="genre-valide"  required></select>
+
+
         <input type="submit" value="Envoyer" />
     </fieldset>
 </form>

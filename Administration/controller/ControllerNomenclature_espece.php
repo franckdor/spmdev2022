@@ -4,7 +4,8 @@ require_once File::build_path(array("model", "ModelNomenclature_espece.php"));
 require_once File::build_path(array("model", "ModelStatut_genre.php"));
 require_once File::build_path(array("model", "ModelStatut_espece.php"));
 require_once File::build_path(array("model", "ModelNomenclature_genre.php"));
-
+require_once File::build_path(array("model", "ModelEspece_valide.php"));
+require_once File::build_path(array("model", "ModelGenre_valide.php"));
 class ControllerNomenclature_espece {
 
 
@@ -23,6 +24,7 @@ class ControllerNomenclature_espece {
         //}
         //Association status is not an "action", we don't need a new file for it.
 
+        
         require_once File::build_path(array("view", "view.php"));
     }
 
@@ -64,6 +66,30 @@ class ControllerNomenclature_espece {
         sleep(0.5);
         echo json_encode($tabE);
         
+    }
+
+    public static function autocompleteEspVALID() {
+        $tab = ModelEspece_valide::selectALL();
+
+        sleep(0.5);
+        $tabEV = array();
+        foreach($tab as $EV) {
+            array_push($tabEV, $EV->get('nom_espece'));
+        }
+
+        echo json_encode($tabEV);
+    }
+
+    public static function autocompleteGenVALID() {
+        $tab = ModelGenre_valide::selectALL();
+
+        sleep(0.5);
+        $tabGV = array();
+        foreach($tab as $GV) {
+            array_push($tabGV, $GV->get('nom_genre'));
+        }
+
+        echo json_encode($tabGV);
     }
 
     //CALL FOR autocompletion in JS request (url from js)

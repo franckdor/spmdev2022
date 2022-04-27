@@ -29,13 +29,17 @@ class ModelNomenclature_espece extends Model {
     //Id Genre Valide
     private $id_espece_valide;
 
+    private $who;
+
+    private $dateadd;
+
     protected static $object = "Nomenclature_espece";
     protected static $primary='id_nomenclature_espece';
 
 
-    public function __construct($idE=NULL, $nomG=NULL, $nomE=NULL, $author_date=NULL, $note=NULL, $ref=NULL, $bibli=NULL, $statut=NULL, $idEV=NULL) {
+    public function __construct($idE=NULL, $nomG=NULL, $nomE=NULL, $author_date=NULL, $note=NULL, $ref=NULL, $bibli=NULL, $statut=NULL, $idEV=NULL, $whoo=NULL, $date=NULL) {
         if (!is_null($idE) || !is_null($nomG) || !is_null($nomE) || !is_null($author_date) || !is_null($note) || !is_null($ref) ||
-        !is_null($bibli) || !is_null($statut) || !is_null($idEV)) {
+        !is_null($bibli) || !is_null($statut) || !is_null($idEV) ||!is_null($whoo) || !is_null($date)) {
             $this->id_nomenclature_espece = $idE;
             $this->nom_genre = $nomG;
             $this->nom_espece = $nomE;
@@ -45,6 +49,8 @@ class ModelNomenclature_espece extends Model {
             $this->code_bibliographie = $bibli;
             $this->id_statut = $statut;
             $this->id_espece_valide = $idEV;
+            $this->who = $whoo;
+            $this->dateadd = $date; 
         }
     }
 

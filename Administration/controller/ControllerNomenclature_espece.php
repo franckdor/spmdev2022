@@ -34,8 +34,10 @@ class ControllerNomenclature_espece {
             'nom_espece' => $_POST['espece'],
             'nom_genre' => $_POST['genre'],
             'auteur_date' => $_POST['auteur'],
-            'id_statut' => $tab[0]->get('id_statut_espece')
-        );   
+            'id_statut' => $tab[0]->get('id_statut_espece'),
+            'who' => $_SESSION['login'],
+            'dateadd' => date('d/m/Y', time()) 
+         );   
         ModelNomenclature_espece::save($data);
         require_once File::build_path(array("view", "view.php"));
     }

@@ -8,6 +8,7 @@
     </head>
     <body>
         <div id="boxCenter">
+                <a href="test.php">TEST</a>
                 <a href="index.php?action=readAll">Admin list</a>
                 <a href="index.php?action=home">Home</a>
                 <?php //if you're not logged then you can connect
@@ -20,7 +21,7 @@
                     //echo " ";
                     echo '<a href="index.php?action=signOut&controller=admin">Deconnect</a>';
                     echo '<a href="index.php?action=readAll&controller=nomenclature_espece">Species</a>';
-                    echo '<a href="index.php?action=requete&controller=nomenclature_espece&espece=">Species TEST</a>';
+                    echo '<a href="index.php?action=requete&controller=nomenclature_espece">Species TEST</a>';
                 }
                 ?>
                 

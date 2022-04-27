@@ -54,3 +54,31 @@ fieldset>div {
     display:flex;
     align-items:center;
 }
+
+#select-repo-inline .ts-dropdown {
+	position: relative !important;
+	top: 0 !important;
+	left: 0 !important;
+	width: auto !important;
+	box-shadow: none;
+	height: auto !important;
+}
+#select-repo-inline .ts-dropdown-content {
+	overflow: auto !important;
+	max-height: none !important;
+
+}
+#select-repo-inline .ts-wrapper{
+	position: sticky;
+	top: 2rem;
+	z-index:2000;
+}
+#select-repo-inline .option{
+	margin: 0;
+}
+.icon{
+	width: 3rem;
+}
+.item{
+	width: 100%;
+}

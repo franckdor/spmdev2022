@@ -1,43 +1,10 @@
-const espece = document.getElementById('espece');
-const autoESP = document.getElementById("autocompletionESP");
-
-/*
-videESP();
-
-espece.addEventListener("input", () => {
-    if (espece.value.length > 1) {
-      if (!timeout) {
-        clearTimeout();
-      }
-      timeout = setTimeout(function () {
-      maRequeteESP(espece.value);
-    }, 200);
-  }
-});
-
-autoESP.addEventListener("click", function(e)  {
-    videESP();
-    espece.value = e.target.innerText;
-});
-
-function afficheESP(tableau) {
-    videESP();
-    for (let i=0; i<tableau.length; i++) {
-        var p = document.createElement("p");
-        p.innerHTML = tableau[i];
-        autoESP.appendChild(p);
-    }
-    if(tableau.length > 0) autoESP.style.borderWidth = "1px";
-}
-  
-function videESP() {
-    autoESP.innerHTML = "";
-    autoESP.style.boderWidth = "0px 0px 0px 0px";
-}
-
 let requeteESPE;
-function requeteESP(stringEspece, callback) {
-    let url = "index.php?controller=nomenclature_espece&action=autocompleteEsp&espece=" + encodeURIComponent(stringEspece);
+let requeteESPEV;
+requeteESP(callback_ESP);
+
+
+function requeteESP(callback) {
+    let url = "index.php?controller=nomenclature_espece&action=autocompleteEsp";
     if (requeteESPE && requeteESPE.readyState !== XMLHttpRequest.DONE) {
       requeteESPE.abort();
     }
@@ -49,31 +16,51 @@ function requeteESP(stringEspece, callback) {
     requeteESPE.send(null);
 }
 
+function requeteESPV(callback) {
+  let url = "index.php?controller=nomenclature_espece&action=autocompleteEspV";
+  if (requeteESPEV && requeteESPEV.readyState !== XMLHttpRequest.DONE) {
+    requeteESPEV.abort();
+  }
+  requeteESPEV = new XMLHttpRequest();
+  requeteESPEV.open("GET", url, true);
+  requeteESPEV.addEventListener("load", function () {
+      callback(requeteESPEV);
+  });
+  requeteESPEV.send(null);
+}
+
+
+
+
+
 function callback_ESP(req) {
-    let tab = JSON.parse(req.response);
-    let tab2 = [];
-    tab.forEach(element => {
-      tab2.push(element.nom_espece);
-    });
-    console.log(tab2);
-    afficheESP(tab2);
+  var options = [];
+  let tab = JSON.parse(req.response);
+  for (var i=0; i<tab.length; i++) {
+      var title = [];
+      title.push(tab[i].nom_espece);
+      options.push({
+          id: i+'-'+title.join(''),
+          title: title.join(''),
+      });
+  }
+
+  new TomSelect('#select-espece',{
+    maxItems: 1,
+	  maxOptions: 6000,
+	  valueField: 'title',
+	  labelField: 'title',
+    searchField: ['title'],
+    sortField: 'title',
+    options: options,
+    persist: false,
+    create: true
+  });
+
 }
 
-function maRequeteESP(stringEspece) {
-    requeteESP(stringEspece, callback_ESP);
-}
-*/
-var control = new TomSelect('#espece',{
-	persist: false,
-	createOnBlur: true,
-	create: true
-});
 
 
 
-new TomSelect("#genre",{
-	persist: false,
-	createOnBlur: true,
-	create: true
-});
+
 

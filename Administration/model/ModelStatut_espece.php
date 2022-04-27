@@ -37,6 +37,19 @@ class ModelStatut_espece extends Model {
         }
     }
 
+    public static function selectIdByName($name) {
+        try {
+            $sql ="SELECT DISTINCT id_statut_espece FROM statut_espece WHERE nom_statut_espece='$name'";
+            $req_prep = Model::getPDO()->query($sql);
+            $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelStatut_espece");
+            $tab = $req_prep->fetchAll();
+            return $tab;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la base de données.");
+        }
+    }
+
     public function get($attribute) {
         return $this->$attribute;
     }
@@ -44,5 +57,7 @@ class ModelStatut_espece extends Model {
     public function set($attribute) {
         $this->$attribute = $attribute;
     }
+
+
 
 }

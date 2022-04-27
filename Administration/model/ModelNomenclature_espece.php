@@ -48,6 +48,8 @@ class ModelNomenclature_espece extends Model {
         }
     }
 
+    
+
     public static function selectByName($name) {
         try {
             // préparation de la requête
@@ -67,9 +69,36 @@ class ModelNomenclature_espece extends Model {
         }
     }
 
+    
+    public static function selectAllNomEsp() {
+        try {
+            $sql ="SELECT DISTINCT nom_espece FROM nomenclature_espece";
+            $req_prep = Model::getPDO()->query($sql);
+            $req_prep->setFetchMode(PDO::FETCH_OBJ);
+            $tab = $req_prep->fetchAll();
+            return $tab;
+            } catch (PDOException $e){
+                echo $e->getMessage()."\n";
+                die("Erreur lors de la recherche dans la base de données.");
+            }
+    }
+
     public static function selectALLauthordate() {
         try {
         $sql ="SELECT DISTINCT auteur_date FROM nomenclature_espece";
+        $req_prep = Model::getPDO()->query($sql);
+        $req_prep->setFetchMode(PDO::FETCH_OBJ);
+        $tab = $req_prep->fetchAll();
+        return $tab;
+        } catch (PDOException $e){
+            echo $e->getMessage()."\n";
+            die("Erreur lors de la recherche dans la base de données.");
+        }
+    }
+
+    public static function selectAuthorDate() {
+        try {
+        $sql ="SELECT DISTINCT auteur_date FROM nomenclature_espece WHERE id_nomenclature_espece=1";
         $req_prep = Model::getPDO()->query($sql);
         $req_prep->setFetchMode(PDO::FETCH_OBJ);
         $tab = $req_prep->fetchAll();

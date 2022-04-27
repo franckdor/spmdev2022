@@ -22,9 +22,21 @@ class ControllerNomenclature_espece {
         //    $st = $stat->get('nom_statut_genre');    
         //}
         //Association status is not an "action", we don't need a new file for it.
-        $tab = ControllerNomenclature_espece::associationStatus($tab_esp);
-        
-        
+
+        require_once File::build_path(array("view", "view.php"));
+    }
+
+    public static function created() {
+        $view="created";
+        $pagetitle="Admin créé";
+        $tab = ModelStatut_espece::SelectIdByName($_POST['statut']);
+        $data = array(
+            'nom_espece' => $_POST['espece'],
+            'nom_genre' => $_POST['genre'],
+            'auteur_date' => $_POST['auteur'],
+            'id_statut' => $tab[0]->get('id_statut_espece')
+        );   
+        ModelNomenclature_espece::save($data);
         require_once File::build_path(array("view", "view.php"));
     }
     
@@ -34,20 +46,27 @@ class ControllerNomenclature_espece {
         $pagetitle="Liste des espèces";
         $tab = ModelStatut_espece::selectALL();
         require_once File::build_path(array("view", "view.php"));
+        
     }
 
     //Action for JS autocompletion :
     public static function autocompleteEsp() {
-        $tabE = ModelNomenclature_espece::selectByName($_GET['espece']);
-        
+        $tabE = ModelNomenclature_espece::selectAllNomEsp();
         sleep(0.5);
-       
         echo json_encode($tabE);
+        
+    }
+
+    public static function autocompleteEspV() {
+        $tabE = ModelEspece_valide::selectAllNomEsp();
+        sleep(0.5);
+        echo json_encode($tabE);
+        
     }
 
     //CALL FOR autocompletion in JS request (url from js)
     public static function autocompleteGen() {
-        $tabG = ModelNomenclature_genre::selectByName($_GET['genre']);
+        $tabG = ModelNomenclature_genre::selectAllNomGen();
         
         sleep(0.5);
        
@@ -70,7 +89,6 @@ class ControllerNomenclature_espece {
         sleep(0.5);
         echo json_encode($tabA);
     }
-
     
     
     //Associate an id status to it's name

@@ -64,6 +64,19 @@ class ModelNomenclature_genre extends Model {
         }
     }
 
+    public static function selectAllNomGen() {
+        try {
+            $sql ="SELECT DISTINCT nom_genre FROM nomenclature_genre";
+            $req_prep = Model::getPDO()->query($sql);
+            $req_prep->setFetchMode(PDO::FETCH_OBJ);
+            $tab = $req_prep->fetchAll();
+            return $tab;
+            } catch (PDOException $e){
+                echo $e->getMessage()."\n";
+                die("Erreur lors de la recherche dans la base de données.");
+            }
+    }
+
     public function get($attribute) {
         return $this->$attribute;
     }

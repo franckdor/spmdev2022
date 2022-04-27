@@ -1,22 +1,48 @@
-const aut = document.getElementById('authd');
+let requeteAute;
 
-let tab = getAllData();
-function getAllData() {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'index.php?controller=nomenclature_espece&action=autocompleteAut', true);
-    xhr.onload = function() {
-        if (this.status === 200) {
-            const response = JSON.parse(this.responseText);
-            tab = response;
-            console.log(tab);
-        }
-    };
-    xhr.send();
+requeteAut(callbackAut);
+
+function callbackAut(req) {
+    var options = [];
+    let tab = JSON.parse(req.response);
+    for (var i=0; i<tab.length; i++) {
+        var title = [];
+        if (tab[i].auteur_date.charAt(0)=='(') {
+            tab[i].auteur_date = tab[i].auteur_date.substring(1, tab[i].auteur_date.length-1);
+        } 
+        title.push(tab[i].auteur_date);
+        options.push({
+            id: i+'-'+title.join(''),
+            title: title.join(''),
+        });
+    }
+
+
+    new TomSelect("#select-authd", {
+        maxItems:1,
+        maxOptions: null,
+        valueField: 'title',
+        labelField: 'title',
+        sortField: 'title',
+        searchField: ['title'],
+        create: false,
+        options: options,
+    });
 }
 
 
-var control = new TomSelect(aut, {
-    persist: false,
-	createOnBlur: true,
-	create: true
-});
+
+
+function requeteAut(callback) {
+    let url = "index.php?controller=nomenclature_espece&action=autocompleteAut";// + encodeURIComponent(stringAut);
+    if (requeteAute && requeteAute.readyState !== XMLHttpRequest.DONE) {
+      requeteAute.abort();
+    }
+    requeteAute = new XMLHttpRequest();
+    requeteAute.open("GET", url, true);
+    requeteAute.addEventListener("load", function () {
+        callback(requeteAute);
+    });
+    requeteAute.send(null);
+}
+

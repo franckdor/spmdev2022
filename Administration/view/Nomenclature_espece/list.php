@@ -1,10 +1,12 @@
 
 
 <?php
+
 foreach($tab_esp as $esp) {
 echo '<p>' . htmlspecialchars($esp->get('nom_genre')). " " . htmlspecialchars($esp->get('nom_espece')) . /*" " . $st .*/ " " .
 /*htmlspecialchars($esp->get('id_statut')) .*/ '</p>';
 }
+/*
 foreach($tab as $value) {
     foreach($value as $id) {
         echo $id->get('nom_statut_genre');
@@ -12,4 +14,5 @@ foreach($tab as $value) {
         echo "<br>";
     }
 }
+*/
 ?>

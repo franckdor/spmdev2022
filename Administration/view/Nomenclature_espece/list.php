@@ -1,7 +1,6 @@
 
 
 <?php
-var_dump($especeV);
 foreach($tab_esp as $esp) {
 echo '<p>' . htmlspecialchars($esp->get('nom_genre')). " " . htmlspecialchars($esp->get('nom_espece')) . /*" " . $st .*/ " " .
 /*htmlspecialchars($esp->get('id_statut')) .*/ '</p>';

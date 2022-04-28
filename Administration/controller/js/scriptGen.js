@@ -20,7 +20,6 @@ function requeteGEN(callback) {
 function callback_GEN(req) {
   var options = [];
   let tab = JSON.parse(req.response);
-  console.log(tab);
 
   for (var i=0; i<tab.length; i++) {
     var title = [];

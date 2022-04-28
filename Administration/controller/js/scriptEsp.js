@@ -1,5 +1,4 @@
 let requeteESPE;
-let requeteESPEV;
 requeteESP(callback_ESP);
 
 
@@ -15,21 +14,6 @@ function requeteESP(callback) {
     });
     requeteESPE.send(null);
 }
-
-function requeteESPV(callback) {
-  let url = "index.php?controller=nomenclature_espece&action=autocompleteEspV";
-  if (requeteESPEV && requeteESPEV.readyState !== XMLHttpRequest.DONE) {
-    requeteESPEV.abort();
-  }
-  requeteESPEV = new XMLHttpRequest();
-  requeteESPEV.open("GET", url, true);
-  requeteESPEV.addEventListener("load", function () {
-      callback(requeteESPEV);
-  });
-  requeteESPEV.send(null);
-}
-
-
 
 
 

@@ -5,6 +5,7 @@
 <script type="text/javascript" src="controller/js/scriptAut.js" defer></script>
 <script type="text/javascript" src="controller/js/scriptEspV.js" defer></script>
 <script type="text/javascript" src="controller/js/scriptGenV.js" defer></script>
+<script type="text/javascript" src="controller/js/scriptBiblio.js" defer></script>
 <!-- Library for INPUT SELECTOR -->
 <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
@@ -56,7 +57,11 @@
         <br>
         <label for="bibliographie">Bibliographie : </label> 
         <br>
-        <textarea wrap="soft" id="bibliographie" readonly></textarea>
+        <div>
+            <select id="bibliographie" name="biblio" ></select>
+            <br>
+            <textarea wrap="soft" id="biblio" readonly></textarea>
+        </div>
         <br>
         <input type="submit" value="Envoyer" />
     </fieldset>

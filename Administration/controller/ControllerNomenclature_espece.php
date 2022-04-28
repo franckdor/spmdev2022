@@ -6,6 +6,7 @@ require_once File::build_path(array("model", "ModelStatut_espece.php"));
 require_once File::build_path(array("model", "ModelNomenclature_genre.php"));
 require_once File::build_path(array("model", "ModelEspece_valide.php"));
 require_once File::build_path(array("model", "ModelGenre_valide.php"));
+require_once File::build_path(array("model", "ModelBibliographie.php"));
 class ControllerNomenclature_espece {
 
 
@@ -16,6 +17,9 @@ class ControllerNomenclature_espece {
         $view="list";
         $pagetitle="Liste des Espèces";
         $tab_esp = ModelNomenclature_espece::selectALL();
+        
+        $title = ModelBibliographie::selectByRef("Ehara & Gotoh (1987)");
+
         //$statut = ModelStatut_genre::selectNameById(10); //RETURN AN ARRAY
         //$st; 
         //GETTING NAME STATUS OUT OF ARRAY
@@ -45,6 +49,8 @@ class ControllerNomenclature_espece {
         ModelNomenclature_espece::save($data);
         require_once File::build_path(array("view", "view.php"));
     }
+
+    
     
     //Species form
     public static function requete() {
@@ -53,6 +59,23 @@ class ControllerNomenclature_espece {
         $tab = ModelStatut_espece::selectALL();
         require_once File::build_path(array("view", "view.php"));
         
+    }
+
+    public static function autocompleteBiblio() {
+        $biblio = ModelBibliographie::selectALL();
+        sleep(0.5);
+        echo json_encode(array(
+            "biblio" => $biblio
+        ));
+    }
+
+    public static function autocompleteText() {
+        $text = $_GET['reference'];
+        $title = ModelBibliographie::selectByRef($text);
+        sleep(0.5);
+
+        echo json_encode(array(
+            "title" => $title));
     }
 
     //Action for JS autocompletion :

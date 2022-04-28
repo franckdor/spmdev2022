@@ -34,6 +34,56 @@ class ModelBibliographie extends Model {
             $this->id_note = $idn;
         }
     }
+
+    public function get($nom_attribut){
+        return $this->$nom_attribut;
+    }
+
+    static public function selectAll()
+    {
+        try {
+            $table_name = static::$object;
+            $class_name = 'Model' . ucfirst($table_name);
+
+            $pdo = Model::getPDO();
+            $rep = $pdo->query("SELECT * FROM $table_name");
+            $rep->setFetchMode(PDO::FETCH_ASSOC);
+            return $rep->fetchAll();
+        } catch (PDOException $e) {
+            if (Conf::getDebug())
+                echo $e->getMessage();
+            else {
+                echo '<br>Une erreur est survenue - <a href="">Retour à la page d\'accueil</a>';
+            }
+            die();
+        }
+    }
+
+    static public function selectByRef($ref) {
+        try {
+            $sql = "SELECT titre FROM bibliographie WHERE reference=:ref";
+
+            $pdo = Model::getPDO();
+            
+            $req_prep = $pdo->prepare($sql);
+
+            $data = array(
+                'ref' => $ref
+            );
+
+            $req_prep->execute($data);
+
+            $req_prep->setFetchMode(PDO::FETCH_ASSOC);
+            return $req_prep->fetchAll();
+        } catch(PDOException $e) {
+            if (Conf::getDebug())
+                echo $e->getMessage();
+            else {
+                echo '<br>Une erreur est survenue - <a href="">Retour à la page d\'accueil</a>';
+            }
+            die();
+        }
+    }
     
     
 }

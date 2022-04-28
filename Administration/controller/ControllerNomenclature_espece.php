@@ -31,12 +31,14 @@ class ControllerNomenclature_espece {
     public static function created() {
         $view="created";
         $pagetitle="Admin créé";
-        $tab = ModelStatut_espece::SelectIdByName($_POST['statut']);
+        $statut = ModelStatut_espece::SelectIdByName($_POST['statut']);
+        $especeV = ModelEspece_valide::SelectIdByName($_POST['espece_valide'], $_POST['genre_valide']);
         $data = array(
             'nom_espece' => $_POST['espece'],
             'nom_genre' => $_POST['genre'],
             'auteur_date' => $_POST['auteur'],
-            'id_statut' => $tab[0]->get('id_statut_espece'),
+            'id_statut' => $statut[0]->get('id_statut_espece'),
+            'id_espece_valide' => $especeV[0]->get('id_espece_valide'),
             'who' => $_SESSION['login'],
             'dateadd' => date('d/m/Y', time()) 
          );   

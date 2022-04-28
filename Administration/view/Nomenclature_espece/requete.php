@@ -12,28 +12,28 @@
 <form method="POST" action= <?php echo "index.php?controller=". self::$object . "&action=created"?>>
     <fieldset>
         <legend>Autocomplétion en Javascript</legend>
-        <div>
-            <label for="select-espece">Espece : </label>   
-                <select id="select-espece" name="espece" required>
-                    </select>
-                
-        </div>
+        
+            <label for="select-espece">Espece : </label> 
+            <div>  
+                <select id="select-espece" name="espece" required></select>
+
+            </div>
         <br>
-        <div>
-            <label for="select-genre">Genre : </label>  
-                <select id="select-genre" name="genre"  required>
-                </select>
-                
-        </div>
+        
+            <label for="select-genre">Genre : </label>
+            <div>  
+                <select id="select-genre" name="genre"  required></select>    
+            </div>
         <br>
-        <div>
-            <label for="select-authd">Auteur et Date : </label>    
-                <select id="select-authd" name="auteur" required></select>
-                
-        </div>
+        
+            <label for="select-authd">Auteur et Date : </label> 
+            <div>   
+                <select id="select-authd" name="auteur" required></select>   
+            </div>
         <br>
         <div>
             <label for="select-statut">Statut : </label>
+            <br>
             <div id="acdiv">    
                 <!--
                 onfocus = overflow out of 10 opt
@@ -45,13 +45,19 @@
             </div>
         </div>
         <label for="select-espece-valide">Espece Valide : </label>
-        <select id="select-espece-valide" name="espece_valide" required></select>
-
+        <div>
+            <select id="select-espece-valide" name="espece_valide" required></select>
+        </div>  
 
         <label for="select-genre-valide">Genre Valide : </label>  
-        <select id="select-genre-valide" name="genre-valide"  required></select>
-
-
+        <div>
+            <select id="select-genre-valide" name="genre_valide"  required></select>
+        </div>
+        <br>
+        <label for="bibliographie">Bibliographie : </label> 
+        <br>
+        <textarea wrap="soft" id="bibliographie" readonly></textarea>
+        <br>
         <input type="submit" value="Envoyer" />
     </fieldset>
 </form>

@@ -1,8 +1,17 @@
 let requeteBiblio;
 requeteB(callbackBiblio);
 let requeteText;
-console.log(document.getElementById("bibliographie").options);
 
+let select = document.getElementById("bibliographie");
+let textarea = document.getElementById("biblio");
+
+
+select.addEventListener("change", listener)
+
+function listener() {
+    var option = select.options[select.selectedIndex].value;
+    textarea.innerText=option;
+}
 function requeteB(callback) {
     let url = "index.php?controller=nomenclature_espece&action=autocompleteBiblio";
     if (requeteBiblio && requeteBiblio.readyState !== XMLHttpRequest.DONE) {
@@ -35,8 +44,6 @@ function callbackText(req) {
 }
 
 
-
-
 function callbackBiblio(req) {
   var options = [];
   let tab = JSON.parse(req.response);
@@ -46,6 +53,7 @@ function callbackBiblio(req) {
         options.push({
             id: i+'-'+title.join(''),
             title: title.join(''),
+            value: tab['biblio'][i].titre,
         }); 
   }
 
@@ -54,9 +62,9 @@ function callbackBiblio(req) {
 
   new TomSelect('#bibliographie',{
     maxItems: 1,
-	  maxOptions: 6000,
-	  valueField: 'title',
-	  labelField: 'title',
+	maxOptions: 6000,
+	valueField: 'value',
+	labelField: 'title',
     searchField: ['title'],
     sortField: 'title',
     options: options,

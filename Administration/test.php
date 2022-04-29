@@ -3,8 +3,8 @@
 <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
 
 
-<select id="select-junk" placeholder="Start Typing..."></select>
 
+<button id="btn" type="button">Créer un objet Promise !</button>
+<div id="log"></div>
 
 <?php
-echo $_SERVER['REQUEST_TIME'];

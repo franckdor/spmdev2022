@@ -1,6 +1,14 @@
 <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
 <script type="text/javascript" src="controller/NomenclatureJS/scriptAutocompleteGen.js" defer></script>
+<script type="text/javascript" src="controller/NomenclatureJS/scriptStat.js" defer></script>
+
+<div>
+    <label for="select">Recherche : </label>
+    <div>  
+        <select id="select" name="select"  required></select>    
+    </div>
+</div>
 
 <form method="POST" action= <?php echo "index.php?controller=". self::$object . "&action=updated"?>>
     <fieldset>
@@ -28,9 +36,9 @@
             
             </div>
         <br>
-        <label for="select-espece-valide">Espece Valide : </label>
+        <label for="select-sous-famille">Sous-Famille : </label>
         <div>
-            <select id="select-espece-valide" name="espece_valide" required></select>
+            <select id="select-sous-famille" name="sous-famille" required></select>
         </div>  
 
         <label for="select-genre-valide">Genre Valide : </label>  

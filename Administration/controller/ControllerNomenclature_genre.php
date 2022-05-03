@@ -19,18 +19,10 @@ class ControllerNomenclature_genre {
         $pagetitle="Liste des Genres";
 
 
-        
+        $statut = ModelStatut_genre::selectNameById(10);
+        var_dump($statut);
 
         $tab_gen = ModelGenres::selectALL();
-
-        $tabjson = array();
-
-        foreach($tab_gen as $gen) {
-            $monarray = array("val1" => "toto",
-            "val2" => 2);
-            array_push($tabjson, $monarray);
-        }
-        echo json_encode($tabjson);
 
         //$statut = ModelStatut_genre::selectNameById(10); //RETURN AN ARRAY
         //$st; 

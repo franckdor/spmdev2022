@@ -5,21 +5,42 @@ requete(callback);
 function callback(req) {
     var genre = [];
     var tribu = [];
+    var sous_famille = [];
+    var recherche = [];
 
     let tab = JSON.parse(req.response);
     for (var i=0; i<tab.length; i++) {
         var titleGen = [];
         var titleTrib = [];
+        var titleSF = [];
+        var titleR = [];
+
         titleGen.push(tab[i].genre);
         titleTrib.push(tab[i].tribu);
+        titleSF.push(tab[i].sous_famille);
+        titleR.push(tab[i].genre + " - " + tab[i].tribu + " - " + tab[i].sous_famille + " - " + tab[i].statut);
+
         genre.push({
             id: i+'-'+titleGen.join(''),
             title: titleGen.join(''),
         });
+
         tribu.push({
             id: i+'-'+titleTrib.join(''),
             title: titleTrib.join(''),
         });
+
+        sous_famille.push({
+            id: i+'-'+titleSF.join(''),
+            title: titleSF.join(''),
+        });
+
+        recherche.push({
+            id: i+'-'+titleR.join(''),
+            title: titleR.join(''),
+        });
+
+
     }
 
 
@@ -46,6 +67,28 @@ function callback(req) {
         searchField: ['title'],
         create: false,
         options: tribu,
+    });
+
+    new TomSelect("#select-sous-famille", {
+        maxItems:1,
+        maxOptions: null,
+        valueField: 'title',
+        labelField: 'title',
+        sortField: 'title',
+        searchField: ['title'],
+        create: false,
+        options: sous_famille,
+    });
+
+    new TomSelect("#select", {
+        maxItems:1,
+        maxOptions: null,
+        valueField: 'title',
+        labelField: 'title',
+        sortField: 'title',
+        searchField: ['title'],
+        create: false,
+        options: recherche,
     });
 }
 

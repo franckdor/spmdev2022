@@ -1,4 +1,5 @@
 const statut = document.getElementById('statut');
+const statut2 = document.getElementById("statut");
 let requeteStat;
 
 
@@ -11,8 +12,11 @@ maRequeteSTAT();
 function afficheStat(tableau) {
   for (let i=0; i<tableau.length; i++) {
       var o = document.createElement("option");
+      var op = document.createElement("option");
       o.innerHTML = tableau[i];
+      op.innerHTML = tableau[i];
       statut.appendChild(o);
+      statut2.appendChild(op);
   }
   if(tableau.length > 0) o.style.borderWidth = "1px";
 }
@@ -39,7 +43,6 @@ function callback_1(req) {
 //Definition of callback function
 function callback_STA(req) {
     let tab = JSON.parse(req.response);
-    
     let tab2 = [];
     tab.forEach(element => {
       tab2.push(element);

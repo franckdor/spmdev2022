@@ -2,6 +2,7 @@
 
 require_once File::build_path(array("config", "Conf.php"));
 require_once File::build_path(array("model" ,"Model.php"));
+require_once File::build_path(array("model", "ModelStatut_genre.php"));
 
 class ModelGenres extends Model {
 
@@ -73,7 +74,8 @@ class ModelGenres extends Model {
         $array = array(
             "genre" => $this->get("genre"),
             "tribu" => $this->get("tribu"),
-            "sous-famille" => $this->get("sous_famille")
+            "sous_famille" => $this->get("sous_famille"),
+            "statut" => ModelStatut_genre::selectNameById($this->get("code_statut"))[0]->get("nom_statut_genre")
         );
         return $array;
     }

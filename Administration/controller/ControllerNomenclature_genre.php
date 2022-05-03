@@ -7,6 +7,7 @@ require_once File::build_path(array("model", "ModelNomenclature_genre.php"));
 require_once File::build_path(array("model", "ModelEspece_valide.php"));
 require_once File::build_path(array("model", "ModelGenre_valide.php"));
 require_once File::build_path(array("model", "ModelBibliographie.php"));
+require_once File::build_path(array("model", "ModelGenres.php"));
 class ControllerNomenclature_genre {
 
 
@@ -30,7 +31,7 @@ class ControllerNomenclature_genre {
         require_once File::build_path(array("view", "view.php"));
     }
 
-    public static function created() {
+    public static function updated() {
         $view="created";
         $pagetitle="Espèce créée";
         $statut = ModelStatut_genre::SelectIdByName($_POST['statut']);
@@ -59,97 +60,11 @@ class ControllerNomenclature_genre {
         
     }
 
-    public static function autocompleteBiblio() {
-        $biblio = ModelBibliographie::selectALL();
-        sleep(0.5);
-        echo json_encode(array(
-            "biblio" => $biblio
-        ));
-    }
-
-    public static function autocompleteText() {
-        $text = $_GET['reference'];
-        $title = ModelBibliographie::selectByRef($text);
-        sleep(0.5);
-
-        echo json_encode(array(
-            "title" => $title));
-    }
-
-    //Action for JS autocompletion :
-    public static function autocompleteEsp() {
-        $tabE = ModelNomenclature_espece::selectAllNomEsp();
-        sleep(0.5);
-        echo json_encode($tabE);
-        
-    }
-
-    public static function autocompleteEspV() {
-        $tabE = ModelEspece_valide::selectAllNomEsp();
-        sleep(0.5);
-        echo json_encode($tabE);
-        
-    }
-
-    public static function autocompleteEspVALID() {
-        $tab = ModelEspece_valide::selectALL();
+    public static function autocomplete() {
+        $tab_gen = ModelNomenclature_genre::selectALL();
 
         sleep(0.5);
-        $tabEV = array();
-        foreach($tab as $EV) {
-            array_push($tabEV, $EV->get('nom_espece'));
-        }
 
-        echo json_encode($tabEV);
-    }
-
-    public static function autocompleteGenVALID() {
-        $tab = ModelGenre_valide::selectALL();
-
-        sleep(0.5);
-        $tabGV = array();
-        foreach($tab as $GV) {
-            array_push($tabGV, $GV->get('nom_genre'));
-        }
-
-        echo json_encode($tabGV);
-    }
-
-    //CALL FOR autocompletion in JS request (url from js)
-    public static function autocompleteGen() {
-        $tabG = ModelNomenclature_genre::selectAllNomGen();
-        
-        sleep(0.5);
-       
-        echo json_encode($tabG);
-    }
-
-    //CALL FOR autocompletion in JS request (url from js)
-    public static function autocompleteSTAT() {
-        $tabS = ModelStatut_espece::selectALL();
-        $tab = array();
-        sleep(0.5);
-        foreach($tabS as $stat) {
-            array_push($tab, $stat->get('nom_statut_espece'));
-        }
-        echo json_encode($tab);
-    }
-
-    public static function autocompleteAut() {
-        $tabA = ModelNomenclature_espece::selectALLauthordate();
-        sleep(0.5);
-        echo json_encode($tabA);
-    }
-    
-    
-    //Associate an id status to it's name
-    public static function associationStatus($esp_array) {
-        $tab_name = array();
-        $tab_id = array();
-        foreach($esp_array as $esp) {
-            array_push($tab_name, ModelStatut_genre::selectNameById($esp->get('id_statut'))); //tab of status name
-            //array_push($tab_id);
-        }
-        return $tab_name;
+        echo json_encode($tab_gen);
     }
 }

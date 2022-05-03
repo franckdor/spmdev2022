@@ -1,5 +1,6 @@
 <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+<script type="text/javascript" src="controller/NomenclatureJS/scriptAutocompleteGen.js" defer></script>
 
 <form method="POST" action= <?php echo "index.php?controller=". self::$object . "&action=updated"?>>
     <fieldset>
@@ -18,7 +19,6 @@
         <br>
         <div>
             <label for="select-statut">Statut : </label>
-            <br>
             <div id="acdiv">    
                 <!--
                 onfocus = overflow out of 10 opt

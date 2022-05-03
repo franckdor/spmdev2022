@@ -1,3 +1,4 @@
+"use strict";
 let requeteBiblio;
 requeteB(callbackBiblio);
 let requeteText;
@@ -12,6 +13,8 @@ function listener() {
     var option = select.options[select.selectedIndex].value;
     textarea.innerText=option;
 }
+
+
 function requeteB(callback) {
     let url = "index.php?controller=nomenclature_espece&action=autocompleteBiblio";
     if (requeteBiblio && requeteBiblio.readyState !== XMLHttpRequest.DONE) {
@@ -26,7 +29,7 @@ function requeteB(callback) {
 }
 
 function requeteT(callback, reference) {
-    let url = "index.php?controller=nomenclature_espece&action=autocompleteText&reference=" +encodeURI(reference);
+    let url = "index.php?controller=nomenclature_espece&action=autocompleteText&reference=" + encodeURI(reference);
     if (requeteText && requeteText.readyState !== XMLHttpRequest.DONE) {
         requeteText.abort();
     }
@@ -57,7 +60,7 @@ function callbackBiblio(req) {
         }); 
   }
 
-  ref = document.getElementById("bibliographie");
+  let ref = document.getElementById("bibliographie");
     ref.addEventListener("change", requeteT(callbackText, ref.value));
 
   new TomSelect('#bibliographie',{

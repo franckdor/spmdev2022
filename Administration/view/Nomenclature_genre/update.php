@@ -1,25 +1,9 @@
-<!-- We load JS here -->
-<script type="text/javascript" src="controller/NomenclatureJS/scriptGen.js" defer></script>
-<script type="text/javascript" src="controller/NomenclatureJS/scriptEsp.js" defer></script>
-<script type="text/javascript" src="controller/NomenclatureJS/scriptStat.js" defer></script>
-<script type="text/javascript" src="controller/NomenclatureJS/scriptAut.js" defer></script>
-<script type="text/javascript" src="controller/NomenclatureJS/scriptEspV.js" defer></script>
-<script type="text/javascript" src="controller/NomenclatureJS/scriptGenV.js" defer></script>
-<script type="text/javascript" src="controller/NomenclatureJS/scriptBiblio.js" defer></script>
-<!-- Library for INPUT SELECTOR -->
 <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
 
-<form method="POST" action= <?php echo "index.php?controller=". self::$object . "&action=created"?>>
+<form method="POST" action= <?php echo "index.php?controller=". self::$object . "&action=updated"?>>
     <fieldset>
-        <legend>Autocomplétion en Javascript</legend>
-        
-            <label for="select-espece">Espece : </label> 
-            <div>  
-                <select id="select-espece" name="espece" required></select>
-
-            </div>
-        <br>
+        <legend>Update Nomenclature Gender</legend>
         
             <label for="select-genre">Genre : </label>
             <div>  
@@ -59,8 +43,6 @@
         <br>
         <div>
             <select id="bibliographie" name="biblio" ></select>
-            <br>
-            <textarea wrap="soft" id="biblio" readonly></textarea>
         </div>
         <br>
         <input type="submit" value="Envoyer" />

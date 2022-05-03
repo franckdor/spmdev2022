@@ -7,17 +7,17 @@ require_once File::build_path(array("model", "ModelNomenclature_genre.php"));
 require_once File::build_path(array("model", "ModelEspece_valide.php"));
 require_once File::build_path(array("model", "ModelGenre_valide.php"));
 require_once File::build_path(array("model", "ModelBibliographie.php"));
-class ControllerNomenclature_espece {
+class ControllerNomenclature_genre {
 
 
-    protected static $object = 'Nomenclature_espece';
+    protected static $object = 'Nomenclature_genre';
 
 
     public static function readAll() {
-        $view="list";
-        $pagetitle="Liste des Espèces";
-        $tab_esp = ModelNomenclature_espece::selectALL();
-        
+        $view="list";   
+        $pagetitle="Liste des Genres";
+        $tab_gen = ModelNomenclature_genre::selectALL();
+
         //$statut = ModelStatut_genre::selectNameById(10); //RETURN AN ARRAY
         //$st; 
         //GETTING NAME STATUS OUT OF ARRAY
@@ -30,11 +30,10 @@ class ControllerNomenclature_espece {
         require_once File::build_path(array("view", "view.php"));
     }
 
-    //Save data from form to db
     public static function created() {
         $view="created";
-        $pagetitle="Admin créé";
-        $statut = ModelStatut_espece::SelectIdByName($_POST['statut']);
+        $pagetitle="Espèce créée";
+        $statut = ModelStatut_genre::SelectIdByName($_POST['statut']);
         $especeV = ModelEspece_valide::SelectIdByName($_POST['espece_valide'], $_POST['genre_valide']);
         $data = array(
             'nom_espece' => $_POST['espece'],
@@ -52,8 +51,8 @@ class ControllerNomenclature_espece {
     
     
     //Species form
-    public static function requete() {
-        $view="requete";
+    public static function update() {
+        $view="update";
         $pagetitle="Liste des espèces";
         $tab = ModelStatut_espece::selectALL();
         require_once File::build_path(array("view", "view.php"));

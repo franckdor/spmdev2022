@@ -17,7 +17,20 @@ class ControllerNomenclature_genre {
     public static function readAll() {
         $view="list";   
         $pagetitle="Liste des Genres";
-        $tab_gen = ModelNomenclature_genre::selectALL();
+
+
+        
+
+        $tab_gen = ModelGenres::selectALL();
+
+        $tabjson = array();
+
+        foreach($tab_gen as $gen) {
+            $monarray = array("val1" => "toto",
+            "val2" => 2);
+            array_push($tabjson, $monarray);
+        }
+        echo json_encode($tabjson);
 
         //$statut = ModelStatut_genre::selectNameById(10); //RETURN AN ARRAY
         //$st; 
@@ -61,10 +74,14 @@ class ControllerNomenclature_genre {
     }
 
     public static function autocomplete() {
-        $tab_gen = ModelNomenclature_genre::selectALL();
+        $tab_gen = ModelGenres::selectALL();
 
         sleep(0.5);
 
-        echo json_encode($tab_gen);
+        $tabjson = array();
+        foreach($tab_gen as $gen) {
+            array_push($tabjson, $gen->getAll());
+        }
+        echo json_encode($tabjson);
     }
 }

@@ -12,12 +12,11 @@
             </div>
         <br>
         
-            <label for="select-authd">Auteur et Date : </label> 
+            <label for="select-tribu">Tribu : </label> 
             <div>   
-                <select id="select-authd" name="auteur" required></select>   
+                <select id="select-tribu" name="tribu" required></select>   
             </div>
         <br>
-        <div>
             <label for="select-statut">Statut : </label>
             <div id="acdiv">    
                 <!--
@@ -28,7 +27,7 @@
                 onblur='this.size=1;' onchange='this.size=1; this.blur()' required></select>
             
             </div>
-        </div>
+        <br>
         <label for="select-espece-valide">Espece Valide : </label>
         <div>
             <select id="select-espece-valide" name="espece_valide" required></select>

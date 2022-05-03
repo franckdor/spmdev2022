@@ -63,4 +63,18 @@ class ModelGenres extends Model {
             $this->utilisateur = $utilisateur;
         }
     }
+
+    public function get($attribute) {
+        return $this->$attribute;
+    }
+
+    //I serialise by myself
+    public function getAll() {
+        $array = array(
+            "genre" => $this->get("genre"),
+            "tribu" => $this->get("tribu"),
+            "sous-famille" => $this->get("sous_famille")
+        );
+        return $array;
+    }
 }

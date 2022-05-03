@@ -1,20 +1,32 @@
-function callbackAut(req) {
-    var options = [];
+let requeteGen;
+
+requete(callback);
+
+function callback(req) {
+    var genre = [];
+    var tribu = [];
+
     let tab = JSON.parse(req.response);
     for (var i=0; i<tab.length; i++) {
-        var title = [];
-        if (tab[i].auteur_date.charAt(0)=='(') {
-            tab[i].auteur_date = tab[i].auteur_date.substring(1, tab[i].auteur_date.length-1);
-        } 
-        title.push(tab[i].auteur_date);
-        options.push({
-            id: i+'-'+title.join(''),
-            title: title.join(''),
+        var titleGen = [];
+        var titleTrib = [];
+        titleGen.push(tab[i].genre);
+        titleTrib.push(tab[i].tribu);
+        genre.push({
+            id: i+'-'+titleGen.join(''),
+            title: titleGen.join(''),
+        });
+        tribu.push({
+            id: i+'-'+titleTrib.join(''),
+            title: titleTrib.join(''),
         });
     }
 
 
-    new TomSelect("#select-authd", {
+    
+
+
+    new TomSelect("#select-genre", {
         maxItems:1,
         maxOptions: null,
         valueField: 'title',
@@ -22,22 +34,33 @@ function callbackAut(req) {
         sortField: 'title',
         searchField: ['title'],
         create: false,
-        options: options,
+        options: genre,
+    });
+
+    new TomSelect("#select-tribu", {
+        maxItems:1,
+        maxOptions: null,
+        valueField: 'title',
+        labelField: 'title',
+        sortField: 'title',
+        searchField: ['title'],
+        create: false,
+        options: tribu,
     });
 }
 
 
 
 
-function requeteAut(callback) {
+function requete(callback) {
     let url = "index.php?controller=nomenclature_genre&action=autocomplete";
-    if (requeteAute && requeteAute.readyState !== XMLHttpRequest.DONE) {
-      requeteAute.abort();
+    if (requeteGen && requeteGen.readyState !== XMLHttpRequest.DONE) {
+        requeteGen.abort();
     }
-    requeteAute = new XMLHttpRequest();
-    requeteAute.open("GET", url, true);
-    requeteAute.addEventListener("load", function () {
-        callback(requeteAute);
+    requeteGen = new XMLHttpRequest();
+    requeteGen.open("GET", url, true);
+    requeteGen.addEventListener("load", function () {
+        callback(requeteGen);
     });
-    requeteAute.send(null);
+    requeteGen.send(null);
 }

@@ -61,6 +61,7 @@ function callback(req) {
     new TomSelect("#select-tribu", {
         maxItems:1,
         maxOptions: null,
+        items: ['Bryobiini'],
         valueField: 'title',
         labelField: 'title',
         sortField: 'title',
@@ -72,6 +73,7 @@ function callback(req) {
     new TomSelect("#select-sous-famille", {
         maxItems:1,
         maxOptions: null,
+        items: ['Bryobiinae'],
         valueField: 'title',
         labelField: 'title',
         sortField: 'title',
@@ -95,6 +97,8 @@ function callback(req) {
 
 
 
+
+
 function requete(callback) {
     let url = "index.php?controller=nomenclature_genre&action=autocomplete";
     if (requeteGen && requeteGen.readyState !== XMLHttpRequest.DONE) {
@@ -107,3 +111,15 @@ function requete(callback) {
     });
     requeteGen.send(null);
 }
+
+new TomSelect("#select-family", {
+    maxItems:1,
+        maxOptions: null,
+        items: ['Tetranychidae'],
+        valueField: 'title',
+        labelField: 'title',
+        sortField: 'title',
+        searchField: ['title'],
+        create: false,
+        options: [{title : 'Tetranychidae'}]
+});

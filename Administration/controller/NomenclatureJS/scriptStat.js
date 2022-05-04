@@ -1,5 +1,4 @@
 const statut = document.getElementById('statut');
-const statut2 = document.getElementById("statut");
 let requeteStat;
 
 
@@ -12,11 +11,8 @@ maRequeteSTAT();
 function afficheStat(tableau) {
   for (let i=0; i<tableau.length; i++) {
       var o = document.createElement("option");
-      var op = document.createElement("option");
       o.innerHTML = tableau[i];
-      op.innerHTML = tableau[i];
       statut.appendChild(o);
-      statut2.appendChild(op);
   }
   if(tableau.length > 0) o.style.borderWidth = "1px";
 }

@@ -20,7 +20,6 @@ class ControllerNomenclature_genre {
 
 
         $statut = ModelStatut_genre::selectNameById(10);
-        var_dump($statut);
 
         $tab_gen = ModelGenres::selectALL();
 
@@ -37,20 +36,21 @@ class ControllerNomenclature_genre {
     }
 
     public static function updated() {
-        $view="created";
-        $pagetitle="Espèce créée";
+        $view="updated";
+        $pagetitle="Genre créée";
+        var_dump($_POST);
         $statut = ModelStatut_genre::SelectIdByName($_POST['statut']);
-        $especeV = ModelEspece_valide::SelectIdByName($_POST['espece_valide'], $_POST['genre_valide']);
+        //$GenreV = ModelEspece_valide::SelectIdByName($_POST['espece_valide'], $_POST['genre_valide']);
         $data = array(
-            'nom_espece' => $_POST['espece'],
-            'nom_genre' => $_POST['genre'],
-            'auteur_date' => $_POST['auteur'],
-            'id_statut' => $statut[0]->get('id_statut_espece'),
-            'id_espece_valide' => $especeV[0]->get('id_espece_valide'),
-            'who' => $_SESSION['login'],
-            'dateadd' => date('d/m/Y', time()) 
+            'genre' => $_POST['genre'],
+            'tribu' => $_POST['tribu'],
+            'sous_famille' => $_POST['sous-famille'],
+            'code_statut' => $statut[0]->get('id_statut_genre'),
+            //'id_espece_valide' => $especeV[0]->get('id_espece_valide'),
+            'utilisateur' => $_SESSION['login'],
+            'date_maj' => date('d/m/Y', time()) 
          );   
-        ModelNomenclature_espece::save($data);
+        ModelGenres::save($data);
         require_once File::build_path(array("view", "view.php"));
     }
 

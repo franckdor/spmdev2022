@@ -25,7 +25,17 @@
                 <select id="select-tribu" name="tribu" required></select>   
             </div>
         <br>
-            <label for="select-statut">Statut : </label>
+        <label for="select-sous-famille">Sous-Famille : </label>
+        <div>
+            <select id="select-sous-famille" name="sous-famille" required></select>
+        </div>  
+
+        <label for="select-family">Famille : </label>  
+        <div>
+            <select id="select-family" name="family" required></select>
+        </div>
+        <br>
+        <label for="select-statut">Statut : </label>
             <div id="acdiv">    
                 <!--
                 onfocus = overflow out of 10 opt
@@ -35,23 +45,6 @@
                 onblur='this.size=1;' onchange='this.size=1; this.blur()' required></select>
             
             </div>
-        <br>
-        <label for="select-sous-famille">Sous-Famille : </label>
-        <div>
-            <select id="select-sous-famille" name="sous-famille" required></select>
-        </div>  
-
-        <label for="select-genre-valide">Genre Valide : </label>  
-        <div>
-            <select id="select-genre-valide" name="genre_valide"  required></select>
-        </div>
-        <br>
-        <label for="bibliographie">Bibliographie : </label> 
-        <br>
-        <div>
-            <select id="bibliographie" name="biblio" ></select>
-        </div>
-        <br>
         <input type="submit" value="Envoyer" />
     </fieldset>
 </form>

@@ -43,7 +43,6 @@ function requeteT(callback, reference) {
 
 function callbackText(req) {
     let tab = JSON.parse(req.response);
-    console.log(tab);
 }
 
 

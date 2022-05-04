@@ -48,17 +48,17 @@ class ModelEspece_valide extends Model {
     }
 
 
-    public static function selectIdByName($nameS, $nameG) {
+    public static function selectIdByName($nameS) {
         try {
             $table_name = static::$object;
             $class_name = 'Model' . ucfirst($table_name);
             $primary_key = static::$primary;
 
-            $sql ="SELECT DISTINCT id_espece_valide FROM $table_name WHERE nom_espece=:nom_espece AND nom_genre=:nom_genre";
+            $sql ="SELECT DISTINCT id_espece_valide FROM $table_name WHERE nom_espece=:nom_espece";
             $req_prep = Model::getPDO()->prepare($sql);
             $data = array(
                 'nom_espece' => $nameS,
-                'nom_genre' => $nameG,
+
             );
             $req_prep->execute($data);
             $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelEspece_valide");

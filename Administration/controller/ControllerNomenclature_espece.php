@@ -34,15 +34,18 @@ class ControllerNomenclature_espece {
     public static function created() {
         $view="created";
         $pagetitle="Admin créé";
+
+        $espv = explode(" ", $_POST['espece_valide']); //The format of $_POST is "species" - "Genus" 
         $statut = ModelStatut_espece::SelectIdByName($_POST['statut']);
-        $especeV = ModelEspece_valide::SelectIdByName($_POST['espece_valide'], $_POST['genre_valide']);
+        $especeV = ModelEspece_valide::SelectIdByName($espv[0]);
         $data = array(
             'nom_espece' => $_POST['espece'],
             'nom_genre' => $_POST['genre'],
             'auteur_date' => $_POST['auteur'],
             'id_statut' => $statut[0]->get('id_statut_espece'),
             'id_espece_valide' => $especeV[0]->get('id_espece_valide'),
-            'who' => $_SESSION['login'],
+            'reference_page' => $_POST['page'],
+            'utilisateur' => $_SESSION['login'],
             'dateadd' => date('d/m/Y', time()) 
          );   
         ModelNomenclature_espece::save($data);
@@ -98,7 +101,7 @@ class ControllerNomenclature_espece {
         sleep(0.5);
         $tabEV = array();
         foreach($tab as $EV) {
-            array_push($tabEV, $EV->get('nom_espece'));
+            array_push($tabEV, $EV->get('nom_espece') . " - " . $EV->get('nom_genre'));
         }
 
         echo json_encode($tabEV);

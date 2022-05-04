@@ -1,5 +1,6 @@
 <?php
-echo "<h1>Specie nomenclature Act succsfully created<h1>";
+
+echo "<h1>Species nomenclature Act succsfully created<h1>";
 
 
 

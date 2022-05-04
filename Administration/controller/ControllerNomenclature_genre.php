@@ -8,6 +8,7 @@ require_once File::build_path(array("model", "ModelEspece_valide.php"));
 require_once File::build_path(array("model", "ModelGenre_valide.php"));
 require_once File::build_path(array("model", "ModelBibliographie.php"));
 require_once File::build_path(array("model", "ModelGenres.php"));
+require_once File::build_path(array("model", "ModelFamilles.php"));
 class ControllerNomenclature_genre {
 
 
@@ -18,8 +19,7 @@ class ControllerNomenclature_genre {
         $view="list";   
         $pagetitle="Liste des Genres";
 
-
-        $statut = ModelStatut_genre::selectNameById(10);
+        $tab_fam = ModelFamilles::selectAll();
 
         $tab_gen = ModelGenres::selectALL();
 
@@ -75,5 +75,23 @@ class ControllerNomenclature_genre {
             array_push($tabjson, $gen->getAll());
         }
         echo json_encode($tabjson);
+    }
+
+    public static function autocompleteF() {
+        $tab_fam = ModelFamilles::selectAll();
+
+        sleep(0.5);
+
+        $tabjson = array();
+        foreach($tab_fam as $fam) {
+            array_push($tabjson, $fam->getAll());
+        }
+
+        foreach($tabjson as $data) {
+            foreach($data as $key => $value) {
+                echo $key . " ";
+                echo $value . "<br>";
+            }
+        }
     }
 }

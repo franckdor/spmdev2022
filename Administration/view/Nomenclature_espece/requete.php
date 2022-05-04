@@ -4,7 +4,6 @@
 <script type="text/javascript" src="controller/NomenclatureJS/scriptStat.js" defer></script>
 <script type="text/javascript" src="controller/NomenclatureJS/scriptAut.js" defer></script>
 <script type="text/javascript" src="controller/NomenclatureJS/scriptEspV.js" defer></script>
-<script type="text/javascript" src="controller/NomenclatureJS/scriptGenV.js" defer></script>
 <script type="text/javascript" src="controller/NomenclatureJS/scriptBiblio.js" defer></script>
 <!-- Library for INPUT SELECTOR -->
 <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
@@ -49,11 +48,6 @@
         <div>
             <select id="select-espece-valide" name="espece_valide" required></select>
         </div>  
-
-        <label for="select-genre-valide">Genre Valide : </label>  
-        <div>
-            <select id="select-genre-valide" name="genre_valide"  required></select>
-        </div>
         <br>
         <label for="bibliographie">Bibliographie : </label> 
         <br>
@@ -62,6 +56,9 @@
             <br>
             <textarea wrap="soft" id="biblio" readonly></textarea>
         </div>
+        <br>
+        <label for="number">Page : </label>
+        <input id="number" name="page" type="number" value="10">
         <br>
         <input type="submit" value="Envoyer" />
     </fieldset>

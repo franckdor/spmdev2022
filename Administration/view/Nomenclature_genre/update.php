@@ -32,7 +32,7 @@
 
         <label for="select-family">Famille : </label>  
         <div>
-            <select id="select-family" name="family" required></select>
+            <select id="select-family" name="family" ></select>
         </div>
         <br>
         <label for="select-statut">Statut : </label>

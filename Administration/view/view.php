@@ -22,8 +22,8 @@
                     echo '<a href="index.php?action=signOut&controller=admin">Deconnect</a>';
                     echo '<a href="index.php?action=readAll&controller=nomenclature_espece">Species</a>';
                     echo '<a href="index.php?action=requete&controller=nomenclature_espece">Species TEST</a>';
-                    echo '<a href="index.php?action=update&controller=nomenclature_genre">Gender TEST</a>';
-                    echo '<a href="index.php?action=readAll&controller=nomenclature_genre">Gender</a>';
+                    echo '<a href="index.php?action=update&controller=nomenclature_genre">Genus TEST</a>';
+                    echo '<a href="index.php?action=readAll&controller=nomenclature_genre">Genus</a>';
                 }
                 ?>
                 

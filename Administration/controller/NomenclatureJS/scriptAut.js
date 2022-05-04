@@ -7,9 +7,11 @@ function callbackAut(req) {
     let tab = JSON.parse(req.response);
     for (var i=0; i<tab.length; i++) {
         var title = [];
+        /*
         if (tab[i].auteur_date.charAt(0)=='(') {
             tab[i].auteur_date = tab[i].auteur_date.substring(1, tab[i].auteur_date.length-1);
         } 
+        */
         title.push(tab[i].auteur_date);
         options.push({
             id: i+'-'+title.join(''),
@@ -25,7 +27,7 @@ function callbackAut(req) {
         labelField: 'title',
         sortField: 'title',
         searchField: ['title'],
-        create: false,
+        create: true,
         options: options,
     });
 }

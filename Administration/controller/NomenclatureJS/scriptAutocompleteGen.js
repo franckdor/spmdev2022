@@ -1,6 +1,8 @@
 let requeteGen;
+let requeteF;
 
 requete(callback);
+requeteFam(callbackF);
 
 function callback(req) {
     var genre = [];
@@ -42,9 +44,6 @@ function callback(req) {
 
 
     }
-
-
-    
 
 
     new TomSelect("#select-genre", {
@@ -95,10 +94,6 @@ function callback(req) {
 }
 
 
-
-
-
-
 function requete(callback) {
     let url = "index.php?controller=nomenclature_genre&action=autocomplete";
     if (requeteGen && requeteGen.readyState !== XMLHttpRequest.DONE) {
@@ -112,6 +107,26 @@ function requete(callback) {
     requeteGen.send(null);
 }
 
+function requeteFam(callback) {
+    let url = "index.php?controller=nomenclature_genre&action=autocompleteF";
+    if (requeteF && requeteF.readyState !== XMLHttpRequest.DONE) {
+        requeteF.abort();
+    }
+    requeteF = new XMLHttpRequest();
+    requeteF.open("GET", url, true);
+    requeteF.addEventListener("load", function () {
+        callbackF(requeteF);
+    });
+    requeteF.send(null);
+}
+/*
+function callbackF(req) {
+    let tab = JSON.parse(req.response);
+    console.log(tab);
+
+}
+*/
+
 new TomSelect("#select-family", {
     maxItems:1,
         maxOptions: null,
@@ -121,5 +136,5 @@ new TomSelect("#select-family", {
         sortField: 'title',
         searchField: ['title'],
         create: false,
-        options: [{title : 'Tetranychidae'}]
+        options: [{value: 'Tetranychidae'}]
 });

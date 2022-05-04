@@ -29,17 +29,30 @@ class ModelFamilles extends Model {
     protected static $object = "familles";
     protected static $primary='code_famille';
 
-    public function __construct($code=NULL, $ref=NULL, $aut=NULL, $ann=NULL, $tit=NULL, $sourc=NULL, $idn=NULL) {
-        if (!is_null($code) && !is_null($ref) && !is_null($aut) && !is_null($ann) && !is_null($idn) && !is_null($tit)
-        && !is_null($sourc)) {
-            $this->code_bibliographie = $code;
-            $this->reference = $ref;
-            $this->auteur = $aut;
-            $this->annee = $ann;
-            $this->titre = $tit;
-            $this->source = $sourc;
-            $this->id_note = $idn;
+    public function __construct($code_famille=NULL, $famille=NULL, $super_famille=NULL, $infra_ordre=NULL, $sous_ordre=NULL, $ordre=NULL,
+    $code_ordre=NULL, $reference=NULL, $page=NULL, $ordre_taxonomique=NULL) {
+        if (!is_null($code_famille) && !is_null($famille) && !is_null($super_famille) && !is_null($infra_ordre) && !is_null($sous_ordre) 
+        && !is_null($ordre) && !is_null($code_ordre) && !is_null($reference) && !is_null($page) && !is_null($ordre_taxonomique)) {
+            $this->code_famille = $code_famille;
+            $this->famille = $famille;
+            $this->super_famille = $super_famille;
+            $this->infra_ordre = $infra_ordre;
+            $this->sous_ordre = $sous_ordre;
+            $this->ordre = $ordre;
+            $this->code_ordre = $code_ordre;
+            $this->reference = $reference;
+            $this->page = $page;
+            $this->ordre_taxonomique = $ordre_taxonomique;
         }
+    }
+
+    public function get($attribute) {
+        return $this->$attribute; 
+    }
+
+
+    public function getAll() {
+        return get_object_vars($this);
     }
 
 }

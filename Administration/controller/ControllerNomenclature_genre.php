@@ -86,12 +86,8 @@ class ControllerNomenclature_genre {
         foreach($tab_fam as $fam) {
             array_push($tabjson, $fam->getAll());
         }
-
-        foreach($tabjson as $data) {
-            foreach($data as $key => $value) {
-                echo $key . " ";
-                echo $value . "<br>";
-            }
-        }
+        echo json_encode($tabjson);
+        
+        //echo json_encode($tabF);
     }
 }

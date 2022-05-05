@@ -38,7 +38,6 @@ function requeteESPVALID(callback) {
     requeteEspV = new XMLHttpRequest();
     requeteEspV.open("GET", url, true);
     requeteEspV.addEventListener("load", function () {
-        console.log(requeteEspV);
         callback(requeteEspV);
     });
     requeteEspV.send(null);

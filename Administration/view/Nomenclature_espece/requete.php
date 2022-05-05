@@ -5,13 +5,31 @@
 <script type="text/javascript" src="controller/NomenclatureJS/scriptAut.js" defer></script>
 <script type="text/javascript" src="controller/NomenclatureJS/scriptEspV.js" defer></script>
 <script type="text/javascript" src="controller/NomenclatureJS/scriptBiblio.js" defer></script>
+<script type="text/javascript" src="controller/NomenclatureJS/scriptRecherche.js" defer></script>
 <!-- Library for INPUT SELECTOR -->
 <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
 
+
+<div>
+    <label for="search-species">Search by Species: </label>
+    <div>  
+        <select id="search-species" name="searchs"  required></select>    
+    </div>
+</div>
+
+
+<div>
+    <label for="search-genus">Search by Genus : </label>
+    <div>  
+        <select id="search-genus" name="searchg"  required></select>    
+    </div>
+</div>
+
+
 <form method="POST" action= <?php echo "index.php?controller=". self::$object . "&action=created"?>>
     <fieldset>
-        <legend>Autocomplétion en Javascript</legend>
+        <legend>Nomenclature Species</legend>
         
             <label for="select-espece">Espece : </label> 
             <div>  
@@ -53,9 +71,9 @@
         <br>
         <div>
             <select id="bibliographie" name="biblio" ></select>
-            <br>
-            <textarea wrap="soft" id="biblio" readonly></textarea>
         </div>
+        <br>
+            <textarea wrap="soft" id="biblio" readonly></textarea>
         <br>
         <label for="number">Page : </label>
         <input id="number" name="page" type="number" value="10">

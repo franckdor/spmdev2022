@@ -46,7 +46,7 @@ function callback(req) {
     }
 
 
-    new TomSelect("#select-genre", {
+    var genus = new TomSelect("#select-genre", {
         maxItems:1,
         maxOptions: null,
         valueField: 'title',
@@ -57,7 +57,7 @@ function callback(req) {
         options: genre,
     });
 
-    new TomSelect("#select-tribu", {
+    var tribe = new TomSelect("#select-tribu", {
         maxItems:1,
         maxOptions: null,
         items: ['Bryobiini'],
@@ -69,7 +69,7 @@ function callback(req) {
         options: tribu,
     });
 
-    new TomSelect("#select-sous-famille", {
+    var sub_fam = new TomSelect("#select-sous-famille", {
         maxItems:1,
         maxOptions: null,
         items: ['Bryobiinae'],
@@ -80,8 +80,10 @@ function callback(req) {
         create: false,
         options: sous_famille,
     });
+    sub_fam.addItem()
 
-    new TomSelect("#select", {
+
+    var select = new TomSelect("#select", {
         maxItems:1,
         maxOptions: null,
         valueField: 'title',
@@ -91,6 +93,9 @@ function callback(req) {
         create: false,
         options: recherche,
     });
+
+    console.log(select);
+    select.addItem("ALED");
 }
 
 
@@ -119,15 +124,24 @@ function requeteFam(callback) {
     });
     requeteF.send(null);
 }
-/*
+
 function callbackF(req) {
     let tab = JSON.parse(req.response);
-    console.log(tab);
+    let family = [];
+    
+    for(let i=0; i<tab.length; i++) {
 
-}
-*/
+        var titleFam = [];
 
-new TomSelect("#select-family", {
+        titleFam.push(tab[i].famille);
+
+        family.push({
+            id: i+'-'+titleFam.join(''),
+            title: titleFam.join(''),
+        });
+    }
+
+    new TomSelect("#select-family", {
     maxItems:1,
         maxOptions: null,
         items: ['Tetranychidae'],
@@ -136,5 +150,31 @@ new TomSelect("#select-family", {
         sortField: 'title',
         searchField: ['title'],
         create: false,
-        options: [{value: 'Tetranychidae'}]
+        options: family
 });
+}
+/*
+var select = document.getElementById("select");
+console.log(select);
+select.addEventListener("change", filler);
+
+var genusT = document.getElementById("genus");
+console.log(genusT.childNodes);
+
+
+
+
+
+function filler() {
+    var option = select.options[select.selectedIndex].value;
+    tabFill = option.split(" - ");
+    console.log(tabFill);
+    var genus = document.getElementById("select-genre");
+    console.log(genus.options[genus.selectedIndex].value);
+    genus.lastElementChild.innerHTML = tabFill[0];
+    console.log(genus.lastElementChild.innerHTML);
+    console.log(div);
+}
+*/
+var div = document.getElementsByClassName("item");
+console.log(div);

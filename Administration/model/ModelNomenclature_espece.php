@@ -122,4 +122,14 @@ class ModelNomenclature_espece extends Model {
     public function set($attribute) {
         $this->$attribute = $attribute;
     }
+
+    public function getAll() {
+        $array = array(
+            "genre" => $this->get("genre"),
+            "tribu" => $this->get("tribu"),
+            "sous_famille" => $this->get("sous_famille"),
+            "statut" => ModelStatut_genre::selectNameById($this->get("code_statut"))[0]->get("nom_statut_genre")
+        );
+        return $array;
+    }
 }

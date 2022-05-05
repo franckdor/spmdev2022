@@ -15,23 +15,23 @@
         <legend>Update Nomenclature Gender</legend>
         
             <label for="select-genre">Genre : </label>
-            <div>  
+            <div id="genus">  
                 <select id="select-genre" name="genre"  required></select>    
             </div>
         <br>
         
             <label for="select-tribu">Tribu : </label> 
-            <div>   
+            <div id="tribe">   
                 <select id="select-tribu" name="tribu" required></select>   
             </div>
         <br>
         <label for="select-sous-famille">Sous-Famille : </label>
-        <div>
+        <div id="sub-family">
             <select id="select-sous-famille" name="sous-famille" required></select>
         </div>  
 
         <label for="select-family">Famille : </label>  
-        <div>
+        <div id="family">
             <select id="select-family" name="family" ></select>
         </div>
         <br>

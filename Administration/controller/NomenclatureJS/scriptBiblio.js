@@ -3,14 +3,14 @@ let requeteBiblio;
 requeteB(callbackBiblio);
 let requeteText;
 
-let select = document.getElementById("bibliographie");
+let selectBiblio = document.getElementById("bibliographie");
 let textarea = document.getElementById("biblio");
 
 
-select.addEventListener("change", listener)
+selectBiblio.addEventListener("change", listener)
 
 function listener() {
-    var option = select.options[select.selectedIndex].value;
+    var option = selectBiblio.options[selectBiblio.selectedIndex].value;
     textarea.innerText=option;
 }
 
@@ -41,10 +41,6 @@ function requeteT(callback, reference) {
     requeteText.send(null);
 }
 
-function callbackText(req) {
-    let tab = JSON.parse(req.response);
-}
-
 
 function callbackBiblio(req) {
   var options = [];
@@ -59,8 +55,6 @@ function callbackBiblio(req) {
         }); 
   }
 
-  let ref = document.getElementById("bibliographie");
-    ref.addEventListener("change", requeteT(callbackText, ref.value));
 
   new TomSelect('#bibliographie',{
     maxItems: 1,

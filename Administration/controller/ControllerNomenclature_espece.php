@@ -17,6 +17,10 @@ class ControllerNomenclature_espece {
         $view="list";
         $pagetitle="Liste des Espèces";
         $tab_esp = ModelNomenclature_espece::selectALL();
+        $tab = array();
+        foreach($tab_esp as $esp) {
+            array_push($tab, $esp->getAll());
+        }
         
         //$statut = ModelStatut_genre::selectNameById(10); //RETURN AN ARRAY
         //$st; 
@@ -143,6 +147,18 @@ class ControllerNomenclature_espece {
         $tabA = ModelNomenclature_espece::selectALLauthordate();
         sleep(0.5);
         echo json_encode($tabA);
+    }
+
+    public static function filler() {
+        $tab_fill = ModelNomenclature_espece::selectAll();
+
+        $tabjson = array();
+
+        foreach($tab_fill as $fill)  {
+            array_push($tabjson, $fill->getAll());
+        }
+
+        echo json_encode($tabjson);
     }
     
     

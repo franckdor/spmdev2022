@@ -47,6 +47,7 @@ class ControllerNomenclature_genre {
             'sous_famille' => $_POST['sous-famille'],
             'code_statut' => $statut[0]->get('id_statut_genre'),
             //'id_espece_valide' => $especeV[0]->get('id_espece_valide'),
+            'page' => $_POST['page'],
             'utilisateur' => $_SESSION['login'],
             'date_maj' => date('d/m/Y', time()) 
          );   
@@ -59,7 +60,7 @@ class ControllerNomenclature_genre {
     //Species form
     public static function update() {
         $view="update";
-        $pagetitle="Liste des espèces";
+        $pagetitle="Update gender";
         $tab = ModelStatut_espece::selectALL();
         require_once File::build_path(array("view", "view.php"));
         

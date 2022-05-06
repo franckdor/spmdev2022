@@ -7,6 +7,8 @@ Nomenclatures acts :
 
 require_once File::build_path(array("config", "Conf.php"));
 require_once File::build_path(array("model" ,"Model.php"));
+require_once File::build_path(array("model", "ModelEspece_valide.php"));
+require_once File::build_path(array("model", "ModelGenre_valide.php"));
 
 class ModelNomenclature_espece extends Model {
 
@@ -54,6 +56,23 @@ class ModelNomenclature_espece extends Model {
         }
     }
 
+    public static function selectAll() {
+        try {
+            // préparation de la requête
+            $sql = "SELECT DISTINCT * FROM nomenclature_espece WHERE id_statut=10";
+            $req_prep = Model::getPDO()->query($sql);
+            // passage de la valeur de name_tag
+            // exécution de la requête préparée
+            $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelNomenclature_espece");
+            $tabResults = $req_prep->fetchAll();
+            // renvoi du tableau de résultats
+            return $tabResults;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la base de données.");
+        }
+    }
+
     
 
     public static function selectByName($name) {
@@ -75,7 +94,6 @@ class ModelNomenclature_espece extends Model {
         }
     }
 
-    
     public static function selectAllNomEsp() {
         try {
             $sql ="SELECT DISTINCT nom_espece FROM nomenclature_espece";
@@ -124,12 +142,16 @@ class ModelNomenclature_espece extends Model {
     }
 
     public function getAll() {
-        $array = array(
-            "genre" => $this->get("genre"),
-            "tribu" => $this->get("tribu"),
-            "sous_famille" => $this->get("sous_famille"),
-            "statut" => ModelStatut_genre::selectNameById($this->get("code_statut"))[0]->get("nom_statut_genre")
-        );
+        
+            $array = array(
+                "espece" => $this->get("nom_espece"),
+                "genre" => $this->get("nom_genre"),
+                "auteur_date" => $this->get("auteur_date"),
+                "espece_valide" => ModelEspece_valide::select($this->get('id_espece_valide'))->get("nom_espece"),
+                "genre_valide" => ModelEspece_valide::select($this->get('id_espece_valide'))->get('nom_genre'),
+                "statut" => ModelStatut_genre::selectNameById($this->get("id_statut"))[0]->get("nom_statut_genre"),
+            );
+        
         return $array;
     }
 }

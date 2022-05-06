@@ -2,7 +2,7 @@ const statut = document.getElementById('statut');
 let requeteStat;
 
 
-maRequeteSTAT();
+requeteSta(callback_STA);
 
 
 
@@ -46,10 +46,6 @@ function callback_STA(req) {
     afficheStat(tab2);
 }
 
-
-function maRequeteSTAT() {
-  requeteSta(callback_STA);
-}
 
 
 

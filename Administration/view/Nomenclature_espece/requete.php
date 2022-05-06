@@ -1,11 +1,6 @@
 <!-- We load JS here -->
-<script type="text/javascript" src="controller/NomenclatureJS/scriptGen.js" defer></script>
-<script type="text/javascript" src="controller/NomenclatureJS/scriptEsp.js" defer></script>
-<script type="text/javascript" src="controller/NomenclatureJS/scriptStat.js" defer></script>
-<script type="text/javascript" src="controller/NomenclatureJS/scriptAut.js" defer></script>
-<script type="text/javascript" src="controller/NomenclatureJS/scriptEspV.js" defer></script>
+<script type="text/javascript" src="controller/NomenclatureJS/scriptAutocompleteSpe.js" defer></script>
 <script type="text/javascript" src="controller/NomenclatureJS/scriptBiblio.js" defer></script>
-<script type="text/javascript" src="controller/NomenclatureJS/scriptRecherche.js" defer></script>
 <!-- Library for INPUT SELECTOR -->
 <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>

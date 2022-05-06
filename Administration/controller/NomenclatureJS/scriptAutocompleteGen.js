@@ -1,8 +1,66 @@
 let requeteGen;
 let requeteF;
 
+var genus = new TomSelect("#select-genre", {
+    maxItems:1,
+    maxOptions: null,
+    valueField: 'title',
+    labelField: 'title',
+    sortField: 'title',
+    searchField: ['title'],
+    create: false,
+    hideSelected: true,
+});
+
+var tribe = new TomSelect("#select-tribu", {
+    maxItems:1,
+    maxOptions: null,
+    valueField: 'title',
+    labelField: 'title',
+    sortField: 'title',
+    searchField: ['title'],
+    create: false,
+    hideSelected: true,
+});
+
+var sub_fam = new TomSelect("#select-sous-famille", {
+    maxItems:1,
+    maxOptions: null,
+    valueField: 'title',
+    labelField: 'title',
+    sortField: 'title',
+    searchField: ['title'],
+    create: false,
+    hideSelected: true,
+});
+
+
+var select = new TomSelect("#select", {
+    maxItems:1,
+    maxOptions: null,
+    valueField: 'title',
+    labelField: 'title',
+    sortField: 'title',
+    searchField: ['title'],
+    create: false,
+    hideSelected: true,
+});
+
+var familyS = new TomSelect("#select-family", {
+    maxItems:1,
+        maxOptions: null,
+        valueField: 'title',
+        labelField: 'title',
+        sortField: 'title',
+        searchField: ['title'],
+        create: false,
+        hideSelected: true,
+});
+
 requete(callback);
 requeteFam(callbackF);
+
+
 
 function callback(req) {
     var genre = [];
@@ -23,7 +81,7 @@ function callback(req) {
         titleR.push(tab[i].genre + " - " + tab[i].tribu + " - " + tab[i].sous_famille + " - " + tab[i].statut);
 
         genre.push({
-            id: i+'-'+titleGen.join(''),
+            id: i,//+'-'+titleGen.join(''),
             title: titleGen.join(''),
         });
 
@@ -42,60 +100,17 @@ function callback(req) {
             title: titleR.join(''),
         });
 
+        genus.addOption(genre);
 
+        tribe.addOption(tribu);
+        tribe.addItem(['Bryobiini']);
+
+        sub_fam.addOption(sous_famille);
+        sub_fam.addItem(['Bryobiinae']);
+
+        select.addOption(recherche);
     }
 
-
-    var genus = new TomSelect("#select-genre", {
-        maxItems:1,
-        maxOptions: null,
-        valueField: 'title',
-        labelField: 'title',
-        sortField: 'title',
-        searchField: ['title'],
-        create: false,
-        options: genre,
-    });
-
-    var tribe = new TomSelect("#select-tribu", {
-        maxItems:1,
-        maxOptions: null,
-        items: ['Bryobiini'],
-        valueField: 'title',
-        labelField: 'title',
-        sortField: 'title',
-        searchField: ['title'],
-        create: false,
-        options: tribu,
-    });
-
-    var sub_fam = new TomSelect("#select-sous-famille", {
-        maxItems:1,
-        maxOptions: null,
-        items: ['Bryobiinae'],
-        valueField: 'title',
-        labelField: 'title',
-        sortField: 'title',
-        searchField: ['title'],
-        create: false,
-        options: sous_famille,
-    });
-    sub_fam.addItem()
-
-
-    var select = new TomSelect("#select", {
-        maxItems:1,
-        maxOptions: null,
-        valueField: 'title',
-        labelField: 'title',
-        sortField: 'title',
-        searchField: ['title'],
-        create: false,
-        options: recherche,
-    });
-
-    console.log(select);
-    select.addItem("ALED");
 }
 
 
@@ -141,40 +156,48 @@ function callbackF(req) {
         });
     }
 
-    new TomSelect("#select-family", {
-    maxItems:1,
-        maxOptions: null,
-        items: ['Tetranychidae'],
-        valueField: 'title',
-        labelField: 'title',
-        sortField: 'title',
-        searchField: ['title'],
-        create: false,
-        options: family
-});
+    familyS.addOption(family);
+    familyS.addItem(['Tetranychidae']);
+    
 }
-/*
-var select = document.getElementById("select");
-console.log(select);
-select.addEventListener("change", filler);
 
-var genusT = document.getElementById("genus");
-console.log(genusT.childNodes);
-
-
+var selection = document.getElementById("select");
+selection.addEventListener("change", filler);
 
 
 
 function filler() {
-    var option = select.options[select.selectedIndex].value;
+    var option = selection.options[selection.selectedIndex].value;
     tabFill = option.split(" - ");
     console.log(tabFill);
-    var genus = document.getElementById("select-genre");
-    console.log(genus.options[genus.selectedIndex].value);
-    genus.lastElementChild.innerHTML = tabFill[0];
-    console.log(genus.lastElementChild.innerHTML);
-    console.log(div);
+    genusItem = tabFill[0];
+    tribeItem = tabFill[1];
+    subFItem = tabFill[2];
+
+    var tribeOption = document.createElement("option");
+    var genusOption = document.createElement("option");
+    var subFOption = document.createElement("option");
+
+    genusOption.setAttribute("title", genusItem);
+    tribeOption.setAttribute("title", tribeItem);
+    subFOption.setAttribute("title", subFItem);
+
+    var tribeNode = document.createTextNode(tribeItem);
+    var genusNode = document.createTextNode(genusItem);
+    var subFNode = document.createTextNode(subFItem);
+
+    genusOption.appendChild(genusNode);
+    tribeOption.appendChild(tribeNode);
+    subFOption.appendChild(subFNode);
+
+
+    genus.addOption(genusOption);
+    genus.addItem(genusItem);
+    tribe.addOption(tribeOption);
+    tribe.addItem(tribeItem);
+    sub_fam.addOption(subFOption);
+    sub_fam.addItem(subFItem);
 }
-*/
-var div = document.getElementsByClassName("item");
-console.log(div);
+
+
+

@@ -1,46 +1,58 @@
-let log = document.getElementById("log");
+let requeteBiblio;
+requeteB(callbackBiblio);
+var select = document.createElement("SELECT");
+select.setAttribute("id", "mySelect");
+document.body.appendChild(select);
 
-let url = "index.php?controller=nomenclature_espece&action=autocompleteBiblio";
-let url2 = "index.php?controller=nomenclature_espece&action=autocompleteText&reference=";
+var selection = new TomSelect('#mySelect', {
+	maxItems:1,
+    maxOptions: null,
+	valueField: 'value',
+	labelField: 'title',
+    searchField: ['title'],
+	hideSelected: true,
+});
 
-async function getFetchData() {
-	await fetch(url).then(response => response.json())
-	.then(value => value.biblio.forEach(element => {
-		log.insertAdjacentHTML('beforeend', `<p>${element.reference}</p>`)
-	}))
-	.then(value => console.log(value.biblio))
-	.catch(error => console.log(error))
+
+function createSelect() {  
+	var items = ["Foo","Bar","Zoo"];
+	for(var i = 0;i<1;i++) {
+	  var item = items[i];
+	  var newOption = document.createElement("option");
+	  newOption.setAttribute("value", item);
+	  newOption.setAttribute("title", item);
+	  var textNode = document.createTextNode(item);
+	  newOption.appendChild(textNode);
+	  selection.addOption(newOption);
+	  selection.addItem(item);
+	}
 }
 
-const but = document.getElementById("btn");
-btn.addEventListener("click", getFetchData);
-
-
-
-
-/*
-async function getAllRef(url) {
-	console.log("Initialisation de la promesse sur les références");
-	return new Promise(function (resolve, reject) {
-		var xhr = new XMLHttpRequest();
-		xhr.open('get', url, true);
-		xhr.onload = function () {
-			var status = xhr.status;
-			if (status == 200) {
-				resolve(xhr.response);
-				console.log("Je fais un truc");
-			} else {
-				reject(status);
-			}
-		};
-		xhr.send();
-	});
+function requeteB(callback) {
+    let url = "index.php?controller=nomenclature_espece&action=autocompleteBiblio";
+    if (requeteBiblio && requeteBiblio.readyState !== XMLHttpRequest.DONE) {
+        requeteBiblio.abort();
+    }
+    requeteBiblio = new XMLHttpRequest();
+    requeteBiblio.open("GET", url, true);
+    requeteBiblio.addEventListener("load",  function () {
+		console.log(requeteBiblio);
+        callback(requeteBiblio);
+    });
+    requeteBiblio.send(null);
 }
 
-async function loader() {
-	console.log("je suis la fonction loader");
-	let request = await getAllRef(url);
-	console.log(request.status);
-	console.log(request.response);
-}*/
-
+function callbackBiblio(req) {
+	var options = [];
+	let tab = JSON.parse(req.response);
+	for (var i=0; i<tab['biblio'].length; i++) {
+		var title = [];
+		  title.push(tab['biblio'][i].reference);
+		  options.push({
+			  id: i+'-'+title.join(''),
+			  title: title.join(''),
+			  value: tab['biblio'][i].titre,
+		  }); 
+	}
+    selection.addOption(options);
+  }

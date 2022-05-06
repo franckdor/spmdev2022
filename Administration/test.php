@@ -4,7 +4,15 @@
 
 
 
-<button id="btn" type="button">Créer un objet Promise !</button>
-<div id="log"></div>
+
+
+
+
+<p>Click the button to create a SELECT and an OPTION element.</p>
+
+<button onclick="createSelect()">Try it</button>
+
+
+
 
 <?php

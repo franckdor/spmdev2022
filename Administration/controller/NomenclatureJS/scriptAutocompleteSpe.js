@@ -1,4 +1,6 @@
+"use strict";
 const statut = document.getElementById('statut');
+var divp = document.getElementById('p');
 
 let requeteGEND;
 let requeteESPE;
@@ -6,6 +8,10 @@ let requeteAute;
 let requeteStat;
 let requeteEspV;
 let requeteFill;
+let requeteOtherSpecies;
+
+
+
 
 let tableau = [];
 
@@ -90,10 +96,47 @@ function requete(callback) {
   requeteFill = new XMLHttpRequest();
   requeteFill.open("GET", url, true);
   requeteFill.addEventListener("load", function () {
-    console.log(requeteFill);
     callback(requeteFill);
   });
   requeteFill.send(null);
+}
+
+function requeteOtherSpe() {
+  console.log("ALED");
+  
+  let url = "index.php?controller=nomenclature_espece&action=OtherSpecies&other=" + encodeURIComponent(select_VSpe.items[0]);
+  if (requeteOtherSpecies && requeteOtherSpecies.readyState !== XMLHttpRequest.DONE) {
+    requeteOtherSpecies.abort();
+  }
+  requeteOtherSpecies = new XMLHttpRequest();
+  requeteOtherSpecies.open("GET", url, true);
+  requeteOtherSpecies.addEventListener("load", function () {
+    console.log(requeteOtherSpecies);
+    callbackOS(requeteOtherSpecies);
+  });
+  requeteOtherSpecies.send(null);
+  
+}
+
+var other_species = document.getElementById("button");
+other_species.addEventListener("click", requeteOtherSpe/*callbackOS, select_VSpe.items[0]*/);
+
+function myevent() {
+  console.log("Event");
+}
+
+function callbackOS(req) {
+  videdivp();
+  let tab = JSON.parse(req.response);
+  for(let i=0; i<tab.length; i++) {
+    var p = document.createElement("p");
+    p.innerText = tab[i].espece + " | " + tab[i].genre + " | " + tab[i].auteur_date + " | " + tab[i].statut;
+    divp.appendChild(p);
+  }
+}
+
+function videdivp() {
+  divp.innerHTML="";
 }
 
 function callbackSearch(req) {
@@ -101,13 +144,12 @@ function callbackSearch(req) {
   var searchSpe = [];
   
   let tab = JSON.parse(req.response);
-  console.log(tab);
   for (var i=0; i<tab.length; i++) {
       var titleRG = [];
       var titleRS = [];
 
       titleRG.push(tab[i].genre + " - " + tab[i].espece + " - " + tab[i].auteur_date + " - " + tab[i].statut + " - " + tab[i].espece_valide + " - " + tab[i].genre_valide);
-      titleRS.push(tab[i].espece + " - " + tab[i].genre + " - " + tab[i].auteur_date + " - " + tab[i].statut);
+      titleRS.push(tab[i].espece + " - " + tab[i].genre + " - " + tab[i].auteur_date + " - " + tab[i].statut + " - " + tab[i].espece_valide + " - " + tab[i].genre_valide);
 
 
       searchSpe.push({
@@ -300,13 +342,13 @@ function requeteESPVALID(callback) {
 
 
 var searchGen = document.getElementById("search-genus");
-searchGen.addEventListener("change", filler);
+searchGen.addEventListener("change", fillerGenus);
 
-//var searchSpe = document.getElementById("search-species");
-//searchSpe.addEventListener("change", filler);
+var searchSpe = document.getElementById("search-species");
+searchSpe.addEventListener("change", fillerSpecies);
 
 
-function filler() {
+function fillerGenus() {
   var option = searchGen.options[searchGen.selectedIndex].value;
   tabFill = option.split(" - ");
   console.log(tabFill);
@@ -346,3 +388,45 @@ function filler() {
   select_VSpe.addOption(VspeciesOption);
   select_VSpe.addItem(VspeciesItem);
 }
+
+function fillerSpecies() {
+  var option = searchSpe.options[searchSpe.selectedIndex].value;
+  tabFill = option.split(" - ");
+  console.log(tabFill);
+  genusItem = tabFill[0];
+  speciesItem = tabFill[1];
+  audItem = tabFill[2];
+  VspeciesItem = tabFill[4] + " - " + tabFill[5];
+
+
+  var speciesOption = document.createElement("option");
+  var genusOption = document.createElement("option");
+  var audOption = document.createElement("option");
+  var VspeciesOption = document.createElement("option");
+
+  genusOption.setAttribute("title", genusItem);
+  speciesOption.setAttribute("title", speciesItem);
+  audOption.setAttribute("title", audItem);
+  VspeciesOption.setAttribute("title", VspeciesItem);
+
+  var speciesNode = document.createTextNode(speciesItem);
+  var genusNode = document.createTextNode(genusItem);
+  var audNode = document.createTextNode(audItem);
+  var VspeciesNode = document.createTextNode(VspeciesItem);
+
+  genusOption.appendChild(genusNode);
+  speciesOption.appendChild(speciesNode);
+  audOption.appendChild(audNode);
+  VspeciesOption.appendChild(VspeciesNode);
+
+
+  select_genus.addOption(genusOption);
+  select_genus.addItem(genusItem);
+  select_spe.addOption(speciesOption);
+  select_spe.addItem(speciesItem);
+  select_aut.addOption(audOption);
+  select_aut.addItem(audItem);
+  select_VSpe.addOption(VspeciesOption);
+  select_VSpe.addItem(VspeciesItem);
+}
+  

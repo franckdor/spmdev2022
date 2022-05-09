@@ -17,10 +17,7 @@ class ControllerNomenclature_espece {
         $view="list";
         $pagetitle="Liste des Espèces";
         $tab_esp = ModelNomenclature_espece::selectALL();
-        $tab = array();
-        foreach($tab_esp as $esp) {
-            array_push($tab, $esp->getAll());
-        }
+        
         
         //$statut = ModelStatut_genre::selectNameById(10); //RETURN AN ARRAY
         //$st; 
@@ -61,7 +58,7 @@ class ControllerNomenclature_espece {
     //Species form
     public static function requete() {
         $view="requete";
-        $pagetitle="Liste des espèces";
+        $pagetitle="Créer espèces";
         $tab = ModelStatut_espece::selectALL();
         require_once File::build_path(array("view", "view.php"));
         
@@ -171,5 +168,22 @@ class ControllerNomenclature_espece {
             //array_push($tab_id);
         }
         return $tab_name;
+    }
+
+    public static function OtherSpecies() {
+        $other = $_GET["other"];
+        $tab = explode(" - ", $other);
+
+        $species = $tab[0];
+        $genus = $tab[1];
+        
+        $tab_other = ModelNomenclature_espece::SelectSpeciesAndNameWhere($species, $genus);
+
+        $tabjson = array();
+        foreach($tab_other as $esp) {
+            array_push($tabjson, $esp->getAll());
+        }
+
+        echo json_encode($tabjson);
     }
 }

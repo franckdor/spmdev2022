@@ -134,7 +134,11 @@ class ModelNomenclature_espece extends Model {
     }
 
     public function get($attribute) {
-        return $this->$attribute;
+            return $this->$attribute;
+    }
+
+    public function getStatusName() {
+        return ModelStatut_genre::selectNameById($this->get("id_statut"))[0]->get("nom_statut_genre");
     }
 
     public function set($attribute) {
@@ -149,9 +153,33 @@ class ModelNomenclature_espece extends Model {
                 "auteur_date" => $this->get("auteur_date"),
                 "espece_valide" => ModelEspece_valide::select($this->get('id_espece_valide'))->get("nom_espece"),
                 "genre_valide" => ModelEspece_valide::select($this->get('id_espece_valide'))->get('nom_genre'),
-                "statut" => ModelStatut_genre::selectNameById($this->get("id_statut"))[0]->get("nom_statut_genre"),
+                "statut" => $this->getStatusName(),
             );
         
         return $array;
+    }
+
+    public static function SelectSpeciesAndNameWhere($species, $genus) {
+        try {
+            // préparation de la requête
+            $sql = "SELECT * FROM nomenclature_espece ne JOIN
+            espece_valide ev ON ne.id_espece_valide=ev.id_espece_valide
+            WHERE ev.nom_espece=:nom_espece AND ev.nom_genre=:nom_genre AND id_statut!=10";
+            $req_prep = Model::getPDO()->prepare($sql);
+            // passage de la valeur de name_tag
+            $values = array(
+                "nom_espece" => $species,
+                "nom_genre" => $genus,
+        );
+            // exécution de la requête préparée
+            $req_prep->execute($values);
+            $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelNomenclature_espece");
+            $tabResults = $req_prep->fetchAll();
+            // renvoi du tableau de résultats
+            return $tabResults;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la base de données.");
+        }
     }
 }

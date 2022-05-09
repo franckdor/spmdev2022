@@ -60,7 +60,10 @@
         <label for="select-espece-valide">Espece Valide : </label>
         <div>
             <select id="select-espece-valide" name="espece_valide" required></select>
+            <button id="button" class="other-species" name="other" type="button">>>></button>
         </div>  
+        <br>
+        <div id="p"></div>
         <br>
         <label for="bibliographie">Bibliographie : </label> 
         <br>

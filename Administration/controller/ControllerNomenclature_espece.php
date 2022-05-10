@@ -185,4 +185,14 @@ class ControllerNomenclature_espece {
         }
         echo json_encode($tabjson);
     }
+
+    public static function all() {
+        $tab = ModelNomenclature_espece::selectALL();
+        $tabjson = array();
+        foreach($tab as $esp) {
+            array_push($tabjson, $esp->getAll());
+        }
+
+        echo json_encode($tabjson);
+    }
 }

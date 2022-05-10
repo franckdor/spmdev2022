@@ -66,4 +66,16 @@ class ControllerPlante {
         require_once File::build_path(array("view", "view.php"));
         
     }
+
+    public static function biblio() {
+        $tab = ModelBibliographie::selectAll();
+
+        $tabjson = array();
+
+        foreach($tab as $ref) {
+            array_push($tabjson, $ref->getAll());
+        }
+
+        echo json_encode($tabjson);
+    }
 }

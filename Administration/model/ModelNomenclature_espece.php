@@ -56,7 +56,7 @@ class ModelNomenclature_espece extends Model {
         }
     }
 
-    public static function selectAll() {
+    public static function selectAllis10() {
         try {
             // préparation de la requête
             $sql = "SELECT DISTINCT * FROM nomenclature_espece WHERE id_statut=10";
@@ -186,7 +186,8 @@ class ModelNomenclature_espece extends Model {
         try {
             // préparation de la requête
             $sql = "SELECT DISTINCT * FROM nomenclature_espece
-            WHERE id_espece_valide=:id";
+            WHERE id_espece_valide=:id
+            ORDER BY nom_espece, id_statut";
             $req_prep = Model::getPDO()->prepare($sql);
             // passage de la valeur de name_tag
             $values = array(

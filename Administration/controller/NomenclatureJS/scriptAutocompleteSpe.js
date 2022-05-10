@@ -102,7 +102,6 @@ function requete(callback) {
 }
 
 function requeteOtherSpe() {
-  console.log("ALED");
   
   let url = "index.php?controller=nomenclature_espece&action=OtherSpecies&other=" + encodeURIComponent(select_VSpe.items[0]);
   if (requeteOtherSpecies && requeteOtherSpecies.readyState !== XMLHttpRequest.DONE) {
@@ -111,7 +110,6 @@ function requeteOtherSpe() {
   requeteOtherSpecies = new XMLHttpRequest();
   requeteOtherSpecies.open("GET", url, true);
   requeteOtherSpecies.addEventListener("load", function () {
-    console.log(requeteOtherSpecies);
     callbackOS(requeteOtherSpecies);
   });
   requeteOtherSpecies.send(null);
@@ -119,7 +117,7 @@ function requeteOtherSpe() {
 }
 
 var other_species = document.getElementById("button");
-other_species.addEventListener("click", requeteOtherSpe/*callbackOS, select_VSpe.items[0]*/);
+other_species.addEventListener("click", requeteOtherSpe);
 
 function myevent() {
   console.log("Event");
@@ -130,8 +128,9 @@ function callbackOS(req) {
   let tab = JSON.parse(req.response);
   for(let i=0; i<tab.length; i++) {
     var p = document.createElement("p");
-    p.innerText = tab[i].espece + " | " + tab[i].genre + " | " + tab[i].auteur_date + " | " + tab[i].statut;
+    p.innerText = tab[i].espece + "\n" + tab[i].genre + "\n" + tab[i].auteur_date + "\n" + tab[i].statut;
     divp.appendChild(p);
+    divp.appendChild(document.createElement("br"));
   }
 }
 
@@ -349,13 +348,14 @@ searchSpe.addEventListener("change", fillerSpecies);
 
 
 function fillerGenus() {
+  search_species.clear();
   var option = searchGen.options[searchGen.selectedIndex].value;
-  tabFill = option.split(" - ");
-  console.log(tabFill);
-  genusItem = tabFill[0];
-  speciesItem = tabFill[1];
-  audItem = tabFill[2];
-  VspeciesItem = tabFill[4] + " - " + tabFill[5];
+  let tabFill = option.split(" - ");
+  
+  let genusItem = tabFill[0];
+  let speciesItem = tabFill[1];
+  let audItem = tabFill[2];
+  let VspeciesItem = tabFill[4] + " - " + tabFill[5];
 
 
   var speciesOption = document.createElement("option");
@@ -390,13 +390,13 @@ function fillerGenus() {
 }
 
 function fillerSpecies() {
+  search_genus.clear();
   var option = searchSpe.options[searchSpe.selectedIndex].value;
-  tabFill = option.split(" - ");
-  console.log(tabFill);
-  genusItem = tabFill[0];
-  speciesItem = tabFill[1];
-  audItem = tabFill[2];
-  VspeciesItem = tabFill[4] + " - " + tabFill[5];
+  let tabFill = option.split(" - ");
+  let genusItem = tabFill[0];
+  let speciesItem = tabFill[1];
+  let audItem = tabFill[2];
+  let VspeciesItem = tabFill[4] + " - " + tabFill[5];
 
 
   var speciesOption = document.createElement("option");

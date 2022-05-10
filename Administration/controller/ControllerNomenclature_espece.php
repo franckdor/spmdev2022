@@ -177,13 +177,12 @@ class ControllerNomenclature_espece {
         $species = $tab[0];
         $genus = $tab[1];
         
-        $tab_other = ModelNomenclature_espece::SelectSpeciesAndNameWhere($species, $genus);
-
+        $tab_other = ModelNomenclature_espece::SelectIdValidSpe($species, $genus);
+        $tab_other = ModelNomenclature_espece::SelectByIdValidSpecies($tab_other[0]->get('id_espece_valide'));
         $tabjson = array();
         foreach($tab_other as $esp) {
             array_push($tabjson, $esp->getAll());
         }
-
         echo json_encode($tabjson);
     }
 }

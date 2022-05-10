@@ -31,6 +31,9 @@ class ModelEspece_valide extends Model {
         return $this->$nom_attribut;
     }
 
+    public function getAll() {
+        return get_object_vars($this);
+    }
     
     public function __construct($id=NULL, $nomg=NULL, $nome=NULL, $aut=NULL, $idn=NULL, $ref=NULL, $codebibli=NULL, $boll=NULL, $idgv=NULL) {
         if (!is_null($id) && !is_null($nomg) && !is_null($nome) && !is_null($aut) && !is_null($idn) && !is_null($ref)
@@ -69,6 +72,8 @@ class ModelEspece_valide extends Model {
             die("Erreur lors de la recherche dans la base de données.");
         }
     }
+
+    
     
     
 }

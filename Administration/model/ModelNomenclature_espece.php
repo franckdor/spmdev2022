@@ -159,18 +159,39 @@ class ModelNomenclature_espece extends Model {
         return $array;
     }
 
-    public static function SelectSpeciesAndNameWhere($species, $genus) {
+    public static function SelectIDValidSpe($species, $genus) {
         try {
             // préparation de la requête
-            $sql = "SELECT * FROM nomenclature_espece ne JOIN
-            espece_valide ev ON ne.id_espece_valide=ev.id_espece_valide
-            WHERE ev.nom_espece=:nom_espece AND ev.nom_genre=:nom_genre AND id_statut!=10";
+            $sql = "SELECT DISTINCT id_espece_valide FROM nomenclature_espece
+            WHERE nom_espece=:nom_espece AND nom_genre=:nom_genre";
             $req_prep = Model::getPDO()->prepare($sql);
             // passage de la valeur de name_tag
             $values = array(
                 "nom_espece" => $species,
                 "nom_genre" => $genus,
         );
+            // exécution de la requête préparée
+            $req_prep->execute($values);
+            $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelNomenclature_genre");
+            $tabResults = $req_prep->fetchAll();
+            // renvoi du tableau de résultats
+            return $tabResults;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la base de données.");
+        }
+    }
+
+    public static function SelectByIdValidSpecies($idValidSpecies) {
+        try {
+            // préparation de la requête
+            $sql = "SELECT DISTINCT * FROM nomenclature_espece
+            WHERE id_espece_valide=:id";
+            $req_prep = Model::getPDO()->prepare($sql);
+            // passage de la valeur de name_tag
+            $values = array(
+                "id" => $idValidSpecies);
+                
             // exécution de la requête préparée
             $req_prep->execute($values);
             $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelNomenclature_espece");
@@ -182,4 +203,5 @@ class ModelNomenclature_espece extends Model {
             die("Erreur lors de la recherche dans la base de données.");
         }
     }
+    
 }

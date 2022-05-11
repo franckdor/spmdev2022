@@ -1,19 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
-:root {
-    --headerfooter: rgba(186, 211, 232, 0.53);
-}
 
-html, body {
-    line-height: 1.5;
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-    margin: 0px;
-    padding: 0px;
-}
 
 main {
     display: flex;
@@ -56,11 +42,7 @@ header, footer {
     background-color: #342f2f;
 }
 
-header a {
-    color: white;
-    text-decoration: none;
-    text-transform: uppercase;
-}
+
 
 #bouton {
     /** Ces directives indiquent au lien de ressembler à un bouton pour les principaux moteurs de rendu **/
@@ -72,9 +54,6 @@ header a {
     color: initial;
 }
 
-#boxCenter, #boxLeft, #boxRight {
-    display: flex;
-}
 
 #boxRight {
     justify-content: flex-end;
@@ -93,9 +72,7 @@ header a {
     margin-left: 10px;
 }
 
-a:hover {
-    color: #c42c2c;
-}
+
 
 #boxLeft img {
     width: 80px;
@@ -110,15 +87,3 @@ footer {
     color: white;
 }
 
-textarea{  
-    /* box-sizing: padding-box; */
-    overflow:hidden;
-    /* demo only: */
-    padding:10px;
-    width:250px;
-    font-size:12px;
-    margin:50px auto;
-    display:block;
-    border-radius:10px;
-    border:6px solid #556677;
-  }

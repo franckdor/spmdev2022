@@ -1,30 +1,20 @@
 let requeteFill;
-let requeteRef;
+let requetePlant;
 
-var search_species = new TomSelect('#search-species',{
-    maxItems: 1,
-    maxOptions: 200,
-    valueField: 'title',
-    labelField: 'title',
-    searchField: ['title'],
-    sortField: 'title',
-    hideSelected: true,
-    create: false
-  });
-/*
-  var search_ref = new TomSelect('#search-ref',{
-    maxItems: 1,
-    maxOptions: 200,
-    valueField: 'title',
-    labelField: 'title',
-    searchField: ['title'],
-    sortField: 'title',
-    hideSelected: true,
-    create: false
-  });
-*/
+
+requetePlants(callbackPlant);
 requete(callbackSearch);
-requeteReference(callbackReference);
+let selectSpecies = document.getElementById("search-species");
+let textSpe = document.getElementById("species");
+
+selectSpecies.addEventListener("change", textSpeFill);
+
+
+function textSpeFill() {
+  var option = selectSpecies.options[selectSpecies.selectedIndex].value;
+  textSpe.innerText = option;
+}
+
 
 function requete(callback) {
   let url = "index.php?controller=nomenclature_espece&action=all";
@@ -34,25 +24,27 @@ function requete(callback) {
   requeteFill = new XMLHttpRequest();
   requeteFill.open("GET", url, true);
   requeteFill.addEventListener("load", function () {
-    console.log(requeteFill);
+
     callback(requeteFill);
   });
   requeteFill.send(null);
 }
 
-function requeteReference(callback) {
-  let url = "index.php?controller=nomenclature_espece&action=autocompleteBiblio";
-  if (requeteRef && requeteRef.readyState !== XMLHttpRequest.DONE) {
-    requeteRef.abort();
+function requetePlants(callback) {
+  let url = "index.php?controller=plants&action=searchPlant";
+  if (requetePlant && requetePlant.readyState !== XMLHttpRequest.DONE) {
+    requetePlant.abort();
   }
-  requeteRef = new XMLHttpRequest();
-  requeteRef.open("GET", url, true);
-  requeteRef.addEventListener("load", function () {
-    console.log(requeteRef);
-    callback(requeteRef);
+  requetePlant = new XMLHttpRequest();
+  requetePlant.open("GET", url, true);
+  requetePlant.addEventListener("load", function () {
+    console.log(requetePlant);
+    callback(requetePlant);
   });
-  requeteRef.send(null);
+  requetePlant.send(null);
 }
+
+
 
 function callbackSearch(req) {
     var searchSpe = [];
@@ -60,34 +52,61 @@ function callbackSearch(req) {
     let tab = JSON.parse(req.response);
     for (var i=0; i<tab.length; i++) {
         var titleRS = [];
+        var value = [];
 
         titleRS.push(tab[i].espece + " - " + tab[i].genre + " - " + tab[i].auteur_date + " - " + tab[i].statut);
-  
+        value.push(tab[i].genre + " " + tab[i].espece + " " + tab[i].auteur_date + "\n " + tab[i].statut);
+
         searchSpe.push({
           id: i+'-'+titleRS.join(''),
           title: titleRS.join(''),
+          value: value.join(''),
       });
 
-        search_species.addOption(searchSpe);
     }
   
+    new TomSelect('#search-species',{
+      maxItems: 1,
+      maxOptions: 800,
+      valueField: 'value',
+      labelField: 'title',
+      searchField: ['title'],
+      sortField: 'title',
+      hideSelected: true,
+      create: false,
+      options: searchSpe,
+    });
 }
 
-function callbackReference(req) {
-  var searchRef = [];
+function callbackPlant(req) {
+  var searchPlant = [];
   
   let tab = JSON.parse(req.response);
+  console.log(tab);
   for (var i=0; i<tab.length; i++) {
-      var titleRF = [];
+      var titleP = [];
+      //var value = [];
 
-      titleRF.push(tab[i]);
+      titleP.push(tab[i].species + " - " + tab[i].genus);
+      //value.push(tab[i].genre + " " + tab[i].espece + " " + tab[i].auteur_date + "\n " + tab[i].statut);
 
-      searchRef.push({
-        id: i+'-'+titleRF.join(''),
-        title: titleRF.join(''),
+      searchPlant.push({
+        id: i+'-'+titleP.join(''),
+        title: titleP.join(''),
+        //value: value.join(''),
     });
 
-      search_ref.addOption(searchRef);
   }
 
+  new TomSelect('#search-plants',{
+    maxItems: 1,
+    maxOptions: 800,
+    valueField: 'title',
+    labelField: 'title',
+    searchField: ['title'],
+    sortField: 'title',
+    hideSelected: true,
+    create: false,
+    options: searchPlant,
+  });
 }

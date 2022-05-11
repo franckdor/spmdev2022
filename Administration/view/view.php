@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="view/style.css">
+        <link rel="stylesheet" type="text/css" href="view/styles.css">
         <link rel="stylesheet" type="text/css" href="view/completion.css">
         <title><?php echo $pagetitle; ?></title>
     </head>
@@ -24,8 +24,8 @@
                     echo '<a href="index.php?action=requete&controller=nomenclature_espece">Species TEST</a>';
                     echo '<a href="index.php?action=update&controller=nomenclature_genre">Genus TEST</a>';
                     echo '<a href="index.php?action=readAll&controller=nomenclature_genre">Genus</a>';
-                    echo '<a href="index.php?action=readAll&controller=plante">Plants</a>';
-                    echo '<a href="index.php?action=update&controller=plante">Plants TEST</a>';
+                    echo '<a href="index.php?action=readAll&controller=plants">Plants</a>';
+                    echo '<a href="index.php?action=update&controller=plants">Plants TEST</a>';
                 }
                 ?>
                 

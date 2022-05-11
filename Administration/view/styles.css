@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+:root {
+    --headerfooter: rgba(186, 211, 232, 0.53);
+}
+
+html, body {
+    line-height: 1.5;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    margin: 0px;
+    padding: 0px;
+}
+
+#boxCenter {
+    width: 100%;
+    gap: 30px;
+    margin-left: 30px;
+}
+
+#p {
+    display: block;
+}
+
+a:hover {
+    color: #c42c2c;
+}
+
+#boxCenter, #boxLeft, #boxRight {
+    display: flex;
+}
+
+
+textarea{  
+    overflow:hidden;
+    /* demo only: */
+    padding:10px;
+    width:300px;
+    height:auto;
+    font-size:12px;
+    display:block;
+    border-radius:10px;
+    border:3px solid #556677;
+
+}
+
+select {
+    width: 300px;
+}
+
+
+
+

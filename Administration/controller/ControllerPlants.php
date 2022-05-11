@@ -9,18 +9,19 @@ require_once File::build_path(array("model", "ModelGenre_valide.php"));
 require_once File::build_path(array("model", "ModelBibliographie.php"));
 require_once File::build_path(array("model", "ModelGenres.php"));
 require_once File::build_path(array("model", "ModelFamilles.php"));
-require_once File::build_path(array("model", "ModelPlante.php"));
-class ControllerPlante {
+require_once File::build_path(array("model", "ModelPlants.php"));
+
+class ControllerPlants {
 
 
-    protected static $object = 'plante';
+    protected static $object = 'plants';
 
 
     public static function readAll() {
         $view="list";   
         $pagetitle="Liste des plantes";
 
-        $tab_plante = ModelPlante::selectAll();
+        $tab_plante = ModelPlants::selectAll();
 
         $tab_spe = ModelNomenclature_espece::selectALL();
 
@@ -61,7 +62,7 @@ class ControllerPlante {
     //Species form
     public static function update() {
         $view="update";
-        $pagetitle="Update gender";
+        $pagetitle="Update plants";
         $tab = ModelStatut_espece::selectALL();
         require_once File::build_path(array("view", "view.php"));
         
@@ -76,6 +77,15 @@ class ControllerPlante {
             array_push($tabjson, $ref->getAll());
         }
 
+        echo json_encode($tabjson);
+    }
+
+    public static function searchPlant() {
+        $tab = ModelPlants::SelectAll();
+        $tabjson = array();
+        foreach($tab as $plant) {
+            array_push($tabjson, $plant->getSpeGen());
+        }
         echo json_encode($tabjson);
     }
 }

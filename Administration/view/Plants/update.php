@@ -28,7 +28,8 @@
                 <label for="search-species">Search by Species: </label>
                     
                 <div>  
-                    <select id="search-species" name="searchs"  required></select>    
+                    <select id="search-species" name="searchs"  required></select>
+                    <button id="buttonSpecies" class="species" type="button">>>></button>    
                 </div>
                 <textarea wrap="hard" id="species" readonly></textarea>
 
@@ -37,16 +38,20 @@
                 <label for="bibliographie">Search by Ref : </label>
                     
                 <div>  
-                    <select id="bibliographie" name="ref"  required></select>    
+                    <select id="bibliographie" name="ref"  required></select>
+                    <button id="buttonRef" class="ref" type="button">>>></button>    
                 </div>
                 <textarea wrap="hard" id="biblio" readonly></textarea>
 
                 <label for="search-plants">Search by Plant : </label>
 
                 <div>  
-                    <select id="search-plants" name="plants"  required></select>    
+                    <select id="search-plants" name="plants"  required></select> 
+                    <button id="buttonPlants" class="plants" type="button">>>></button>    
                 </div>
                 <textarea wrap="hard" id="plant" readonly></textarea>
+                <br>
+                <input type="submit" value="Envoyer" />
         </fieldset>
 
         

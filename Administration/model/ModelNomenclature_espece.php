@@ -144,7 +144,7 @@ class ModelNomenclature_espece extends Model {
     public function set($attribute) {
         $this->$attribute = $attribute;
     }
-
+    
     public function getAll() {
         
             $array = array(
@@ -154,11 +154,17 @@ class ModelNomenclature_espece extends Model {
                 "espece_valide" => ModelEspece_valide::select($this->get('id_espece_valide'))->get("nom_espece"),
                 "genre_valide" => ModelEspece_valide::select($this->get('id_espece_valide'))->get('nom_genre'),
                 "statut" => $this->getStatusName(),
+                "id" => $this->get('id_nomenclature_espece'),
             );
         
         return $array;
     }
-
+    
+    /*
+    public function getAll() {
+        return get_object_vars($this);
+    }
+    */
     public static function SelectIDValidSpe($species, $genus) {
         try {
             // préparation de la requête

@@ -156,6 +156,7 @@ function callbackSearch(req) {
       searchGen.push({
           id: i+'-'+titleRG.join(''),
           title: titleRG.join(''),
+
       });
 
       search_genus.addOption(searchGen);

@@ -2,6 +2,7 @@ let requeteFill;
 let requetePlant;
 
 
+
 requetePlants(callbackPlant);
 requete(callbackSearch);
 
@@ -21,7 +22,7 @@ function textSpeFill() {
 }
 
 function textPlantFill() {
-  var option = selectPlants.options[selectPlants.selectedIndex].value;
+  var option = selectPlants.tomselect.options[selectPlants.tomselect.items].value;
   textPlant.innerText = option;
 }
 
@@ -91,25 +92,28 @@ function callbackPlant(req) {
   var searchPlant = [];
   
   let tab = JSON.parse(req.response);
-  console.log(tab);
   for (var i=0; i<tab.length; i++) {
       var titleP = [];
       var value = [];
+      var attr = [];
+      
 
       titleP.push(tab[i].species + " - " + tab[i].genus);
-      value.push(tab[i].species + " " + tab[i].genus);
+      value.push(tab[i].species + " - " + tab[i].genus);
+      attr.push(tab[i].id);
+
 
       searchPlant.push({
         id: i+'-'+titleP.join(''),
         title: titleP.join(''),
         value: value.join(''),
+        attr: attr.join(''),
     });
-
   }
 
   new TomSelect('#search-plants',{
     maxItems: 1,
-    maxOptions: 800,
+    maxOptions: 20000,
     valueField: 'value',
     labelField: 'title',
     searchField: ['title'],
@@ -118,4 +122,5 @@ function callbackPlant(req) {
     create: false,
     options: searchPlant,
   });
+
 }

@@ -1,2 +1,4 @@
 <?php
-var_dump($tab_plante);
+foreach($tab_plante as $plant) {
+    echo '<p>' . htmlspecialchars($plant->get('species')). " " . htmlspecialchars($plant->get('genus')) . /*" " . $st .*/ " ";
+}

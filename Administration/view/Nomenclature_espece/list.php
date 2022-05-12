@@ -1,16 +1,19 @@
 <?php
+    echo "<p>Espèces de taxon : <br>";
+foreach($tab_esp as $spe) {
+    $urlprimary = rawurlencode($spe->get('id_nomenclature_espece'));
+    $htmlprimary = htmlspecialchars($spe->get('id_nomenclature_espece'));
+    $htmlSpecies = htmlspecialchars($spe->get('nom_espece'));
+    $htmlGenus = htmlspecialchars($spe->get('nom_genre'));
 
-foreach($tab_esp as $esp) {
-echo '<p>' . htmlspecialchars($esp->get('nom_genre')). " " . htmlspecialchars($esp->get('nom_espece')) . /*" " . $st .*/ " " .
-/*htmlspecialchars($esp->get('id_statut')) .*/ '</p>';
-}
-/*
-foreach($tab as $value) {
-    foreach($value as $id) {
-        echo $id->get('nom_statut_genre');
-        echo $id->get('id_statut_genre');
-        echo "<br>";
+    if (isset($_SESSION['login'])) { ?>
+        
+            <a href="http://admin/index.php?action=read&controller=nomenclature_espece&id_nomenclature_espece=<?php echo $urlprimary; ?>">
+                <?php echo $htmlSpecies . " " . $htmlGenus  ?> </a>et d'identifiant <?php echo $htmlprimary; ?> </p>
+
+<?php
     }
-}
-*/
+
+ }
+
 ?>

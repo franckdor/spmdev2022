@@ -1,7 +1,8 @@
 let requeteFill;
 let requetePlant;
-
-
+const buttonPlants = document.getElementById("buttonPlants");
+const buttonRef = document.getElementById("buttonRef");
+const buttonSpecies = document.getElementById("buttonSpecies");
 
 requetePlants(callbackPlant);
 requete(callbackSearch);
@@ -15,6 +16,20 @@ let textPlant = document.getElementById("plant");
 selectSpecies.addEventListener("change", textSpeFill);
 selectPlants.addEventListener("change", textPlantFill);
 
+buttonPlants.addEventListener("click", () => {
+  window.open("index.php?action=update&controller=plants",'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
+  return false;
+});
+
+buttonRef.addEventListener("click", () => {
+  window.open("index.php?action=update&controller=plants",'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
+  return false;
+});
+
+buttonSpecies.addEventListener("click", () => {
+  window.open("index.php?action=read&controller=nomenclature_espece&id_nomenclature_espece="+selectSpecies.tomselect.options[selectSpecies.tomselect.items].attr,'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
+  return false;
+});
 
 function textSpeFill() {
   var option = selectSpecies.options[selectSpecies.selectedIndex].value;
@@ -63,14 +78,17 @@ function callbackSearch(req) {
     for (var i=0; i<tab.length; i++) {
         var titleRS = [];
         var value = [];
+        var attr = [];
 
         titleRS.push(tab[i].espece + " - " + tab[i].genre + " - " + tab[i].auteur_date + " - " + tab[i].statut);
         value.push(tab[i].genre + " " + tab[i].espece + " " + tab[i].auteur_date + "\n " + tab[i].statut);
+        attr.push(tab[i].id);
 
         searchSpe.push({
           id: i+'-'+titleRS.join(''),
           title: titleRS.join(''),
           value: value.join(''),
+          attr: attr.join(''),
       });
 
     }

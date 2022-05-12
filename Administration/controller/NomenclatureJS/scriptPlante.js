@@ -4,15 +4,25 @@ let requetePlant;
 
 requetePlants(callbackPlant);
 requete(callbackSearch);
+
 let selectSpecies = document.getElementById("search-species");
 let textSpe = document.getElementById("species");
 
+let selectPlants = document.getElementById("search-plants");
+let textPlant = document.getElementById("plant");
+
 selectSpecies.addEventListener("change", textSpeFill);
+selectPlants.addEventListener("change", textPlantFill);
 
 
 function textSpeFill() {
   var option = selectSpecies.options[selectSpecies.selectedIndex].value;
   textSpe.innerText = option;
+}
+
+function textPlantFill() {
+  var option = selectPlants.options[selectPlants.selectedIndex].value;
+  textPlant.innerText = option;
 }
 
 
@@ -38,7 +48,6 @@ function requetePlants(callback) {
   requetePlant = new XMLHttpRequest();
   requetePlant.open("GET", url, true);
   requetePlant.addEventListener("load", function () {
-    console.log(requetePlant);
     callback(requetePlant);
   });
   requetePlant.send(null);
@@ -85,15 +94,15 @@ function callbackPlant(req) {
   console.log(tab);
   for (var i=0; i<tab.length; i++) {
       var titleP = [];
-      //var value = [];
+      var value = [];
 
       titleP.push(tab[i].species + " - " + tab[i].genus);
-      //value.push(tab[i].genre + " " + tab[i].espece + " " + tab[i].auteur_date + "\n " + tab[i].statut);
+      value.push(tab[i].species + " " + tab[i].genus);
 
       searchPlant.push({
         id: i+'-'+titleP.join(''),
         title: titleP.join(''),
-        //value: value.join(''),
+        value: value.join(''),
     });
 
   }
@@ -101,7 +110,7 @@ function callbackPlant(req) {
   new TomSelect('#search-plants',{
     maxItems: 1,
     maxOptions: 800,
-    valueField: 'title',
+    valueField: 'value',
     labelField: 'title',
     searchField: ['title'],
     sortField: 'title',

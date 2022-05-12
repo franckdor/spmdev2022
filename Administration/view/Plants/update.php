@@ -46,6 +46,7 @@
                 <div>  
                     <select id="search-plants" name="plants"  required></select>    
                 </div>
+                <textarea wrap="hard" id="plant" readonly></textarea>
         </fieldset>
 
         

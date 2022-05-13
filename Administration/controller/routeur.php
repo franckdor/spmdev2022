@@ -5,7 +5,8 @@ session_start();
 require_once File::build_path(array("controller", "ControllerAdmin.php"));
 require_once File::build_path(array("controller", "ControllerNomenclature_espece.php"));
 require_once File::build_path(array("controller", "ControllerNomenclature_genre.php"));
-require_once File::build_path(array("controller", "ControllerPlante.php"));
+require_once File::build_path(array("controller", "ControllerPlants.php"));
+require_once File::build_path(array("controller", "ControllerBibliographie.php"));
 
 $controller_default = 'Admin';
 

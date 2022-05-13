@@ -119,18 +119,14 @@ function requeteOtherSpe() {
 var other_species = document.getElementById("button");
 other_species.addEventListener("click", requeteOtherSpe);
 
-function myevent() {
-  console.log("Event");
-}
 
 function callbackOS(req) {
   videdivp();
   let tab = JSON.parse(req.response);
   for(let i=0; i<tab.length; i++) {
     var p = document.createElement("p");
-    p.innerText = tab[i].espece + "\n" + tab[i].genre + "\n" + tab[i].auteur_date + "\n" + tab[i].statut;
+    p.innerText = tab[i].espece + " -- " + tab[i].genre + " -- " + tab[i].auteur_date + " -- " + tab[i].statut + "\n";
     divp.appendChild(p);
-    divp.appendChild(document.createElement("br"));
   }
 }
 
@@ -160,6 +156,7 @@ function callbackSearch(req) {
       searchGen.push({
           id: i+'-'+titleRG.join(''),
           title: titleRG.join(''),
+
       });
 
       search_genus.addOption(searchGen);

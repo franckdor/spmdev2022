@@ -17,7 +17,7 @@ class ControllerNomenclature_espece {
         $view="list";
         $pagetitle="Liste des Espèces";
         $tab_esp = ModelNomenclature_espece::selectALL();
-        
+        $r = ModelNomenclature_espece::select(1);
         
         //$statut = ModelStatut_genre::selectNameById(10); //RETURN AN ARRAY
         //$st; 
@@ -29,6 +29,16 @@ class ControllerNomenclature_espece {
 
         
         require_once File::build_path(array("view", "view.php"));
+    }
+
+    public static function read()
+    {   
+        
+        $esp = ModelNomenclature_espece::select($_GET['id_nomenclature_espece']);
+        
+        $view = 'detail';
+        $pagetitle = 'Détails de espèce';
+        require File::build_path(array("view", "view.php"));
     }
 
     //Save data from form to db
@@ -50,6 +60,12 @@ class ControllerNomenclature_espece {
             'dateadd' => date('d/m/Y', time()) 
          );   
         ModelNomenclature_espece::save($data);
+        require_once File::build_path(array("view", "view.php"));
+    }
+
+    public static function errorPageIntrouvable() {
+        $view="error";
+        $pagetitle="Error";
         require_once File::build_path(array("view", "view.php"));
     }
 

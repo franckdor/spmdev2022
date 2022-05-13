@@ -46,8 +46,9 @@ class ModelBibliographie extends Model {
             $class_name = 'Model' . ucfirst($table_name);
 
             $pdo = Model::getPDO();
-            $rep = $pdo->query("SELECT * FROM $table_name");
-            $rep->setFetchMode(PDO::FETCH_ASSOC);
+            $rep = $pdo->query("SELECT * FROM $table_name
+            ORDER BY code_bibliographie");
+            $rep->setFetchMode(PDO::FETCH_CLASS, "ModelBibliographie");
             return $rep->fetchAll();
         } catch (PDOException $e) {
             if (Conf::getDebug())
@@ -83,6 +84,10 @@ class ModelBibliographie extends Model {
             }
             die();
         }
+    }
+
+    public function getAll() {
+        return get_object_vars($this);
     }
 
     static public function selectIdByTitle($title) {

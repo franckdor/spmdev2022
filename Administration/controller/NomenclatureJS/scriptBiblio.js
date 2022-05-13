@@ -3,14 +3,15 @@ let requeteBiblio;
 requeteB(callbackBiblio);
 
 let selectBiblio = document.getElementById("bibliographie");
-let textarea = document.getElementById("biblio");
+let textareab = document.getElementById("biblio");
 
 
 selectBiblio.addEventListener("change", listener)
 
 function listener() {
     var option = selectBiblio.options[selectBiblio.selectedIndex].value;
-    textarea.innerText=option;
+    textareab.innerText=option;
+    textareab.focus();
 }
 
 
@@ -31,14 +32,14 @@ function requeteB(callback) {
 function callbackBiblio(req) {
   var options = [];
   let tab = JSON.parse(req.response);
-  for (var i=0; i<tab['biblio'].length; i++) {
+  for (var i=0; i<tab.length; i++) {
       var title = [];
       var attr = [];
       var value = [];
 
-        title.push(tab['biblio'][i].reference);
-        attr.push(tab['biblio'][i].code_bibliographie);
-        value.push(tab['biblio'][i].auteur + " - " +  tab['biblio'][i].annee + " - " + tab['biblio'][i].titre + " - " + tab['biblio'][i].source);
+        title.push(tab[i].reference);
+        attr.push(tab[i].code_bibliographie);
+        value.push(tab[i].auteur + " - " +  tab[i].annee + " - " + tab[i].titre + " - " + tab[i].source);
         options.push({
             id: i+'-'+title.join(''),
             title: title.join(''),
@@ -61,3 +62,11 @@ function callbackBiblio(req) {
   });
 
 }
+
+let textarea = document.getElementById("biblio");
+        textarea.addEventListener('focus', autoResize, false);
+      
+        function autoResize() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        }

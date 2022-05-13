@@ -82,10 +82,12 @@ class ControllerNomenclature_espece {
 
     public static function autocompleteBiblio() {
         $biblio = ModelBibliographie::selectALL();
-        sleep(0.5);
-        echo json_encode(array(
-            "biblio" => $biblio
-        ));
+        $tabjson = array();
+        foreach($biblio as $ref) {
+            array_push($tabjson, $ref->getAll());
+        }
+
+        echo json_encode($tabjson);
     }
 
     public static function autocompleteText() {

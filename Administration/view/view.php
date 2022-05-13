@@ -26,6 +26,7 @@
                     echo '<a href="index.php?action=readAll&controller=nomenclature_genre">Genus</a>';
                     echo '<a href="index.php?action=readAll&controller=plants">Plants</a>';
                     echo '<a href="index.php?action=update&controller=plants">Plants TEST</a>';
+                    echo '<a href="index.php?action=readAll&controller=bibliographie">Biblio</a>';
                 }
                 ?>
                 

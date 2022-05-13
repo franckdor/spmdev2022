@@ -61,7 +61,6 @@ class ControllerNomenclature_genre {
     public static function update() {
         $view="update";
         $pagetitle="Update gender";
-        $tab = ModelStatut_espece::selectALL();
         require_once File::build_path(array("view", "view.php"));
         
     }

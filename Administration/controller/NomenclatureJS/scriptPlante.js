@@ -9,9 +9,11 @@ requete(callbackSearch);
 
 let selectSpecies = document.getElementById("search-species");
 let textSpe = document.getElementById("species");
+textSpe.addEventListener('focus', autoResize, false);
 
 let selectPlants = document.getElementById("search-plants");
 let textPlant = document.getElementById("plant");
+textPlant.addEventListener('focus', autoResize, false);
 
 selectSpecies.addEventListener("change", textSpeFill);
 selectPlants.addEventListener("change", textPlantFill);
@@ -34,11 +36,13 @@ buttonSpecies.addEventListener("click", () => {
 function textSpeFill() {
   var option = selectSpecies.options[selectSpecies.selectedIndex].value;
   textSpe.innerText = option;
+  textSpe.focus();
 }
 
 function textPlantFill() {
   var option = selectPlants.tomselect.options[selectPlants.tomselect.items].value;
   textPlant.innerText = option;
+  textPlant.focus();
 }
 
 
@@ -141,4 +145,10 @@ function callbackPlant(req) {
     options: searchPlant,
   });
 
+}
+
+      
+function autoResize() {
+  this.style.height = 'auto';
+  this.style.height = this.scrollHeight + 'px';
 }

@@ -3,7 +3,7 @@
 require_once File::build_path(array("config", "Conf.php"));
 require_once File::build_path(array("model" ,"Model.php"));
 
-class ModelEspece_valide extends Model {
+class ModelRepartition extends Model {
 
     private $id_repartition;
 

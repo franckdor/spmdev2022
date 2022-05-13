@@ -9,6 +9,7 @@ require_once File::build_path(array("config", "Conf.php"));
 require_once File::build_path(array("model" ,"Model.php"));
 require_once File::build_path(array("model", "ModelEspece_valide.php"));
 require_once File::build_path(array("model", "ModelGenre_valide.php"));
+require_once File::build_path(array("model", "ModelStatut_genre.php"));
 
 class ModelNomenclature_espece extends Model {
 
@@ -210,5 +211,38 @@ class ModelNomenclature_espece extends Model {
             die("Erreur lors de la recherche dans la base de données.");
         }
     }
+
+    public static function SelectID_GenusSpeciesStatusRef($data) {
+        try {
+            $tab = explode(" - ", $data);
+            $status = ModelStatut_genre::selectIdByName($tab[3]);
+    
+            // préparation de la requête
+            $sql = "SELECT DISTINCT * FROM nomenclature_espece
+            WHERE nom_genre=:genus
+            AND nom_espece=:species
+            AND auteur_date=:author
+            AND id_statut=:statut";
+
+            $req_prep = Model::getPDO()->prepare($sql);
+            // passage de la valeur de name_tag
+            $values = array(
+                "genus" => $tab[0],
+                "species" => $tab[1],
+                "author" => $tab[2],
+                "statut" => $status[0]->get('id_statut_genre'),
+            );
+                
+            // exécution de la requête préparée
+            $req_prep->execute($values);
+            $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelNomenclature_espece");
+            $tabResults = $req_prep->fetchAll();
+            // renvoi du tableau de résultats
+            return $tabResults;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la base de données.");
+        }
+    } 
     
 }

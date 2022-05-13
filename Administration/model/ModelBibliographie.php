@@ -84,6 +84,33 @@ class ModelBibliographie extends Model {
             die();
         }
     }
+
+    static public function selectIdByTitle($title) {
+        try {
+
+            $sql = "SELECT code_bibliographie FROM bibliographie WHERE titre=:title";
+
+            $pdo = Model::getPDO();
+            
+            $req_prep = $pdo->prepare($sql);
+
+            $data = array(
+                'title' => $title
+            );
+
+            $req_prep->execute($data);
+
+            $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelBibliographie");
+            return $req_prep->fetchAll();
+        } catch(PDOException $e) {
+            if (Conf::getDebug())
+                echo $e->getMessage();
+            else {
+                echo '<br>Une erreur est survenue - <a href="">Retour à la page d\'accueil</a>';
+            }
+            die();
+        }
+    }
     
     
 }

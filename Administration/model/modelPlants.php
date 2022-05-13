@@ -85,4 +85,25 @@ class ModelPlants extends Model {
         return $tab;
     }
 
+
+    public static function selectId($plant) {
+        try {
+            $tab = explode(" - ", $plant);
+            $sql = "SELECT DISTINCT * FROM plants WHERE genus=:genus AND species=:species";
+            $req_prep = Model::getPDO()->prepare($sql);
+            $data = array(
+                'genus' => $tab[1],
+                'species' => $tab[0],
+            );
+            $req_prep->execute($data);
+            $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelPlants");
+            $tab = $req_prep->fetchAll();
+            return $tab;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la base de données.");
+        } 
+    }
+    
+
 }

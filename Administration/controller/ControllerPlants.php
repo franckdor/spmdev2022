@@ -10,6 +10,7 @@ require_once File::build_path(array("model", "ModelBibliographie.php"));
 require_once File::build_path(array("model", "ModelGenres.php"));
 require_once File::build_path(array("model", "ModelFamilles.php"));
 require_once File::build_path(array("model", "ModelPlants.php"));
+require_once File::build_path(array("model", "ModelPlante_hote.php"));
 
 class ControllerPlants {
 
@@ -40,7 +41,6 @@ class ControllerPlants {
     public static function updated() {
         $view="updated";
         $pagetitle="Genre créée";
-        var_dump($_POST);
         $statut = ModelStatut_genre::SelectIdByName($_POST['statut']);
         //$GenreV = ModelEspece_valide::SelectIdByName($_POST['espece_valide'], $_POST['genre_valide']);
         $data = array(
@@ -66,6 +66,25 @@ class ControllerPlants {
         $tab = ModelStatut_espece::selectALL();
         require_once File::build_path(array("view", "view.php"));
         
+    }
+
+    public static function created() {
+        $view="created";
+        $pagetitle="Create Nomenclature Host Plant";
+        
+        $id_plant = ModelPlants::SelectId($_POST['plants']);
+        $id_species = ModelNomenclature_espece::SelectID_GenusSpeciesStatusRef($_POST['searchs']);
+        $id_bibliographie = ModelBibliographie::selectIdByTitle($_POST['ref']);
+        
+        $data = array(
+            "id_plante" => $id_plant[0]->get('plant_ID'),
+            "id_nomenclature_espece" => $id_species[0]->get('id_nomenclature_espece'),
+            "code_bibliographie" => $id_bibliographie[0]->get('code_bibliographie'),
+            "utilisateur" => $_SESSION['login'],
+            "date_add" => date('d/m/Y', time()),
+        );
+        ModelPlante_hote::save($data);
+        require_once File::build_path(array("view", "view.php"));
     }
 
     public static function biblio() {

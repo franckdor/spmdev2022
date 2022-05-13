@@ -81,7 +81,7 @@ function callbackSearch(req) {
         var attr = [];
 
         titleRS.push(tab[i].espece + " - " + tab[i].genre + " - " + tab[i].auteur_date + " - " + tab[i].statut);
-        value.push(tab[i].genre + " " + tab[i].espece + " " + tab[i].auteur_date + "\n " + tab[i].statut);
+        value.push(tab[i].genre + " - " + tab[i].espece + " - " + tab[i].auteur_date + " - " + tab[i].statut);
         attr.push(tab[i].id);
 
         searchSpe.push({

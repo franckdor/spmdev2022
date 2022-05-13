@@ -71,7 +71,7 @@ class ControllerPlants {
     public static function created() {
         $view="created";
         $pagetitle="Create Nomenclature Host Plant";
-        
+        var_dump($_POST);
         $id_plant = ModelPlants::SelectId($_POST['plants']);
         $id_species = ModelNomenclature_espece::SelectID_GenusSpeciesStatusRef($_POST['searchs']);
         $id_bibliographie = ModelBibliographie::selectIdByTitle($_POST['ref']);
@@ -82,6 +82,9 @@ class ControllerPlants {
             "code_bibliographie" => $id_bibliographie[0]->get('code_bibliographie'),
             "utilisateur" => $_SESSION['login'],
             "date_add" => date('d/m/Y', time()),
+            "original_data" => $_POST['original'],
+            "synthesis" => $_POST['synthesis'],
+            "valid" => $_POST['valid'],
         );
         ModelPlante_hote::save($data);
         require_once File::build_path(array("view", "view.php"));

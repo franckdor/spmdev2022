@@ -82,6 +82,8 @@ class ModelPlants extends Model {
         $tab['species'] = $this->get('species');
         $tab['genus'] = $this->get('genus');
         $tab['id'] = $this->get('plant_ID');
+        $tab['scientific_name'] = $this->get('scientific_name');
+        $tab['family'] = $this->get('family');  
         return $tab;
     }
 

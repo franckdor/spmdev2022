@@ -117,7 +117,7 @@ function callbackPlant(req) {
       
 
       titleP.push(tab[i].species + " - " + tab[i].genus);
-      value.push(tab[i].species + " - " + tab[i].genus);
+      value.push(tab[i].scientific_name + " - " + tab[i].family);
       attr.push(tab[i].id);
 
 

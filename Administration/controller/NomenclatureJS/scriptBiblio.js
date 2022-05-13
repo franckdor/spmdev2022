@@ -34,12 +34,15 @@ function callbackBiblio(req) {
   for (var i=0; i<tab['biblio'].length; i++) {
       var title = [];
       var attr = [];
+      var value = [];
+
         title.push(tab['biblio'][i].reference);
         attr.push(tab['biblio'][i].code_bibliographie);
+        value.push(tab['biblio'][i].auteur + " - " +  tab['biblio'][i].annee + " - " + tab['biblio'][i].titre + " - " + tab['biblio'][i].source);
         options.push({
             id: i+'-'+title.join(''),
             title: title.join(''),
-            value: tab['biblio'][i].titre,
+            value: value.join(''),
             attr: attr.join(''),
         }); 
   }

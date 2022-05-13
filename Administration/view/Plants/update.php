@@ -10,17 +10,24 @@
         <fieldset>
                 <legend>Plants</legend>
 
-                <input type="checkbox" id="valid" name="valid" checked>
+                <!-- I put INPUT:HIDDEN before INPUT:CHECKBOX because I
+                save a Boolean in plante_hote and PHP takes the last value 
+                for the same name as the one to use.
+                If there is not the INPUT:HIDDEN field in db is equal to NULL when
+                unchecked  -->
+                <input type="hidden" value='0' name="valid">
+                <input type="checkbox" value='1' id="valid" name="valid" checked>
                 <label for="valid">Valid</label>
 
                 <br>
-
                 
-
-                <input type="checkbox" id="original" name="original" checked>
+                <input type="hidden" value='0' name="original">
+                <input type="checkbox" value='1' id="original" name="original" checked>
                 <label for="original">Original</label>
 
-                <input type="checkbox" id="synthesis" name="synthesis">
+                
+                <input type="hidden" value='0'  name="synthesis">
+                <input type="checkbox" value='1' id="synthesis" name="synthesis">
                 <label for="synthesis">Synthesis/Catalogue</label>
 
                 <br> 

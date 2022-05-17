@@ -21,12 +21,13 @@
                     //echo " ";
                     echo '<li><a href="index.php?action=signOut&controller=admin">Deconnect</a></li>';
                     echo '<li><a href="index.php?action=readAll&controller=nomenclature_espece">Species</a></li>';
-                    echo '<li><a href="index.php?action=requete&controller=nomenclature_espece">Species TEST</a></li>';
-                    echo '<li><a href="index.php?action=update&controller=nomenclature_genre">Genus TEST</a></li>';
+                    echo '<li><a href="index.php?action=requete&controller=nomenclature_espece">Species Add</a></li>';
+                    echo '<li><a href="index.php?action=update&controller=nomenclature_genre">Genus Add</a></li>';
                     echo '<li><a href="index.php?action=readAll&controller=nomenclature_genre">Genus</a></li>';
                     echo '<li><a href="index.php?action=readAll&controller=plants">Plants</a></li>';
-                    echo '<li><a href="index.php?action=update&controller=plants">Plants TEST</a></li>';
+                    echo '<li><a href="index.php?action=update&controller=plants">Plants Add</a></li>';
                     echo '<li><a href="index.php?action=readAll&controller=bibliographie">Biblio</a></li>';
+                    echo '<li><a href="index.php?action=update&controller=bibliographie">Biblio Add</a></li>';
                 }
                 ?>
             </ul>    

@@ -35,6 +35,19 @@ class ControllerNomenclature_genre {
         require_once File::build_path(array("view", "view.php"));
     }
 
+    public static function read() {
+        if (!isset($_GET['id'])) {
+            self::error("");
+            exit();
+        }
+        $genus = ModelGenres::select($_GET['id']);
+
+        $view="detail";
+        $pagetitle="Detail ". $genus->get("genre");
+
+        require_once File::build_path(array("view", "view.php")); 
+    }
+
     public static function updated() {
         if (Security::is_connected() == false) {
             self::errorConnecte();

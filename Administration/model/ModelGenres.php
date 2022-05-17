@@ -1,5 +1,5 @@
 <?php
-
+// THIS WILL BE THE FUTURE NOMENCLATURE GENRE
 require_once File::build_path(array("config", "Conf.php"));
 require_once File::build_path(array("model" ,"Model.php"));
 require_once File::build_path(array("model", "ModelStatut_genre.php"));

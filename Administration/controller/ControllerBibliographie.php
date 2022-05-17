@@ -23,10 +23,21 @@ class ControllerBibliographie {
     }
 
     public static function update() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
         $view = "update";
         $pagetitle = "Bibliographie";
 
         require_once File::build_path(array("view", "view.php"));
 
+    }
+
+    public static function errorConnecte() {
+        //IF YOU TRY TO ACCESS A ADMIN VIEW WITHOUT BEING CONNECTED
+        $view = "errorConnecte";
+        $pagetitle = "Access Denied";
+        require_once File::build_path(array("view", "view.php"));
     }
 }

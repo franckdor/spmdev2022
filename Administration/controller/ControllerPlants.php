@@ -39,6 +39,10 @@ class ControllerPlants {
     }
 
     public static function updated() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
         $view="updated";
         $pagetitle="Genre créée";
         $statut = ModelStatut_genre::SelectIdByName($_POST['statut']);
@@ -61,6 +65,10 @@ class ControllerPlants {
     
     //Species form
     public static function update() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
         $view="update";
         $pagetitle="Update plants";
         $tab = ModelStatut_espece::selectALL();
@@ -69,6 +77,10 @@ class ControllerPlants {
     }
 
     public static function created() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
         $view="created";
         $pagetitle="Create Nomenclature Host Plant";
         var_dump($_POST);
@@ -109,5 +121,12 @@ class ControllerPlants {
             array_push($tabjson, $plant->getSpeGen());
         }
         echo json_encode($tabjson);
+    }
+
+    public static function errorConnecte() {
+        //IF YOU TRY TO ACCESS A ADMIN VIEW WITHOUT BEING CONNECTED
+        $view = "errorConnecte";
+        $pagetitle = "Access Denied";
+        require_once File::build_path(array("view", "view.php"));
     }
 }

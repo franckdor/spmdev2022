@@ -7,7 +7,8 @@
 
         <fieldset>
                 <legend>Biblio</legend>
-                <label for="searchBiblio">Search></label>
+                <label for="searchBiblio">Search</label>
+                <select id="searchBiblio" name="searchs"  required></select>
 
                 
                 <input type="submit" value="Envoyer" />

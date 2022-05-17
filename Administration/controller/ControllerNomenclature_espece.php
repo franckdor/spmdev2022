@@ -43,6 +43,10 @@ class ControllerNomenclature_espece {
 
     //Save data from form to db
     public static function created() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
         $view="created";
         $pagetitle="Admin créé";
 
@@ -73,6 +77,10 @@ class ControllerNomenclature_espece {
     
     //Species form
     public static function requete() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
         $view="requete";
         $pagetitle="Créer espèces";
         $tab = ModelStatut_espece::selectALL();
@@ -176,16 +184,11 @@ class ControllerNomenclature_espece {
         echo json_encode($tabjson);
     }
     
-    
-    //Associate an id status to it's name
-    public static function associationStatus($esp_array) {
-        $tab_name = array();
-        $tab_id = array();
-        foreach($esp_array as $esp) {
-            array_push($tab_name, ModelStatut_genre::selectNameById($esp->get('id_statut'))); //tab of status name
-            //array_push($tab_id);
-        }
-        return $tab_name;
+    public static function errorConnecte() {
+        //IF YOU TRY TO ACCESS A ADMIN VIEW WITHOUT BEING CONNECTED
+        $view = "errorConnecte";
+        $pagetitle = "Access Denied";
+        require_once File::build_path(array("view", "view.php"));
     }
 
     public static function OtherSpecies() {

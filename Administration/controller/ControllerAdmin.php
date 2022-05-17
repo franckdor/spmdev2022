@@ -39,6 +39,10 @@ class ControllerAdmin {
     }
 
     public static function created() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
         $view="created";
         $pagetitle="Admin créé";
         $data = array(
@@ -52,6 +56,10 @@ class ControllerAdmin {
     }
 
     public static function delete() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
         $log = $_GET['id'];
         $pagetitle="suppression";
         $view="deleted";
@@ -77,6 +85,18 @@ class ControllerAdmin {
             $_SESSION['login'] = $ad->get('login');
             require_once File::build_path(array('view', 'view.php'));
         }
+    }
+
+    public static function update() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
+        if(!isset($_GET['id'])) {
+            
+        }
+        $action = 'updated';
+
     }
 
     
@@ -110,6 +130,13 @@ class ControllerAdmin {
         $pagetitle = 'Connexion';
         $wrongInformations = true;
         require_once File::build_path(array('view', 'view.php'));
+    }
+
+    public static function errorConnecte() {
+        //IF YOU TRY TO ACCESS A ADMIN VIEW WITHOUT BEING CONNECTED
+        $view = "errorConnecte";
+        $pagetitle = "Access Denied";
+        require_once File::build_path(array("view", "view.php"));
     }
 
 }

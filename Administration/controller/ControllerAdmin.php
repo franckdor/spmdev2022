@@ -89,6 +89,18 @@ class ControllerAdmin {
         }
     }
 
+    public static function update() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
+        if(!isset($_GET['id'])) {
+            
+        }
+        $action = 'updated';
+
+    }
+
     
     public static function errorPageIntrouvable() {
         $view="error";

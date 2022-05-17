@@ -31,7 +31,9 @@ class ControllerAdmin {
     }
 
     public static function create() {
-        $view="create";
+        $action = "created";
+        $methodName = "created";
+        $view="update";
         $pagetitle="créer un Admin";
         require_once File::build_path(array("view", "view.php"));
     }

@@ -1,4 +1,6 @@
-  <form method="POST" action= <?php echo "index.php?controller=". self::$object . "&action=created"?>>
+<form method="POST"
+      action=<?php echo "index.php?controller=" . self::$object . "&action=" . $action . '>' ?>>
+    <legend><?php echo($_GET["action"] == "create" ? "Créer un client" : "Modifier un client"); ?></legend>
       <fieldset>
           <legend>Créer admin :</legend>
           <p>

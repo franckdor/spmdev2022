@@ -36,6 +36,10 @@ class ControllerNomenclature_genre {
     }
 
     public static function updated() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
         $view="updated";
         $pagetitle="Genre créée";
         var_dump($_POST);
@@ -59,6 +63,10 @@ class ControllerNomenclature_genre {
     
     //Species form
     public static function update() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
         $view="update";
         $pagetitle="Update gender";
         require_once File::build_path(array("view", "view.php"));
@@ -89,5 +97,12 @@ class ControllerNomenclature_genre {
         echo json_encode($tabjson);
         
         //echo json_encode($tabF);
+    }
+
+    public static function errorConnecte() {
+        //IF YOU TRY TO ACCESS A ADMIN VIEW WITHOUT BEING CONNECTED
+        $view = "errorConnecte";
+        $pagetitle = "Access Denied";
+        require_once File::build_path(array("view", "view.php"));
     }
 }

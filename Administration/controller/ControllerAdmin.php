@@ -93,9 +93,37 @@ class ControllerAdmin {
             exit();
         }
         if(!isset($_GET['id'])) {
-            
+            self::errorConnecte();
+            ecit();
         }
+        $admin = ModelAdmin::select($_GET['id']);
         $action = 'updated';
+        $view = 'update';
+        $pagetitle = 'Update Admin';
+        require_once File::build_path(array('view', "view.php"));
+    }
+
+    public static function updated() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
+
+        $data = array(
+            'log' => $_POST['login'],
+        );
+
+        if (!$_POST['pswd'] == "") {
+            $data['mdp'] = Security::hacher($_POST['pswd']);
+        }
+
+        ModelAdmin::update($data);
+
+        if ($_SESSION['id'] == $_POST['id']) {
+
+        }
+        $view = 'home';
+
 
     }
 

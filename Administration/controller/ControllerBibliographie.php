@@ -34,10 +34,30 @@ class ControllerBibliographie {
 
     }
 
+    public static function read() {
+        if (!isset($_GET['code_bibliographie'])) {
+            self::error("Id non présent");
+        }
+        $biblio = ModelBibliographie::select($_GET['code_bibliographie']);
+        $view = "detail";
+        $pagetitle = "Info Reference";
+        
+        require_once File::build_path(array("view", "view.php"));
+
+    }
+
     public static function errorConnecte() {
         //IF YOU TRY TO ACCESS A ADMIN VIEW WITHOUT BEING CONNECTED
         $view = "errorConnecte";
         $pagetitle = "Access Denied";
+        require_once File::build_path(array("view", "view.php"));
+    }
+
+    public static function error($m = "") {
+
+        $message = $m;
+        $view = "error";
+        $pagetitle = "ERROR". $message;
         require_once File::build_path(array("view", "view.php"));
     }
 }

@@ -94,8 +94,9 @@ class ControllerAdmin {
         }
         if(!isset($_GET['id'])) {
             self::errorConnecte();
-            ecit();
+            exit();
         }
+        //id : Record primary key
         $admin = ModelAdmin::select($_GET['id']);
         $action = 'updated';
         $view = 'update';
@@ -110,7 +111,8 @@ class ControllerAdmin {
         }
 
         $data = array(
-            'log' => $_POST['login'],
+            'id' => $_POST['id'],
+            'login' => $_POST['log'],
         );
 
         if (!$_POST['pswd'] == "") {
@@ -120,11 +122,12 @@ class ControllerAdmin {
         ModelAdmin::update($data);
 
         if ($_SESSION['id'] == $_POST['id']) {
+            $view = "home";
 
-        }
-        $view = 'home';
-
-
+        } else {$view = 'list';}
+        
+        $pagetitle = "Admin modified";
+        require_once File::build_path(array("view", "view.php"));
     }
 
     

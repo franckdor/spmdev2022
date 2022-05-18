@@ -9,7 +9,7 @@
             <input <?php if (isset($admin)) {echo 
             "value=".$admin->get('id');
             } ?>
-             type="text" placeholder="1" name="id" id="admin_id" required/>
+             type="text" placeholder="1" name="id" id="admin_id" readonly/>
           </p>
           <?php } ?>
           <p>
@@ -21,7 +21,7 @@
           <p>
               <label for="admin_pswd">Mot de passe</label> :
               <input 
-               type="password" name="pswd" id="admin_pswd" required/>
+               type="password" name="pswd" id="admin_pswd" <?php if($action == "create") { echo "required"; } ?>/>
           </p>
           <p>
             <input type="submit" value="Envoyer" />

@@ -28,7 +28,7 @@ class Model {
     }
 
     
-//Function called by all Models/ModelsXXX function to connect the DB
+//Function called by all Models/ModelsXXX function to connect to the DB
     public static function getPDO() {
         if (is_null(self::$pdo)) {
             self::init();
@@ -101,6 +101,10 @@ class Model {
         }
     }
 
+    //Update one tuple for associated table for this model
+    //In : data = dico 
+    //$key = column name
+    //$value = associated value
     public static function update($data)
     {
         try {
@@ -108,7 +112,7 @@ class Model {
             foreach ($data as $key => $value) {
                 $set = $set . "$key = :$key, ";
             }
-            //retire la last virgula
+            //retire la last virgule
             $set = rtrim($set, ", ");
 
             $o = static::$object;
@@ -123,6 +127,10 @@ class Model {
         }
     }
 
+    //Create one tuple
+    //In : data = dico 
+    //$key = column name
+    //$value = associated value
     public static function save($data)
     {
         try {

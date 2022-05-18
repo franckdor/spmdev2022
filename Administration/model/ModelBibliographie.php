@@ -39,6 +39,9 @@ class ModelBibliographie extends Model {
         return $this->$nom_attribut;
     }
 
+    //RETRIEVE ALL DATA WITH  ORDER BY 
+    //function overloaded 
+    //return an object with all its info
     static public function selectAll()
     {
         try {
@@ -86,6 +89,8 @@ class ModelBibliographie extends Model {
         }
     }
 
+    //Uses the default model  
+    //A faire évoluer
     public function getAll() {
         return get_object_vars($this);
     }

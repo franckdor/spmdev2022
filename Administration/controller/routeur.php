@@ -30,7 +30,7 @@ if (isset($_GET['action'])) { // Default actions if nothing is specified
     $action = $_GET['action'];
 }
 
-// Verification that the action exists in the class
+// Verification that $action exists in the controller class
 $methodes = get_class_methods($controller_class);
 if (!in_array($action, $methodes)) {
     $controller_class::errorPageIntrouvable();

@@ -32,21 +32,21 @@
                 ?>
             </ul>    
                 
-        
-<main>
-    <?php
+        <!-- Main content -->
+        <main>
+            <?php
 
-        // If $controller='Admin' and $view='list',
-        // Then $filepath="/site_path/view/Admin/list.php"
-        $filepath = File::build_path(array("view", static::$object, "$view.php"));
-        if (file_exists($filepath)) {
-            require $filepath;
-        } else {
-            $filepath = File::build_path(array("view", static::$object, "$view.html")); 
-            require $filepath;
-        }
-    ?>
-</main>    
+                // If $controller='Admin' and $view='list',
+                // Then $filepath="/site_path/view/Admin/list.php"
+                $filepath = File::build_path(array("view", static::$object, "$view.php"));
+                if (file_exists($filepath)) {
+                    require $filepath;
+                } else {
+                    $filepath = File::build_path(array("view", static::$object, "$view.html")); 
+                    require $filepath;
+                }
+            ?>
+        </main>    
     </body>
 </html>
 

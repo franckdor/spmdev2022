@@ -6,8 +6,7 @@
 
 
 <?php if ($action != "create") { ?>
-    <script type="text/javascript" src="controller/UpdateJS/nomenclature_specy.js" defer></script>
-
+    
 <?php } ?>
 
 <!-- Library for INPUT SELECTOR -->
@@ -35,7 +34,7 @@
           <p>
             <label for="specy_id">Id</label> :
             <input <?php if (isset($specy)) {echo 
-            "value=".$specy->get('id_nomenclature_espece');
+            "value=".htmlspecialchars($specy->get('id_nomenclature_espece'));
             } ?>
              type="text" placeholder="1" name="id" id="specy_id" readonly/>
           </p>
@@ -49,7 +48,7 @@
             <div>  
                 <select id="select-espece" name="espece" required>
                 <?php if(isset($specy)) { 
-                        echo '<option value='. $specy->get('nom_espece') . '></option>'; ?>
+                        echo '<option value='. htmlspecialchars($specy->get('nom_espece')) . '></option>'; ?>
                 <?php } ?>
                 </select> 
             </div>
@@ -59,7 +58,7 @@
             <div>  
                 <select id="select-genre" name="genre"  required>
                 <?php if(isset($specy)) { 
-                        echo '<option value='. $specy->get('nom_genre') . '></option>'; ?>
+                        echo '<option value='. htmlspecialchars($specy->get('nom_genre')) . '></option>'; ?>
                 <?php } ?>
                 </select>    
             </div>
@@ -68,7 +67,7 @@
             <div>   
                 <select id="select-authd" name="auteur" required>
                 <?php if(isset($specy)) { ?>
-                    <option value=" <?php echo $specy->get('auteur_date'); ?>" ></option>
+                    <option value=" <?php echo htmlspecialchars($specy->get('auteur_date')); ?>" ></option>
                 <?php } ?>
                 </select>   
             </div>
@@ -83,17 +82,18 @@
                 -->
                 <select name="statut" id="statut" required>
                 <?php if(isset($specy)) { ?>
-                    <option value="<?php echo $specy->getAll()['statut']; ?>" ></option>
+                    <option value="<?php echo htmlspecialchars($specy->getAll()['statut']); ?>" ></option>
                 <?php } ?>
                 </select>
             
             </div>
         </div>
         <label for="select-espece-valide">Espece Valide : </label>
+        
         <div>
             <select id="select-espece-valide" name="espece_valide" required>
             <?php if(isset($validSpe)) { ?>
-                    <option value="<?php echo $validSpe->get('nom_espece') . " - " . $validSpe->get('nom_genre'); ?>" ></option>
+                    <option value="<?php echo htmlspecialchars($validSpe->get('nom_espece')) . " - " . htmlspecialchars($validSpe->get('nom_genre')); ?>" ></option>
                 <?php } ?>
             </select>
             <button id="button" class="other-species" name="other" type="button">>>></button>
@@ -104,13 +104,24 @@
         <label for="bibliographie">Bibliographie : </label> 
         <br>
         <div>
-            <select id="bibliographie" name="biblio" ></select>
+            <select id="bibliographie" name="biblio">
+                <?php if(isset($biblio)) { ?>
+                    <option value="<?php echo htmlspecialchars($biblio->get('auteur')." - ".$biblio->get('annee')." - ".$biblio->get('titre')." - ".$biblio->get('source')); ?>"
+                    attr="<?php echo $biblio->get('code_bibliographie') ?>"></option>
+                <?php } ?>
+            </select>
         </div>
         <br>
-            <textarea wrap="soft" id="biblio" readonly></textarea>
+            <textarea wrap="soft" id="biblio" readonly><?php if(isset($biblio)) {
+            echo $biblio->get('auteur')." - ".$biblio->get('annee')." - ".$biblio->get('titre')." - ".$biblio->get('source');
+                } ?>
+            </textarea>
         <br>
         <label for="number">Page : </label>
-        <input id="number" name="page" type="number" value="10">
+        <input id="number" name="page" type="number"
+        <?php if(isset($page)) { ?> min="<?php echo $page[0]; ?>" 
+        max="<?php echo $page[1]; ?>" 
+        <?php } ?>/>
         <br>
         <input type="submit" value="Envoyer" />
     </fieldset>

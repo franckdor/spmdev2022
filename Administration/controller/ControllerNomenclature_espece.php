@@ -95,13 +95,25 @@ class ControllerNomenclature_espece {
             self::errorConnecte();
             exit();
         }
+
         if(!isset($_GET['id'])) {
             self::errorConnecte();
             exit();
         }
+
         $specy = ModelNomenclature_espece::select($_GET['id']);
+
+
         $id_valid_spe = $specy->get('id_espece_valide');
+        $bibliography_id = $specy->get('code_bibliographie');
+
         $validSpe = ModelEspece_valide::select($id_valid_spe);
+        $biblio = ModelBibliographie::select($bibliography_id);
+        
+        $page = explode(', ', $biblio->get('source'));
+        $page =$page[count($page)-1];
+        $page = explode("-", $page);
+
         $action = 'updated';
         $view = 'update';
         $pagetitle = 'Update Specy';

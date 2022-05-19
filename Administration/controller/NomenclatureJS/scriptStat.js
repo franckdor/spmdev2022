@@ -15,20 +15,6 @@ var select_status = new TomSelect("#statut", {
 
 requeteSta(callback_STA);
 
-
-
-  
-//displays in <SELECT> differents status
-function afficheStat(tableau) {
-  for (let i=0; i<tableau.length; i++) {
-      var o = document.createElement("option");
-      o.innerHTML = tableau[i];
-      statut.appendChild(o);
-  }
-  if(tableau.length > 0) o.style.borderWidth = "1px";
-}
-
-
 //Request to the server
 function requeteSta(callback) {
   let url = "index.php?controller=nomenclature_espece&action=autocompleteSTAT";
@@ -46,7 +32,7 @@ function requeteSta(callback) {
 //Definition of callback function
 function callback_STA(req) {
     let tab = JSON.parse(req.response);
-    console.log(tab);
+    
     var status = [];
 
     for(let i=0; i<tab.length; i++) {

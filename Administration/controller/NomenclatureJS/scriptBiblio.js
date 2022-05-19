@@ -4,6 +4,9 @@ requeteB(callbackBiblio);
 
 let selectBiblio = document.getElementById("bibliographie");
 let textareab = document.getElementById("biblio");
+setTimeout(() => {
+    textareab.focus();
+}, 2000);
 
 
 selectBiblio.addEventListener("change", listener)
@@ -58,7 +61,8 @@ function callbackBiblio(req) {
     sortField: 'title',
     options: options,
     persist: false,
-    create: true
+    create: true,
+    hideSelected: true,
   });
 
 }

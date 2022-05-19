@@ -11,13 +11,15 @@
     </div>
 </div>
 
-<form method="POST" action= <?php echo "index.php?controller=". self::$object . "&action=updated"?>>
+<form method="POST" action= <?php echo "index.php?controller=". self::$object . "&action=" . $action . '>'?>
     <fieldset>
-        <legend>Update Nomenclature Gender</legend>
+    <legend><?php echo($_GET["action"] == "create" ? "Add Genus" : "Update Genus"); ?></legend>
         
             <label for="select-genre">Genre : </label>
             <div id="genus">  
-                <select id="select-genre" name="genre"  required></select>    
+                <select id="select-genre" name="genre"  required>
+                    
+                </select>    
             </div>
         <br>
         

@@ -76,16 +76,36 @@ class ControllerNomenclature_espece {
     
     
     //Species form
-    public static function requete() {
+    public static function create() {
         if (Security::is_connected() == false) {
             self::errorConnecte();
             exit();
         }
-        $view="requete";
+        $view="update";
+        $action="create";
         $pagetitle="Créer espèces";
         $tab = ModelStatut_espece::selectALL();
         require_once File::build_path(array("view", "view.php"));
         
+    }
+
+
+    public static function update() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
+        if(!isset($_GET['id'])) {
+            self::errorConnecte();
+            exit();
+        }
+        $specy = ModelNomenclature_espece::select($_GET['id']);
+        $id_valid_spe = $specy->get('id_espece_valide');
+        $validSpe = ModelEspece_valide::select($id_valid_spe);
+        $action = 'updated';
+        $view = 'update';
+        $pagetitle = 'Update Specy';
+        require_once File::build_path(array('view', "view.php"));
     }
 
     public static function autocompleteBiblio() {

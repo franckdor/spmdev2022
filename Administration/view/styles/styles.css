@@ -45,6 +45,10 @@ textarea{
 
 }
 
+#aled {
+    float: right;
+}
+
 select {
     width: 300px;
 }
@@ -78,3 +82,7 @@ ul {
     background-color: #111;
   }
 
+  #biblio {
+    width: 40%;
+  }
+  

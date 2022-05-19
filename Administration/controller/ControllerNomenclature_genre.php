@@ -72,6 +72,17 @@ class ControllerNomenclature_genre {
         require_once File::build_path(array("view", "view.php"));
     }
 
+    public static function create() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
+        $action = "create";
+        $view="update";
+        $pagetitle="Update gender";
+        require_once File::build_path(array("view", "view.php"));
+        
+    }
     
     
     //Species form
@@ -80,8 +91,28 @@ class ControllerNomenclature_genre {
             self::errorConnecte();
             exit();
         }
+        if (!isset($_GET['id'])) {
+            self::error();
+            exit();
+        }
+        $genus = ModelGenres::select($_GET['id']);
+
+        $bibliography_id = $genus->get('code_reference');
+
+        
+
+        if (!is_null($bibliography_id)) {
+            $biblio = ModelBibliographie::select($bibliography_id);
+
+            $page = explode(', ', $biblio->get('source'));
+            $page =$page[count($page)-1];
+            $page = explode("-", $page);
+        }
+        
+
+        $action = "update";
         $view="update";
-        $pagetitle="Update gender";
+        $pagetitle="Create gender";
         require_once File::build_path(array("view", "view.php"));
         
     }

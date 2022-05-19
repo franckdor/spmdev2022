@@ -11,24 +11,36 @@
     </div>
 </div>
 
-<form method="POST" action= <?php echo "index.php?controller=". self::$object . "&action=updated"?>>
+<form method="POST" action= <?php echo "index.php?controller=". self::$object . "&action=" . $action . '>'?>
     <fieldset>
-        <legend>Update Nomenclature Gender</legend>
+    <legend><?php echo($_GET["action"] == "create" ? "Add Genus" : "Update Genus"); ?></legend>
         
             <label for="select-genre">Genre : </label>
             <div id="genus">  
-                <select id="select-genre" name="genre"  required></select>    
+                <select id="select-genre" name="genre"  required>
+                    <?php if(isset($genus)) { ?>
+                        <option value="<?php echo htmlspecialchars($genus->get('genre')); ?>"></option>
+                  <?php  } ?>
+                </select>    
             </div>
         <br>
         
             <label for="select-tribu">Tribu : </label> 
             <div id="tribe">   
-                <select id="select-tribu" name="tribu" required></select>   
+                <select id="select-tribu" name="tribu" required>
+                <?php if(isset($genus)) { ?>
+                        <option value="<?php echo htmlspecialchars($genus->get('tribu')); ?>"></option>
+                  <?php  } ?>
+                </select>   
             </div>
         <br>
         <label for="select-sous-famille">Sous-Famille : </label>
         <div id="sub-family">
-            <select id="select-sous-famille" name="sous-famille" required></select>
+            <select id="select-sous-famille" name="sous-famille" required>
+            <?php if(isset($genus)) { ?>
+                        <option value="<?php echo htmlspecialchars($genus->get('sous_famille')); ?>"></option>
+                  <?php  } ?>
+            </select>
         </div>  
 
         <label for="select-family">Famille : </label>  
@@ -42,20 +54,33 @@
                 onfocus = overflow out of 10 opt
                 blur = when you stop focus smth
                 -->
-            <select name="statut" id="statut" onfocus='this.size=10;' 
-            onblur='this.size=1;' onchange='this.size=1; this.blur()' required></select>
+            <select name="statut" id="statut" required>
+            <?php if(isset($genus)) { ?>
+                    <option value="<?php echo htmlspecialchars($genus->getAll()['statut']); ?>" ></option>
+                <?php } ?>
+            </select>
         </div>
         <br>
         <label for="bibliographie">Bibliographie : </label> 
         <br>
         <div>
-            <select id="bibliographie" name="biblio" ></select>
+            <select id="bibliographie" name="biblio" >
+            <?php if(isset($biblio)) { ?>
+                    <option value="<?php echo htmlspecialchars($biblio->get('auteur')." - ".$biblio->get('annee')." - ".$biblio->get('titre')." - ".$biblio->get('source')); ?>"
+                    attr="<?php echo $biblio->get('code_bibliographie') ?>"></option>
+                <?php } ?>
+            </select>
         </div>
         <br>
-            <textarea wrap="soft" id="biblio" readonly></textarea>
+            <textarea wrap="soft" id="biblio" readonly><?php if(isset($biblio)) {
+            echo $biblio->get('auteur')." - ".$biblio->get('annee')." - ".$biblio->get('titre')." - ".$biblio->get('source');
+                } ?>
+            </textarea>
         <br>
         <label for="number">Page : </label>
-        <input id="number" name="page" type="number" value="10">
+        <input id="number" name="page" type="number" <?php if(isset($page)) { ?> min="<?php echo $page[0]; ?>" 
+        max="<?php echo $page[1]; ?>" 
+        <?php } ?> value="<?php echo $page[1]; ?>">
         <br>
         <input type="submit" value="Envoyer" />
     </fieldset>

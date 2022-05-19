@@ -9,7 +9,7 @@
             <input <?php if (isset($admin)) {echo 
             "value=".$admin->get('id');
             } ?>
-             type="text" placeholder="1" name="id" id="admin_id" readonly/>
+             type="text" placeholder="1" name="id" id="admin_id" <?php if($action != "create") { echo "readonly"; } ?>/>
           </p>
           <?php } ?>
           <p>

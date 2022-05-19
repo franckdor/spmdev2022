@@ -105,10 +105,9 @@ function callback(req) {
         genus.addOption(genre);
 
         tribe.addOption(tribu);
-        tribe.addItem(['Bryobiini']);
 
         sub_fam.addOption(sous_famille);
-        sub_fam.addItem(['Bryobiinae']);
+
 
         select.addOption(recherche);
     }

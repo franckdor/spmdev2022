@@ -1,11 +1,9 @@
 "use strict";
-const statut = document.getElementById('statut');
 var divp = document.getElementById('p');
 
 let requeteGEND;
 let requeteESPE;
 let requeteAute;
-let requeteStat;
 let requeteEspV;
 let requeteFill;
 let requeteOtherSpecies;
@@ -84,7 +82,6 @@ var search_species = new TomSelect('#search-species',{
 requeteESP(callback_ESP);
 requeteGEN(callback_GEN);
 requeteAut(callbackAut);
-requeteSta(callback_STA);
 requeteESPVALID(callbackESPVALID);
 requete(callbackSearch);
 
@@ -279,29 +276,6 @@ function afficheStat(tableau) {
 }
 
 
-//Request to the server
-function requeteSta(callback) {
-  let url = "index.php?controller=nomenclature_espece&action=autocompleteSTAT";
-  if (requeteStat && requeteStat.readyState !== XMLHttpRequest.DONE) {
-    requeteStat.abort();
-  }
-  requeteStat = new XMLHttpRequest();
-  requeteStat.open("GET", url, true);
-  requeteStat.addEventListener("load", function () {
-      callback(requeteStat);//Callback = server response
-  });
-  requeteStat.send(null);
-}
-
-//Definition of callback function
-function callback_STA(req) {
-    let tab = JSON.parse(req.response);
-    let tab2 = [];
-    tab.forEach(element => {
-      tab2.push(element);
-    });
-    afficheStat(tab2);
-}
 
 
 

@@ -2,6 +2,7 @@
 <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
 
+
 <section>
     <form method="POST" action= <?php echo "index.php?controller=". self::$object . "&action=created"?>>
 
@@ -10,13 +11,13 @@
         <legend>Biblio</legend>
         
         <section>
-            <label for="searchBiblio">Search :</label>    
-            <select id="searchBiblio" name="searchs"  required></select>
+            <label for="selectBiblio">Search :</label>    
+            <select id="selectBiblio" name="searchs"  required></select>
 
             <label for="textTap">TAP :</label>
             <input id="textTap" name="tap" type="text" />
 
-            <label for="textOcc">TAP :</label>
+            <label for="textOcc">Occ :</label>
             <input id="textOcc" name="occS" type="text" />
         </section>
         
@@ -28,15 +29,15 @@
                 <br>
 
                 <label for="textTitle">Title :</label> 
-                <textarea id="textTitle" name="title"  required></textarea>
+                <input id="textTitle" name="title" type="text" />
 
                 <label for="textSource">Source :</label>
-                <textarea id="textSource" name="source"  required></textarea>
+                <input id="textSource" name="source" type="text" />
         
         </section>
 
         <section id="resume">
-            <label for="textResume">Title :</label>
+            <label for="textResume">resume :</label>
             <textarea id="textResume" name="resume"  required></textarea>
         </section>
 
@@ -47,13 +48,10 @@
             <div id="plants"></div>
 
         </section>
-
-
                 
             <input type="submit" value="Envoyer" />
         </fieldset>
 
-        
         
     </form>
 </section>

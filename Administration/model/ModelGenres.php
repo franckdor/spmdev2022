@@ -79,4 +79,26 @@ class ModelGenres extends Model {
         );
         return $array;
     }
+
+
+    static public function selectAll()
+    {
+        try {
+            $table_name = static::$object;
+            $class_name = 'Model' . ucfirst($table_name);
+
+            $pdo = Model::getPDO();
+            $rep = $pdo->query("SELECT * FROM $table_name
+            ORDER BY code_genre");
+            $rep->setFetchMode(PDO::FETCH_CLASS, "ModelBibliographie");
+            return $rep->fetchAll();
+        } catch (PDOException $e) {
+            if (Conf::getDebug())
+                echo $e->getMessage();
+            else {
+                echo '<br>Une erreur est survenue - <a href="">Retour à la page d\'accueil</a>';
+            }
+            die();
+        }
+    }
 }

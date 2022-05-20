@@ -30,19 +30,21 @@
     </div>
 </div>
 <?php// } ?>
-<?php if ($_GET["action"] == "update") { ?>
+   
+
+<form method="POST" action= <?php echo "index.php?controller=". self::$object . "&action=" . $action . '>'?>
+    <fieldset>
+        <legend><?php echo($_GET["action"] == "create" ? "Add Specy" : "Update Specy"); ?></legend>
+
+        <?php if ($_GET["action"] == "update") { ?>
           <p>
             <label for="specy_id">Id</label> :
             <input <?php if (isset($specy)) {echo 
             "value=".htmlspecialchars($specy->get('id_nomenclature_espece'));
             } ?>
-             type="text" placeholder="1" name="id" id="specy_id" readonly/>
+             type="text" name="id" id="specy_id" readonly/>
           </p>
-          <?php } ?>   
-
-<form method="POST" action= <?php echo "index.php?controller=". self::$object . "&action=" . $action . '>'?>
-    <fieldset>
-        <legend><?php echo($_GET["action"] == "create" ? "Add Specy" : "Update Specy"); ?></legend>
+          <?php } ?>
         
             <label for="select-espece">Espece : </label> 
             <div>  

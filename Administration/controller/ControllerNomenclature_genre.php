@@ -48,13 +48,13 @@ class ControllerNomenclature_genre {
         require_once File::build_path(array("view", "view.php")); 
     }
 
-    public static function updated() {
+    public static function created() {
         if (Security::is_connected() == false) {
             self::errorConnecte();
             exit();
         }
-        $view="updated";
-        $pagetitle="Genre créée";
+        $view="created";
+        $pagetitle="Genus created";
         var_dump($_POST);
         $statut = ModelStatut_genre::SelectIdByName($_POST['statut']);
         //$GenreV = ModelEspece_valide::SelectIdByName($_POST['espece_valide'], $_POST['genre_valide']);
@@ -107,14 +107,42 @@ class ControllerNomenclature_genre {
             $page = explode(', ', $biblio->get('source'));
             $page =$page[count($page)-1];
             $page = explode("-", $page);
+        } else {
+            $page[0] = 0;
         }
         
 
-        $action = "update";
+        $action = "updated";
         $view="update";
         $pagetitle="Create gender";
         require_once File::build_path(array("view", "view.php"));
         
+    }
+
+    static public function updated() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
+
+        $statut = ModelStatut_genre::SelectIdByName($_POST['statut']);
+        $code_biblio = ModelBibliographie::selectByAuthorYearTitleSource($_POST['biblio']);
+
+        $data = array(
+            'code_genre' => $_POST['id'],
+            'genre' => $_POST['genre'],
+            'tribu' => $_POST['tribu'],
+            'sous_famille' => $_POST['sous-famille'],
+            'code_statut' => $statut[0]->get('id_statut_genre'),
+            'code_reference' => $code_biblio[0]->get('code_bibliographie'),
+            'page' => $_POST['page'],
+            'utilisateur' => $_SESSION['login'],
+        );
+
+        ModelGenres::update($data);
+        $view="updated";
+        $pagetitle="Genus Updated";
+        require_once File::build_path(array('view', "view.php"));
     }
 
     public static function autocomplete() {

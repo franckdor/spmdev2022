@@ -53,6 +53,8 @@ class ControllerNomenclature_espece {
         $espv = explode(" ", $_POST['espece_valide']); //The format of $_POST is "species" - "Genus" 
         $statut = ModelStatut_espece::SelectIdByName($_POST['statut']);
         $especeV = ModelEspece_valide::SelectIdByName($espv[0]);
+        $code_biblio = ModelBibliographie::selectByAuthorYearTitleSource($_POST['biblio']);
+        
         $data = array(
             'nom_espece' => $_POST['espece'],
             'nom_genre' => $_POST['genre'],
@@ -61,7 +63,8 @@ class ControllerNomenclature_espece {
             'id_espece_valide' => $especeV[0]->get('id_espece_valide'),
             'reference_page' => $_POST['page'],
             'utilisateur' => $_SESSION['login'],
-            'dateadd' => date('d/m/Y', time()) 
+            'dateadd' => date('d/m/Y', time()) ,
+            'code_bibliographie' => $code_biblio[0]->get('code_bibliographie'),
          );   
         ModelNomenclature_espece::save($data);
         require_once File::build_path(array("view", "view.php"));
@@ -70,6 +73,35 @@ class ControllerNomenclature_espece {
     public static function errorPageIntrouvable() {
         $view="error";
         $pagetitle="Error";
+        require_once File::build_path(array("view", "view.php"));
+    }
+
+    public static function updated() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
+
+        $espv = explode(" ", $_POST['espece_valide']); //The format of $_POST is "species" - "Genus" 
+        $statut = ModelStatut_espece::SelectIdByName($_POST['statut']);
+        $especeV = ModelEspece_valide::SelectIdByName($espv[0]);
+        $code_biblio = ModelBibliographie::selectByAuthorYearTitleSource($_POST['biblio']);
+
+        $data = array(
+            'id_nomenclature_espece' => $_POST['id'],
+            'nom_espece' => $_POST['espece'],
+            'nom_genre' => $_POST['genre'],
+            'auteur_date' => $_POST['auteur'],
+            'id_statut' => $statut[0]->get('id_statut_espece'),
+            'id_espece_valide' => $especeV[0]->get('id_espece_valide'),
+            'code_bibliographie' => $code_biblio[0]->get('code_bibliographie'),
+            'reference_page' => $_POST['page'],
+            'utilisateur' => $_SESSION['login'],
+            //'dateadd' => date('d/m/Y', time()),
+        );
+        ModelNomenclature_espece::update($data);
+        $view = "updated";
+        $pagetitle = "Specy Updated";
         require_once File::build_path(array("view", "view.php"));
     }
 
@@ -108,11 +140,12 @@ class ControllerNomenclature_espece {
         $bibliography_id = $specy->get('code_bibliographie');
 
         $validSpe = ModelEspece_valide::select($id_valid_spe);
-        $biblio = ModelBibliographie::select($bibliography_id);
-        
-        $page = explode(', ', $biblio->get('source'));
-        $page =$page[count($page)-1];
-        $page = explode("-", $page);
+        if (!is_null($bibliography_id)) {
+            $biblio = ModelBibliographie::select($bibliography_id);
+            $page = explode(', ', $biblio->get('source'));
+            $page =$page[count($page)-1];
+            $page = explode("-", $page);
+        }
 
         $action = 'updated';
         $view = 'update';

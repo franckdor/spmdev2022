@@ -121,6 +121,40 @@ class ModelBibliographie extends Model {
             die();
         }
     }
+
+    //Function used in updated actions. ($data = $_POST['biblio'])
+    static public function selectByAuthorYearTitleSource($data) {
+        try {
+            $data = explode(" - ", $data);
+
+
+            $sql = "SELECT code_bibliographie FROM bibliographie WHERE auteur=:auteur_date AND titre=:titre AND annee=:annee AND source=:source";
+
+            $pdo = Model::getPDO();
+
+            $req_prep = $pdo->prepare($sql);
+
+            $values = array(
+                'auteur_date' => $data[0],
+                'annee' => $data[1],
+                'titre' =>$data[2],
+                'source' => $data[3],
+            );
+
+            $req_prep->execute($values);
+
+            $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelBibliographie");
+            return $req_prep->fetchAll();
+
+        }catch(PDOException $e) {
+            if (Conf::getDebug())
+                echo $e->getMessage();
+            else {
+                echo '<br>Une erreur est survenue - <a href="">Retour à la page d\'accueil</a>';
+            }
+            die();
+        }
+    }
     
     
 }

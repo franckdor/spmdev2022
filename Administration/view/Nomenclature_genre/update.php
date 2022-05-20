@@ -14,6 +14,16 @@
 <form method="POST" action= <?php echo "index.php?controller=". self::$object . "&action=" . $action . '>'?>
     <fieldset>
     <legend><?php echo($_GET["action"] == "create" ? "Add Genus" : "Update Genus"); ?></legend>
+
+    <?php if ($_GET["action"] == "update") { ?>
+          <p>
+            <label for="specy_id">Id</label> :
+            <input <?php if (isset($genus)) {echo 
+            "value=".htmlspecialchars($genus->get('code_genre'));
+            } ?>
+             type="text" name="id" id="genus_id" readonly/>
+          </p>
+          <?php } ?>
         
             <label for="select-genre">Genre : </label>
             <div id="genus">  

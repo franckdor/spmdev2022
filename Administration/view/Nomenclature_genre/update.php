@@ -89,8 +89,8 @@
         <br>
         <label for="number">Page : </label>
         <input id="number" name="page" type="number" <?php if(isset($page)) { ?> min="<?php echo $page[0]; ?>" 
-        max="<?php echo $page[1]; ?>" 
-        <?php } ?> value="<?php echo $page[1]; ?>">
+        max="<?php echo $page[0]; ?>" 
+        <?php } ?> value="<?php echo $page[0]; ?>">
         <br>
         <input type="submit" value="Envoyer" />
     </fieldset>

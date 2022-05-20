@@ -107,6 +107,8 @@ class ControllerNomenclature_genre {
             $page = explode(', ', $biblio->get('source'));
             $page =$page[count($page)-1];
             $page = explode("-", $page);
+        } else {
+            $page[0] = 0;
         }
         
 

@@ -114,7 +114,7 @@ class ControllerNomenclature_espece {
             exit();
         }
         $view="update";
-        $action="create";
+        $action="created";
         $pagetitle="Créer espèces";
         $tab = ModelStatut_espece::selectALL();
         require_once File::build_path(array("view", "view.php"));

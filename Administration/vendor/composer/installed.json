@@ -1,0 +1,57 @@
+{
+    "packages": [
+        {
+            "name": "technosophos/libris",
+            "version": "2.0.2",
+            "version_normalized": "2.0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/technosophos/LibRIS.git",
+                "reference": "5b6628ece0e57e90bd54f3b2d8de922dc4cc662c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/technosophos/LibRIS/zipball/5b6628ece0e57e90bd54f3b2d8de922dc4cc662c",
+                "reference": "5b6628ece0e57e90bd54f3b2d8de922dc4cc662c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "2012-03-14T16:36:15+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "LibRIS": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT or GPLv2"
+            ],
+            "authors": [
+                {
+                    "name": "M Butcher",
+                    "homepage": "http://technosophos.com"
+                }
+            ],
+            "description": "An RIS parser. RIS is a format for reference metadata.",
+            "homepage": "https://github.com/technosophos/LibRIS",
+            "keywords": [
+                "Bibliography",
+                "File parser",
+                "RIS",
+                "Reference"
+            ],
+            "support": {
+                "issues": "https://github.com/technosophos/LibRIS/issues",
+                "source": "https://github.com/technosophos/LibRIS/tree/master"
+            },
+            "abandoned": true,
+            "install-path": "../technosophos/libris"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}

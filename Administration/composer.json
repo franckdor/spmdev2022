@@ -1,0 +1,5 @@
+{
+  "require": {
+    "technosophos/libris": ">=1.0.0"
+  }
+}

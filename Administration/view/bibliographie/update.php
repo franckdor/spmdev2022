@@ -1,6 +1,7 @@
 <!-- Library for INPUT SELECTOR -->
 <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+<script type="text/javascript" src="controller/NomenclatureJS/scriptBibliographie.js" defer></script>
 
 
 <section>
@@ -15,16 +16,16 @@
             <select id="selectBiblio" name="searchs"  ></select>
 
             <label for="textTap">TAP :</label>
-            <input id="textTap" name="tap" type="text" />
+            <input id="textTap" placeholder="oui/non" name="tap" type="text" />
 
             <label for="textOcc">Occ :</label>
-            <input id="textOcc" name="occS" type="text" />
+            <input id="textOcc" placeholder="RAS" name="occS" type="text" />
         </section>
         
         <section id="AATS">
                 
                 <label for="textAuthor">Author :</label>
-                <select id="searchAuthor" name="author"  ></select>
+                <input id="searchAuthor" name="author"  type="text />
 
                 <br>
 

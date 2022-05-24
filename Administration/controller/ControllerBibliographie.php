@@ -81,7 +81,7 @@ class ControllerBibliographie {
 
     public static function created() {
 
-       
+        var_dump($_POST);       
 
         $view = "created";
         $pagetitle = "test";

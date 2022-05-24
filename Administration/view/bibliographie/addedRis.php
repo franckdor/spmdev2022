@@ -1,6 +1,5 @@
 <?php
 
-echo "Ris";
-var_dump($_FILES);
+echo "<h1>Successfully loaded on db ! </h1>"
 
 ?>

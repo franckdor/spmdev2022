@@ -50,4 +50,5 @@ class ModelRis extends Model {
             $this->$UR = $UR;
         }
     }
+
 }

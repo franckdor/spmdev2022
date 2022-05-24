@@ -5,7 +5,7 @@ use \LibRIS\RISReader;
 
 $reader = new RISReader();
 
-$reader->parseFile('./file.ris');
+$reader->parseFile('C:\wamp64\tmp\php8471.tmp');
 
 $reader->printRecords();
 

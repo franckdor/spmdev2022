@@ -160,6 +160,18 @@ class Model {
         }
     }
 
+    //GET COLUMN NAMES (FOR RIS)
+    public static function getColumns() {
+        try {
+            $table_name = static::$object;
+            $query = Model::getPDO()->query("select * from $table_name limit 1 ");
+            $column_names = array_keys($query->fetch(PDO::FETCH_ASSOC));
+            return $column_names;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
 
 }
 

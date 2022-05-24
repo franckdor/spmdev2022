@@ -139,6 +139,10 @@ class ControllerAdmin {
 
     public static function signIn()
     {
+        if (Security::is_connected()) {
+            self::home();
+            exit();
+        }
         $view = "signIn";
         $pagetitle = 'Connexion';
         $wrongInformations = false;

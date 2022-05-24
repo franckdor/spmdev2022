@@ -27,7 +27,8 @@
                     echo '<li><a href="index.php?action=readAll&controller=plants">Plants</a></li>';
                     echo '<li><a href="index.php?action=update&controller=plants">HostPlants Add</a></li>';
                     echo '<li><a href="index.php?action=readAll&controller=bibliographie">Biblio</a></li>';
-                    echo '<li><a href="index.php?action=update&controller=bibliographie">Biblio Add</a></li>';
+                    echo '<li><a href="index.php?action=create&controller=bibliographie">Biblio Add</a></li>';
+                    echo '<li><a href="index.php?action=addRis&controller=bibliographie">Ris ADD</a></li>';
                 }
                 ?>
             </ul>    

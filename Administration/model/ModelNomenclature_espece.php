@@ -265,5 +265,29 @@ class ModelNomenclature_espece extends Model {
             die();
         }
     }
+
+
+    public static function SelectByCodeBiblio($code_biblio) {
+        try {
+            // préparation de la requête
+            $sql = "SELECT DISTINCT * FROM nomenclature_espece
+            WHERE code_bibliographie=:code
+            ORDER BY nom_espece, id_statut";
+            $req_prep = Model::getPDO()->prepare($sql);
+            // passage de la valeur de name_tag
+            $values = array(
+                "code" => $code_biblio);
+                
+            // exécution de la requête préparée
+            $req_prep->execute($values);
+            $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelNomenclature_espece");
+            $tabResults = $req_prep->fetchAll();
+            // renvoi du tableau de résultats
+            return $tabResults;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la base de données.");
+        }
+    }
     
 }

@@ -10,6 +10,8 @@
         <fieldset>
     
         <legend>Biblio</legend>
+
+        <input type="text" id="id_biblio" name="code" readonly />
         
         <section>
             <label for="selectBiblio">Search :</label>    

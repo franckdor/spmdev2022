@@ -11,6 +11,7 @@ require_once File::build_path(array("model", "ModelGenre_valide.php"));
 require_once File::build_path(array("model", "ModelBibliographie.php"));
 require_once File::build_path(array("model", "ModelRepartition.php"));
 require_once File::build_path(array("model", "Modelris.php"));
+require_once File::build_path(array("model", "ModelRepartition.php"));
 use \LibRIS\RISReader;
 
 class ControllerBibliographie {
@@ -114,5 +115,17 @@ class ControllerBibliographie {
         $view = "error";
         $pagetitle = "ERROR". $message;
         require_once File::build_path(array("view", "view.php"));
+    }
+
+    public static function searchRepart() {
+        $tabRepart = ModelRepartition::selectByCodeBiblio($_GET['code']);
+
+        $tab = array();
+        
+        //foreach($tabRepart as $repart) {
+        //    array_push($tab);
+        //}
+
+        echo json_encode($tab);
     }
 }

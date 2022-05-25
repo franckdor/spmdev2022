@@ -82,7 +82,6 @@ function requeteSpe(callback) {
     requeteSpecies = new XMLHttpRequest();
     requeteSpecies.open("GET", url, true);
     requeteSpecies.addEventListener("load",  function () {
-        console.log(requeteSpecies);
         callback(requeteSpecies);
     });
     requeteSpecies.send(null);
@@ -153,7 +152,11 @@ function callbackRepart(req) {
             labelRepart.innerText = "Repartition";
             repartition.appendChild(labelRepart);
 
-    console.log(tab);
+    for(let i=0; i<tab.length; i++) {
+        var p = document.createElement("p");
+        p.innerText = tab[i].genre + " " + tab[i].espece + " | " + tab[i].pays + " - " + tab[i].zone;
+        repartition.appendChild(p);
+    }
 
 
   

@@ -11,7 +11,9 @@ require_once File::build_path(array("model", "ModelGenre_valide.php"));
 require_once File::build_path(array("model", "ModelBibliographie.php"));
 require_once File::build_path(array("model", "ModelRepartition.php"));
 require_once File::build_path(array("model", "Modelris.php"));
+require_once File::build_path(array("model", "ModelPays.php"));
 require_once File::build_path(array("model", "ModelRepartition.php"));
+require_once File::build_path(array("model", "ModelZone_biogeographique.php"));
 use \LibRIS\RISReader;
 
 class ControllerBibliographie {
@@ -118,13 +120,20 @@ class ControllerBibliographie {
     }
 
     public static function searchRepart() {
-        $tabRepart = ModelRepartition::selectByCodeBiblio($_GET['code']);
-
+        $tabRepart = ModelRepartition::selectByCodeBiblio(6936);
+        $i = 0;
         $tab = array();
         
-        //foreach($tabRepart as $repart) {
-        //    array_push($tab);
-        //}
+        foreach($tabRepart as $repart) {
+            $specy = ModelNomenclature_espece::select($repart->get('id_nomenclature_espece'));
+            $pays = ModelPays::select($repart->get('id_pays'));
+            $bioarea = ModelZone_biogeographique::select($pays->get('id_zone_biogeographique'));
+            $tab[$i] = ['espece' => $specy->get('nom_espece'), 
+            'genre' => $specy->get('nom_genre') , 
+            'pays' => $pays->get('nom_pays'), 
+            'zone' => $bioarea->get('nom_zone_biogeographique')];
+            $i = $i+1;     
+        }
 
         echo json_encode($tab);
     }

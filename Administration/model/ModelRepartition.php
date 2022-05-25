@@ -36,4 +36,50 @@ class ModelRepartition extends Model {
         }
     }
 
+
+    public static function selectByCodeBiblio($code_biblio) {
+            try {
+                // préparation de la requête
+                $sql = "SELECT DISTINCT * FROM repartition
+                WHERE code_bibliographie=:code";
+                $req_prep = Model::getPDO()->prepare($sql);
+                // passage de la valeur de name_tag
+                $values = array(
+                    "code" => $code_biblio);
+                    
+                // exécution de la requête préparée
+                $req_prep->execute($values);
+                $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelRepartition");
+                $tabResults = $req_prep->fetchAll();
+                // renvoi du tableau de résultats
+                return $tabResults;
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+                die("Erreur lors de la recherche dans la base de données.");
+            }
+    }
+
+    public static function selectByIdNomenclature($id_nomenclature) {
+        try {
+            // préparation de la requête
+            $sql = "SELECT DISTINCT * FROM nomenclature_espece ne
+            JOIN repartion r ON r.id_nomenclature_espece=ne.id_nomenclature_espece
+            WHERE id_nomenclature_espece=:id";
+            $req_prep = Model::getPDO()->prepare($sql);
+            // passage de la valeur de name_tag
+            $values = array(
+                "id" => $id_nomenclature);
+                
+            // exécution de la requête préparée
+            $req_prep->execute($values);
+            $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelNomenclature_espece");
+            $tabResults = $req_prep->fetchAll();
+            // renvoi du tableau de résultats
+            return $tabResults;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la base de données.");
+        }
+}
+
 }

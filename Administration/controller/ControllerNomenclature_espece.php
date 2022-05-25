@@ -7,6 +7,7 @@ require_once File::build_path(array("model", "ModelNomenclature_genre.php"));
 require_once File::build_path(array("model", "ModelEspece_valide.php"));
 require_once File::build_path(array("model", "ModelGenre_valide.php"));
 require_once File::build_path(array("model", "ModelBibliographie.php"));
+require_once File::build_path(array("model", "ModelRepartition.php"));
 class ControllerNomenclature_espece {
 
 
@@ -228,6 +229,17 @@ class ControllerNomenclature_espece {
         foreach($tabS as $stat) {
             array_push($tab, $stat->get('nom_statut_espece'));
         }
+        echo json_encode($tab);
+    }
+
+    public static function searchSpeciesCode() {
+        $tabSpecies = ModelNomenclature_espece::SelectByCodeBiblio($_GET['code']);
+        
+        $tab = array();
+        foreach($tabSpecies as $spe) {
+            array_push($tab, $spe->getAll());
+        }
+        sleep(0.5);
         echo json_encode($tab);
     }
 

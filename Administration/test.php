@@ -1,38 +1,28 @@
 <?php
-require_once 'vendor/autoload.php';
-
-use \LibRIS\RISReader;
-
-$reader = new RISReader();
-
-$reader->parseFile('C:\wamp64\tmp\php8471.tmp');
-
-$reader->printRecords();
-
-//var_dump($reader);
 
 
+require_once 'lib/File.php';
+require_once File::build_path(array("model", "ModelRepartition.php"));
+require_once File::build_path(array("model", "ModelNomenclature_espece.php"));
+require_once File::build_path(array("model", "ModelPays.php"));
+require_once File::build_path(array("model", "ModelZone_biogeographique.php"));
 
+$tabRepart = ModelRepartition::selectByCodeBiblio(6936);
+$i = 0;
+$tab = array();
+        
+        foreach($tabRepart as $repart) {
+            $specy = ModelNomenclature_espece::select($repart->get('id_nomenclature_espece'));
+            $tab['espece'.$i] = $specy;
+            $pays = ModelPays::select($repart->get('id_pays'));
+            $tab['pays'.$i] = $pays;
+            $i = $i+1;     
+        }
 
-$records = $reader->getRecords();
+        var_dump($tab);
 
-var_dump($records);
-
-
-var_dump(affficheAll($records));
-
-function affficheAll($records) {
-  
-  $array = array();
-  for ($i=0; $i<count($records); $i++) {
-    $ris = [];
-    foreach($records[$i] as $key => $value) {
-      $ris[$key] = $value[0];
-    }
-    array_push($array, $ris);
-  }
-  return $array;
-}
-
-
+        $tab1 = ModelZone_biogeographique::select(1);
+        var_dump($tab1);
 ?>
+
+

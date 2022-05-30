@@ -12,6 +12,7 @@ var author = document.getElementById("searchAuthor");
 var title = document.getElementById("textTitle");
 var source = document.getElementById("textSource");
 var id = document.getElementById("id_biblio");
+var year = document.getElementById("date");
 
 selectBiblio.addEventListener("change", listener);
 
@@ -22,6 +23,7 @@ function listener() {
     title.value = tab[2];
     source.value = tab[3];
     id.value = selectBiblio.tomselect.options[selectBiblio.tomselect.items].attr;
+    year.value = selectBiblio.tomselect.options[selectBiblio.tomselect.items].year;
     requeteSpe(callbackSpecies);
     requeteRepartition(callbackRepart);
     requeteHP(callbackHP);
@@ -47,15 +49,18 @@ function callbackBiblio(req) {
         var title = [];
         var attr = [];
         var value = [];
+        var year = [];
   
           title.push(tab[i].reference + " - " + tab[i].titre);
           attr.push(tab[i].code_bibliographie);
+          year.push(tab[i].annee);
           value.push(tab[i].auteur + " - " +  tab[i].annee + " - " + tab[i].titre + " - " + tab[i].source);
           options.push({
               id: i+'-'+title.join(''),
               title: title.join(''),
               value: value.join(''),
               attr: attr.join(''),
+              year: year.join(''),
           }); 
     }
   

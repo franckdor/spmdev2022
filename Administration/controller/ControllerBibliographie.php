@@ -34,6 +34,10 @@ class ControllerBibliographie {
             self::errorConnecte();
             exit();
         }
+
+
+
+
         $action = "created";
         $view = "update";
         $pagetitle = "Bibliographie";
@@ -83,9 +87,17 @@ class ControllerBibliographie {
     }
 
     public static function created() {
-
-        var_dump($_POST);       
-
+ 
+        $data = array(
+            'reference' => $_POST['tap'],
+            'auteur' => $_POST['author'],
+            'annee' => $_POST['year'],
+            'titre' => $_POST['title'],
+            'source' => $_POST['source'],
+            'occurences' => $_POST['occ'],
+            'tap' => $_POST['tap'],
+        );      
+        ModelBibliographie::save($data);
         $view = "created";
         $pagetitle = "test";
         

@@ -120,7 +120,7 @@ class ControllerBibliographie {
     }
 
     public static function searchRepart() {
-        $tabRepart = ModelRepartition::selectByCodeBiblio(6936);
+        $tabRepart = ModelRepartition::selectByCodeBiblio($_GET['code']);
         $i = 0;
         $tab = array();
         
@@ -128,10 +128,30 @@ class ControllerBibliographie {
             $specy = ModelNomenclature_espece::select($repart->get('id_nomenclature_espece'));
             $pays = ModelPays::select($repart->get('id_pays'));
             $bioarea = ModelZone_biogeographique::select($pays->get('id_zone_biogeographique'));
+            //$plant = ModelPlante_hote::select
             $tab[$i] = ['espece' => $specy->get('nom_espece'), 
             'genre' => $specy->get('nom_genre') , 
             'pays' => $pays->get('nom_pays'), 
             'zone' => $bioarea->get('nom_zone_biogeographique')];
+            $i = $i+1;     
+        }
+
+        echo json_encode($tab);
+    }
+
+
+    public static function searchHostPlant() {
+        $tabHost = ModelPlante_hote::selectByCodeBiblio($_GET['code']);
+        $i = 0;
+        $tab = array();
+        
+        foreach($tabHost as $plant) {
+            $hplant = ModelPlants::select($plant->get('id_plante'));
+            $specy = ModelNomenclature_espece::select($repart->get('id_nomenclature_espece'));
+            $tab[$i] = ['espece' => $specy->get('nom_espece'), 
+            'genre' => $specy->get('nom_genre') , 
+            'specy_plant' => $hplant->get('species'), 
+            'genus_plant' => $hplant->get('genus')];
             $i = $i+1;     
         }
 

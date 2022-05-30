@@ -2,6 +2,7 @@
 let requeteBiblio;
 let requeteSpecies;
 let requeteRepart;
+let requeteHostP;
 
 requeteB(callbackBiblio);
 
@@ -23,6 +24,7 @@ function listener() {
     id.value = selectBiblio.tomselect.options[selectBiblio.tomselect.items].attr;
     requeteSpe(callbackSpecies);
     requeteRepartition(callbackRepart);
+    requeteHP(callbackHP);
 }
 
 function requeteB(callback) {
@@ -155,6 +157,39 @@ function callbackRepart(req) {
     for(let i=0; i<tab.length; i++) {
         var p = document.createElement("p");
         p.innerText = tab[i].genre + " " + tab[i].espece + " | " + tab[i].pays + " - " + tab[i].zone;
+        repartition.appendChild(p);
+    }
+
+}
+
+function requeteHP(callback) {
+    let url = "index.php?controller=bibliographie&action=searchHostPlant&code=" + encodeURI(id.value);
+    if (requeteHostP && requeteHostP.readyState !== XMLHttpRequest.DONE) {
+        requeteHostP.abort();
+    }
+    requeteHostP = new XMLHttpRequest();
+    requeteHostP.open("GET", url, true);
+    requeteHostP.addEventListener("load",  function () {
+        console.log(requeteHostP);
+        callback(requeteHostP);
+    });
+    requeteHostP.send(null);
+}
+
+function callbackHP(req) {
+    let tab = JSON.parse(req.response);
+    var HP = document.getElementById("plants");
+
+    HP.innerHTML = "";
+
+    let labelHP = document.createElement("label");
+    labelHP.htmlFor = "repartition";
+    labelHP.innerText = "Repartition";
+    HP.appendChild(labelHP);
+
+    for(let i=0; i<tab.length; i++) {
+        var p = document.createElement("p");
+        p.innerText = tab[i].genre + " " + tab[i].espece + " | " + tab[i].specy_plant + " - " + tab[i].genus_plant;
         repartition.appendChild(p);
     }
 

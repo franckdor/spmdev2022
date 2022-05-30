@@ -35,4 +35,27 @@ class ModelPlante_hote extends Model {
         $this->$attribute = $attribute;
     }
 
+
+    public static function SelectByCodeBiblio($code_biblio) {
+        try {
+            // préparation de la requête
+            $sql = "SELECT DISTINCT * FROM plante_hote
+            WHERE code_bibliographie=:code";
+            $req_prep = Model::getPDO()->prepare($sql);
+            // passage de la valeur de name_tag
+            $values = array(
+                "code" => $code_biblio);
+                
+            // exécution de la requête préparée
+            $req_prep->execute($values);
+            $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelPlante_hote");
+            $tabResults = $req_prep->fetchAll();
+            // renvoi du tableau de résultats
+            return $tabResults;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la base de données.");
+        }
+    }
+
 }

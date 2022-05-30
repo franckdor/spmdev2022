@@ -172,6 +172,29 @@ class Model {
         }
     }
 
+    public static function selectMaxId() {
+        try {
+            $table_name = static::$object;
+            if ($table_name == 'plants') {
+                return false;
+            }
+            $primary_key = static::$primary;
+            $sql = "SELECT MAX($primary_key) FROM $table_name;";
+
+            $pdo = Model::getPDO();
+            $rep = $pdo->query($sql);
+            $rep->setFetchMode(PDO::FETCH_ASSOC);
+            $number = $rep->fetchAll();
+            if (is_null($number[0]['max'])) {
+                $number[0]['max'] = 10000;
+            }
+            return $number[0]['max'];
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
 
 }
 

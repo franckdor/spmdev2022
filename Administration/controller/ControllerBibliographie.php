@@ -72,15 +72,7 @@ class ControllerBibliographie {
         $view = "addedRis";
         $pagetitle = "Add From file";
         
-        $reader = new RISReader();
-
-        $reader->parseFile($_FILES['file']['tmp_name']);
-
-        $infos = Ris::getAll($_FILES['file']['tmp_name']);
-
-        foreach($infos as $data) {
-            Modelris::save($data);      
-        }
+        ModelRis::saveRis($_FILES['file']['tmp_name']);
 
         
         require_once File::build_path(array("view", "view.php"));

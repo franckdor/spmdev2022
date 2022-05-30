@@ -21,15 +21,17 @@
             <input id="textTap" placeholder="oui/non" name="tap" type="text" />
 
             <label for="textOcc">Occ :</label>
-            <input id="textOcc" placeholder="RAS" name="occS" type="text" />
+            <input id="textOcc" placeholder="RAS" name="occ" type="text" />
         </section>
         
         <section id="AATS">
                 
                 <label for="textAuthor">Author :</label>
-                <input id="searchAuthor" name="author"  type="text />
+                <input id="searchAuthor" name="author"  type="text"/>
 
                 <br>
+                <label for="date">Year :</label> 
+                <input id="date" name="year" type="text" minlength="4" maxlength="4" />
 
                 <label for="textTitle">Title :</label> 
                 <input id="textTitle" name="title" type="text" />

@@ -34,6 +34,10 @@ class ControllerBibliographie {
             self::errorConnecte();
             exit();
         }
+
+
+
+
         $action = "created";
         $view = "update";
         $pagetitle = "Bibliographie";
@@ -83,9 +87,17 @@ class ControllerBibliographie {
     }
 
     public static function created() {
-
-        var_dump($_POST);       
-
+ 
+        $data = array(
+            'reference' => $_POST['tap'],
+            'auteur' => $_POST['author'],
+            'annee' => $_POST['year'],
+            'titre' => $_POST['title'],
+            'source' => $_POST['source'],
+            'occurences' => $_POST['occ'],
+            'tap' => $_POST['tap'],
+        );      
+        ModelBibliographie::save($data);
         $view = "created";
         $pagetitle = "test";
         
@@ -120,7 +132,7 @@ class ControllerBibliographie {
     }
 
     public static function searchRepart() {
-        $tabRepart = ModelRepartition::selectByCodeBiblio(6936);
+        $tabRepart = ModelRepartition::selectByCodeBiblio($_GET['code']);
         $i = 0;
         $tab = array();
         
@@ -128,11 +140,36 @@ class ControllerBibliographie {
             $specy = ModelNomenclature_espece::select($repart->get('id_nomenclature_espece'));
             $pays = ModelPays::select($repart->get('id_pays'));
             $bioarea = ModelZone_biogeographique::select($pays->get('id_zone_biogeographique'));
+            //$plant = ModelPlante_hote::select
             $tab[$i] = ['espece' => $specy->get('nom_espece'), 
             'genre' => $specy->get('nom_genre') , 
             'pays' => $pays->get('nom_pays'), 
             'zone' => $bioarea->get('nom_zone_biogeographique')];
             $i = $i+1;     
+        }
+
+        echo json_encode($tab);
+    }
+
+
+    public static function searchHostPlant() {
+        $tabHost = ModelPlante_hote::selectByCodeBiblio(7);
+        $i = 0;
+        $tab = array();
+        
+        foreach($tabHost as $plant) {
+            $id = $plant->get('id_plante');
+            $hplant = ModelPlants::select($id);
+            if (count($hplant) == 0) {
+                break;
+            } else {
+                $specy = ModelNomenclature_espece::select($plant->get('id_nomenclature_espece'));
+                $tab[$i] = ['espece' => $specy->get('nom_espece'), 
+                'genre' => $specy->get('nom_genre') , 
+                'specy_plant' => $hplant->get('species'), 
+                'genus_plant' => $hplant->get('genus')];
+                $i = $i+1;     
+            }
         }
 
         echo json_encode($tab);

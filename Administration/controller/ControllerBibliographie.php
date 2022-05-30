@@ -141,18 +141,23 @@ class ControllerBibliographie {
 
 
     public static function searchHostPlant() {
-        $tabHost = ModelPlante_hote::selectByCodeBiblio($_GET['code']);
+        $tabHost = ModelPlante_hote::selectByCodeBiblio(7);
         $i = 0;
         $tab = array();
         
         foreach($tabHost as $plant) {
-            $hplant = ModelPlants::select($plant->get('id_plante'));
-            $specy = ModelNomenclature_espece::select($repart->get('id_nomenclature_espece'));
-            $tab[$i] = ['espece' => $specy->get('nom_espece'), 
-            'genre' => $specy->get('nom_genre') , 
-            'specy_plant' => $hplant->get('species'), 
-            'genus_plant' => $hplant->get('genus')];
-            $i = $i+1;     
+            $id = $plant->get('id_plante');
+            $hplant = ModelPlants::select($id);
+            if (count($hplant) == 0) {
+                break;
+            } else {
+                $specy = ModelNomenclature_espece::select($plant->get('id_nomenclature_espece'));
+                $tab[$i] = ['espece' => $specy->get('nom_espece'), 
+                'genre' => $specy->get('nom_genre') , 
+                'specy_plant' => $hplant->get('species'), 
+                'genus_plant' => $hplant->get('genus')];
+                $i = $i+1;     
+            }
         }
 
         echo json_encode($tab);

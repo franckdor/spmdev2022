@@ -39,7 +39,7 @@ class ModelPlants extends Model {
 
 
     protected static $object = "plants";
-    protected static $primary='plant_ID';
+    protected static $primary="plant_ID";
 
     public function __construct($plant_ID=NULL, $phylum=NULL, $class=NULL, $order=NULL, $family=NULL, $genus=NULL,
     $species=NULL, $scientific_name_authorship=NULL, $scientific_name=NULL, $taxonomic_status=NULL, $taxon_rank=NULL,
@@ -96,6 +96,24 @@ class ModelPlants extends Model {
             $data = array(
                 'genus' => $tab[1],
                 'species' => $tab[0],
+            );
+            $req_prep->execute($data);
+            $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelPlants");
+            $tab = $req_prep->fetchAll();
+            return $tab;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la base de données.");
+        } 
+    }
+
+    //SELECT BUT QUOTES CAUSE DB CARES ABOUT CAPS
+    public static function select($id) {
+        try {
+            $sql = "SELECT DISTINCT * FROM plants WHERE 'plant_ID'=:id";
+            $req_prep = Model::getPDO()->prepare($sql);
+            $data = array(
+                'id' => $id,  
             );
             $req_prep->execute($data);
             $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelPlants");

@@ -183,8 +183,8 @@ function callbackHP(req) {
     HP.innerHTML = "";
 
     let labelHP = document.createElement("label");
-    labelHP.htmlFor = "repartition";
-    labelHP.innerText = "Repartition";
+    labelHP.htmlFor = "plants";
+    labelHP.innerText = "Host Plant";
     HP.appendChild(labelHP);
 
     for(let i=0; i<tab.length; i++) {

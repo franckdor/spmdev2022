@@ -176,8 +176,11 @@ class ControllerNomenclature_genre {
 
         $tabjson = array();
         foreach($tab as $tribe) {
-            
+            array_push($tabjson, $tribe->getIDandName());
         }
+        
+        
+        echo json_encode($tabjson);
     }
 
     public static function errorConnecte() {

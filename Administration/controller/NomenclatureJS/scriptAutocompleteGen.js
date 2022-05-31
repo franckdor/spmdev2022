@@ -62,31 +62,27 @@ var familyS = new TomSelect("#select-family", {
 
 requete(callback);
 requeteFam(callbackF);
-
+requeteTribe(callbackTribe);
 
 
 function callback(req) {
-    var genre = [];
-    var tribu = [];
+    
     var sous_famille = [];
     var recherche = [];
 
     let tab = JSON.parse(req.response);
     for (var i=0; i<tab.length; i++) {
         var titleGen = [];
-        var titleTrib = [];
+        
         var titleSF = [];
         var titleR = [];
 
         titleGen.push(tab[i].genre);
-        titleTrib.push(tab[i].tribu);
+        
         titleSF.push(tab[i].sous_famille);
         titleR.push(tab[i].genre + " - " + tab[i].tribu + " - " + tab[i].sous_famille + " - " + tab[i].statut);
 
-        tribu.push({
-            id: i+'-'+titleTrib.join(''),
-            title: titleTrib.join(''),
-        });
+        
 
         sous_famille.push({
             id: i+'-'+titleSF.join(''),
@@ -100,7 +96,7 @@ function callback(req) {
 
         //genus.addOption(genre);
 
-        tribe.addOption(tribu);
+        
 
         sub_fam.addOption(sous_famille);
 
@@ -171,8 +167,41 @@ function requeteTribe(callback) {
     requeteT.send(null);
 }
 
+
+function callbackTribe(req) {
+    var tribu = [];
+
+    let tab = JSON.parse(req.response);
+
+    for(let i=0; i<tab.length; i++) {
+        var titleTrib = [];
+        var idTrib = [];
+
+        titleTrib.push(tab[i].nom_classification);
+        idTrib.push(tab[i].id_classification); 
+
+        tribu.push({
+            id: i+'-'+titleTrib.join(''),
+            title: titleTrib.join(''),
+            idTrib: idTrib.join(''),
+        });
+
+        tribe.addOption(tribu);
+    }
+
+} 
+
 var selection = document.getElementById("select");
 selection.addEventListener("change", filler);
+
+var tribeSelect = document.getElementById("select-tribu");
+tribeSelect.addEventListener("change", hiddenFunc);
+
+function hiddenFunc() {
+    var hiddenId = document.getElementById('tribeID');
+    hiddenId.value = tribe.options[tribe.items].idTrib;
+    console.log(hiddenId.value);
+}
 
 
 

@@ -34,8 +34,9 @@
                 </select>    
             </div>
         <br>
-        
+            
             <label for="select-tribu">Tribu : </label> 
+            <input id="tribeID" name="tribeID" type="hidden" />
             <div id="tribe">   
                 <select id="select-tribu" name="tribu" required>
                 <?php if(isset($genus)) { ?>

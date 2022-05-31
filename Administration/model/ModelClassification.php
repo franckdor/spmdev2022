@@ -56,6 +56,15 @@ class ModelClassification extends Model{
         return $this->$nom_attribut;
     }
 
+    public function getIDandName() {
+        $array = array(
+            'id_classification' => $this->id_classification,
+            'nom_classification' => $this->nom_classification,
+        );
+
+        return $array;
+    }
+
 
 }
 ?>

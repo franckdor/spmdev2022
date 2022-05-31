@@ -9,6 +9,8 @@ require_once File::build_path(array("model", "ModelGenre_valide.php"));
 require_once File::build_path(array("model", "ModelBibliographie.php"));
 require_once File::build_path(array("model", "ModelGenres.php"));
 require_once File::build_path(array("model", "ModelFamilles.php"));
+require_once File::build_path(array("model", "ModelClassification.php"));
+
 class ControllerNomenclature_genre {
 
 
@@ -148,7 +150,6 @@ class ControllerNomenclature_genre {
     public static function autocomplete() {
         $tab_gen = ModelGenres::selectALL();
 
-        sleep(0.5);
 
         $tabjson = array();
         foreach($tab_gen as $gen) {
@@ -160,7 +161,6 @@ class ControllerNomenclature_genre {
     public static function autocompleteF() {
         $tab_fam = ModelFamilles::selectAll();
 
-        sleep(0.5);
 
         $tabjson = array();
         foreach($tab_fam as $fam) {
@@ -169,6 +169,15 @@ class ControllerNomenclature_genre {
         echo json_encode($tabjson);
         
         //echo json_encode($tabF);
+    }
+
+    public static function selectTribe() {
+        $tab = ModelClassification::selectTribe();
+
+        $tabjson = array();
+        foreach($tab as $tribe) {
+            
+        }
     }
 
     public static function errorConnecte() {

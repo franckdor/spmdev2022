@@ -2,6 +2,8 @@
 
 require_once File::build_path(array("config", "Conf.php"));
 require_once File::build_path(array("model" ,"Model.php"));
+require_once File::build_path(array('vendor', 'autoload.php'));
+use \LibRIS\RISReader;
 
 class ModelRis extends Model {
 
@@ -19,6 +21,37 @@ class ModelRis extends Model {
             $this->$id_ris = $id_ris;
             $this->$tag = $tag;
             $this->$value = $value;
+        }
+    }
+
+    public static function saveRis($filename) {
+        $reader = new RISReader();
+    
+        $reader->parseFile($filename);
+    
+        $records = $reader->getRecords();
+    
+        $array = array();
+        for ($i=0; $i<count($records); $i++) {
+            $ris = [];
+            foreach($records[$i] as $key => $value) {
+                $ris[$key] = $value[0];
+                }
+                array_push($array, $ris);
+        }
+        $id = ModelRis::selectMaxId()+1;
+        for($i=0; $i<count($array); $i++) {
+            foreach($array[$i] as $key => $value) {
+                
+                $data = array(
+                    'id_ris' => $id,
+                    'tag' => $key,
+                    'value' => $value
+                );
+                //ModelRis::save($data);
+                ModelRis::save($data);
+            }
+            $id++;
         }
     }
 

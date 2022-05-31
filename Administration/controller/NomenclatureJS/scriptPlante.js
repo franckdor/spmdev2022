@@ -24,7 +24,7 @@ buttonPlants.addEventListener("click", () => {
 });
 
 buttonRef.addEventListener("click", () => {
-  window.open("index.php?action=update&controller=plants",'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
+  window.open("index.php?action=read&controller=bibliographie&code_bibliographie=",'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
   return false;
 });
 
@@ -79,6 +79,8 @@ function callbackSearch(req) {
     var searchSpe = [];
     
     let tab = JSON.parse(req.response);
+
+    console.log(tab);
     for (var i=0; i<tab.length; i++) {
         var titleRS = [];
         var value = [];

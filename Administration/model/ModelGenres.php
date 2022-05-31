@@ -90,7 +90,7 @@ class ModelGenres extends Model {
             $pdo = Model::getPDO();
             $rep = $pdo->query("SELECT * FROM $table_name
             ORDER BY code_genre");
-            $rep->setFetchMode(PDO::FETCH_CLASS, "ModelBibliographie");
+            $rep->setFetchMode(PDO::FETCH_CLASS, "ModelGenres");
             return $rep->fetchAll();
         } catch (PDOException $e) {
             if (Conf::getDebug())

@@ -8,19 +8,12 @@ use \LibRIS\RISReader;
 class Ris {
 
     //NEED RIS FILE SRC
-    public static function getAll($filename) {
-        $val = ModelRis::getColumns();
-        $upperval = array();
-        foreach($val as $low) {
-            array_push($upperval, strtoupper($low));
-        }
-        
-    
+    public static function getAll($filename) {   
         $count = 0;
         
         $reader = new RISReader();
 
-        $reader->parseFile('./file.ris');
+        $reader->parseFile($filename);
 
         $records = $reader->getRecords();
 
@@ -38,6 +31,6 @@ class Ris {
         return $array;
     }
     
-
+    
 
 }

@@ -1,5 +1,6 @@
 let requeteGen;
 let requeteF;
+let requeteT;
 
 var genus = new TomSelect("#select-genre", {
     maxItems:1,
@@ -8,7 +9,7 @@ var genus = new TomSelect("#select-genre", {
     labelField: 'title',
     sortField: 'title',
     searchField: ['title'],
-    create: false,
+    create: true,
     hideSelected: true,
 });
 
@@ -82,11 +83,6 @@ function callback(req) {
         titleSF.push(tab[i].sous_famille);
         titleR.push(tab[i].genre + " - " + tab[i].tribu + " - " + tab[i].sous_famille + " - " + tab[i].statut);
 
-        genre.push({
-            id: i,//+'-'+titleGen.join(''),
-            title: titleGen.join(''),
-        });
-
         tribu.push({
             id: i+'-'+titleTrib.join(''),
             title: titleTrib.join(''),
@@ -102,7 +98,7 @@ function callback(req) {
             title: titleR.join(''),
         });
 
-        genus.addOption(genre);
+        //genus.addOption(genre);
 
         tribe.addOption(tribu);
 
@@ -136,7 +132,7 @@ function requeteFam(callback) {
     requeteF = new XMLHttpRequest();
     requeteF.open("GET", url, true);
     requeteF.addEventListener("load", function () {
-        callbackF(requeteF);
+        callback(requeteF);
     });
     requeteF.send(null);
 }
@@ -160,6 +156,19 @@ function callbackF(req) {
     familyS.addOption(family);
     familyS.addItem(['Tetranychidae']);
     
+}
+
+function requeteTribe(callback) {
+    let url = "index.php?controller=nomenclature_genre&action=selectTribe";
+    if (requeteT && requeteT.readyState !== XMLHttpRequest.DONE) {
+        requeteT.abort();
+    }
+    requeteT = new XMLHttpRequest();
+    requeteT.open("GET", url, true);
+    requeteT.addEventListener("load", function () {
+        callback(requeteT);
+    });
+    requeteT.send(null);
 }
 
 var selection = document.getElementById("select");

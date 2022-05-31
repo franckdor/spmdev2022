@@ -254,7 +254,7 @@ class ModelNomenclature_espece extends Model {
             $pdo = Model::getPDO();
             $rep = $pdo->query("SELECT * FROM $table_name
             ORDER BY id_nomenclature_espece");
-            $rep->setFetchMode(PDO::FETCH_CLASS, "ModelBibliographie");
+            $rep->setFetchMode(PDO::FETCH_CLASS, "ModelNomenclature_espece");
             return $rep->fetchAll();
         } catch (PDOException $e) {
             if (Conf::getDebug())

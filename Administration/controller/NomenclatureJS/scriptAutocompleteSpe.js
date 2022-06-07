@@ -65,7 +65,7 @@ var search_genus = new TomSelect('#search-genus',{
   searchField: ['title'],
   sortField: 'title',
   hideSelected: true,
-  create: true
+
 });
 
 var search_species = new TomSelect('#search-species',{
@@ -76,7 +76,7 @@ var search_species = new TomSelect('#search-species',{
   searchField: ['title'],
   sortField: 'title',
   hideSelected: true,
-  create: true
+
 });
 
 requeteESP(callback_ESP);

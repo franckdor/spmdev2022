@@ -10,7 +10,6 @@
     <body>
         
             <ul>
-                <li><a href="test.php">TEST</a></li>
                 <li><a href="index.php?action=readAll">Admin list</a></li>
                 <li><a href="index.php?action=home">Home</a></li>
                 <?php //if you're not logged then you can connect

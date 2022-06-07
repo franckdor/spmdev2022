@@ -11,10 +11,17 @@ ADD utilisateur VARCHAR(32),
 ADD date_add DATE;
 
 ALTER TABLE nomenclature_genre
-ADD utilisateur VARCHAR(32);
-ADD date_add DATE,
+ADD utilisateur VARCHAR(32),
+ADD date_maj DATE,
 ADD tribu VARCHAR(32),
-ADD sous-famille VARCHAR(32);
+ADD sous_famille VARCHAR(32);
+
+ALTER TABLE nomenclature_genre
+RENAME TO genre;
+
+ALTER TABLE genres
+RENAME TO nomenclature_genre;
+
 
 ALTER TABLE plante_hote
 ADD utilisateur VARCHAR(32),
@@ -24,6 +31,16 @@ ADD original_data Boolean,
 ADD synthesis Boolean; 
 
 --EN ATTENDANT ALAIN
+
+
+BEGIN
+   IF NEW.id_statut = 10 THEN
+        INSERT INTO espece_valide(nom_genre, nom_espece, auteur_date, reference_page, code_bibliographie)
+        VALUES(new.nom_genre, new.nom_espece, new.auteur_date, new.reference_page, new.code_bibliographie);
+    END IF;
+    return NEW;
+END;
+
 
 CREATE TABLE genres (
     Code_genre VARCHAR(32),

@@ -12,6 +12,9 @@ class ControllerAdmin {
         //renvoyer sur l'affichage du compte si connecté
         //proposer la connexion et l'inscription si non
         $view = 'home';
+        if (!Security::is_connected()) {
+            $view = "signIn";
+        }
         $pagetitle = 'Connexion';
         require_once File::build_path(array('view', 'view.php'));
     }

@@ -27,11 +27,7 @@ CREATE TABLE ris (
     UR VARCHAR(500),
 );
 
-ALTER TABLE nomenclature_genre
-RENAME TO genre;
 
-ALTER TABLE genres
-RENAME TO nomenclature_genre;
 
 ALTER TABLE bibliographie ADD
 occurences VARCHAR(50),
@@ -318,3 +314,8 @@ CREATE TABLE "world_flora_online" (
 
 )
 
+ALTER TABLE nomenclature_genre
+RENAME TO genre;
+
+ALTER TABLE genres
+RENAME TO nomenclature_genre;

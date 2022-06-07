@@ -14,8 +14,12 @@ class ControllerAdmin {
         $view = 'home';
         if (!Security::is_connected()) {
             $view = "signIn";
+            $wrongInformations = false;
         }
         $pagetitle = 'Connexion';
+
+        
+
         require_once File::build_path(array('view', 'view.php'));
     }
 

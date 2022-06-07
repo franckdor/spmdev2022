@@ -125,6 +125,7 @@ function callbackOS(req) {
   for(let i=0; i<tab.length; i++) {
     var button = document.createElement("button");
     button.innerText = "> > >";
+    button.type = "button";
     button.addEventListener("click", () => {
       window.open("index.php?action=update&controller=nomenclature_espece&id=" + encodeURIComponent(tab[i].id),'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
     });
@@ -134,10 +135,6 @@ function callbackOS(req) {
     p.appendChild(button);
     divp.appendChild(p);
   }
-}
-
-function updateSpecy(id) {
-  
 }
 
 
@@ -153,21 +150,23 @@ function callbackSearch(req) {
   for (var i=0; i<tab.length; i++) {
       var titleRG = [];
       var titleRS = [];
+      var idEsp = []
 
       titleRG.push(tab[i].genre + " - " + tab[i].espece + " - " + tab[i].auteur_date + " - " + tab[i].statut + " - " + tab[i].espece_valide + " - " + tab[i].genre_valide);
       titleRS.push(tab[i].espece + " - " + tab[i].genre + " - " + tab[i].auteur_date + " - " + tab[i].statut + " - " + tab[i].espece_valide + " - " + tab[i].genre_valide);
-
+      idEsp.push(tab[i].id);
 
       searchSpe.push({
         id: i+'-'+titleRS.join(''),
         title: titleRS.join(''),
+        idEsp: idEsp.join(''),
     });
 
 
       searchGen.push({
           id: i+'-'+titleRG.join(''),
           title: titleRG.join(''),
-
+          idEsp: idEsp.join(''),
       });
 
       search_genus.addOption(searchGen);
@@ -368,6 +367,9 @@ function fillerGenus() {
   select_VSpe.addItem(VspeciesItem);
   select_status.addOption(statOption);
   select_status.addItem(statItem);
+
+  var id = search_genus.options[search_genus.items].idEsp;
+  window.open("index.php?action=update&controller=nomenclature_espece&id=" + encodeURIComponent(id));
 }
 
 function fillerSpecies() {
@@ -417,3 +419,4 @@ function fillerSpecies() {
   select_status.addItem(statItem);
 }
   
+

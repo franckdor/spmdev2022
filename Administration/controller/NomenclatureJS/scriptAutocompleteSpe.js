@@ -265,18 +265,6 @@ function requeteAut(callback) {
     });
     requeteAute.send(null);
 }
-  
-//displays in <SELECT> differents status
-function afficheStat(tableau) {
-  for (let i=0; i<tableau.length; i++) {
-      var o = document.createElement("option");
-      o.innerHTML = tableau[i];
-      statut.appendChild(o);
-  }
-  if(tableau.length > 0) o.style.borderWidth = "1px";
-}
-
-
 
 
 
@@ -327,6 +315,7 @@ function fillerGenus() {
   let genusItem = tabFill[0];
   let speciesItem = tabFill[1];
   let audItem = tabFill[2];
+  let statItem = tabFill[3];
   let VspeciesItem = tabFill[4] + " - " + tabFill[5];
 
 
@@ -334,21 +323,25 @@ function fillerGenus() {
   var genusOption = document.createElement("option");
   var audOption = document.createElement("option");
   var VspeciesOption = document.createElement("option");
+  var statOption = document.createElement("option");
 
   genusOption.setAttribute("title", genusItem);
   speciesOption.setAttribute("title", speciesItem);
   audOption.setAttribute("title", audItem);
   VspeciesOption.setAttribute("title", VspeciesItem);
+  statOption.setAttribute("title", statItem);
 
   var speciesNode = document.createTextNode(speciesItem);
   var genusNode = document.createTextNode(genusItem);
   var audNode = document.createTextNode(audItem);
   var VspeciesNode = document.createTextNode(VspeciesItem);
+  var statNode = document.createTextNode(statItem);
 
   genusOption.appendChild(genusNode);
   speciesOption.appendChild(speciesNode);
   audOption.appendChild(audNode);
   VspeciesOption.appendChild(VspeciesNode);
+  statOption.appendChild(statNode);
 
 
   select_genus.addOption(genusOption);
@@ -359,6 +352,8 @@ function fillerGenus() {
   select_aut.addItem(audItem);
   select_VSpe.addOption(VspeciesOption);
   select_VSpe.addItem(VspeciesItem);
+  select_status.addOption(statOption);
+  select_status.addItem(statItem);
 }
 
 function fillerSpecies() {
@@ -368,6 +363,7 @@ function fillerSpecies() {
   let genusItem = tabFill[0];
   let speciesItem = tabFill[1];
   let audItem = tabFill[2];
+  let statItem = tabFill[3];
   let VspeciesItem = tabFill[4] + " - " + tabFill[5];
 
 
@@ -375,22 +371,25 @@ function fillerSpecies() {
   var genusOption = document.createElement("option");
   var audOption = document.createElement("option");
   var VspeciesOption = document.createElement("option");
+  var statOption = document.createElement("option");
 
   genusOption.setAttribute("title", genusItem);
   speciesOption.setAttribute("title", speciesItem);
   audOption.setAttribute("title", audItem);
   VspeciesOption.setAttribute("title", VspeciesItem);
+  statOption.setAttribute("title", statItem);
 
   var speciesNode = document.createTextNode(speciesItem);
   var genusNode = document.createTextNode(genusItem);
   var audNode = document.createTextNode(audItem);
   var VspeciesNode = document.createTextNode(VspeciesItem);
+  var statNode = document.createTextNode(statItem);
 
   genusOption.appendChild(genusNode);
   speciesOption.appendChild(speciesNode);
   audOption.appendChild(audNode);
   VspeciesOption.appendChild(VspeciesNode);
-
+  statOption.appendChild(statNode);
 
   select_genus.addOption(genusOption);
   select_genus.addItem(genusItem);
@@ -400,5 +399,7 @@ function fillerSpecies() {
   select_aut.addItem(audItem);
   select_VSpe.addOption(VspeciesOption);
   select_VSpe.addItem(VspeciesItem);
+  select_status.addOption(statOption);
+  select_status.addItem(statItem);
 }
   

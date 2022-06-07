@@ -13,10 +13,10 @@
                 <li><a href="index.php?action=readAll">Admin list</a></li>
                 <li><a href="index.php?action=home">Home</a></li>
                 <?php //if you're not logged then you can connect
-                if (!isset($_SESSION['id'])) {
+                if (!Security::is_connected()) {
                     echo '<li><a href="index.php?action=signIn">Login</a></li>';
                 } //if you're logged, then this appears.   
-                if (isset($_SESSION['id'])) {
+                if (Security::is_connected()) {
                     echo '<li><a href="index.php?action=create&controller=admin">Add Admin</a></li>';
                     //echo " ";
                     echo '<li id="aled"><a href="index.php?action=signOut&controller=admin">Deconnect</a></li>';

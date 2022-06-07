@@ -7,7 +7,7 @@ require_once File::build_path(array("model", "ModelNomenclature_genre.php"));
 require_once File::build_path(array("model", "ModelEspece_valide.php"));
 require_once File::build_path(array("model", "ModelGenre_valide.php"));
 require_once File::build_path(array("model", "ModelBibliographie.php"));
-require_once File::build_path(array("model", "ModelGenres.php"));
+require_once File::build_path(array("model", "ModelGenre.php"));
 require_once File::build_path(array("model", "ModelFamilles.php"));
 require_once File::build_path(array("model", "ModelClassification.php"));
 
@@ -23,7 +23,7 @@ class ControllerNomenclature_genre {
 
         $tab_fam = ModelFamilles::selectAll();
 
-        $tab_gen = ModelGenres::selectALL();
+        $tab_gen = ModelNomenclature_genre::selectALL();
 
         //$statut = ModelStatut_genre::selectNameById(10); //RETURN AN ARRAY
         //$st; 
@@ -42,7 +42,7 @@ class ControllerNomenclature_genre {
             self::error("");
             exit();
         }
-        $genus = ModelGenres::select($_GET['id']);
+        $genus = ModelNomenclature_genre::select($_GET['id']);
 
         $view="detail";
         $pagetitle="Detail ". $genus->get("genre");
@@ -55,22 +55,38 @@ class ControllerNomenclature_genre {
             self::errorConnecte();
             exit();
         }
-        $view="created";
+        $view="updated";
         $pagetitle="Genus created";
         var_dump($_POST);
         $statut = ModelStatut_genre::SelectIdByName($_POST['statut']);
+
+        //REGISTER IN VALID_GENUS
+        if ($statut[0]->get('id_statut_genre') == 10) {
+            $data = array(
+                'id_classification' => $_POST['tribeID'],
+                'nom_genre' => $_POST['genre'],
+                'code_bibliographie' => $_POST['code_biblio'],
+                'reference_page' => $_POST['page'],
+                'nom_genre' => $_POST['genre'],
+            );
+
+            ModelGenre_valide::save($data);
+        }
         //$GenreV = ModelEspece_valide::SelectIdByName($_POST['espece_valide'], $_POST['genre_valide']);
         $data = array(
             'genre' => $_POST['genre'],
             'tribu' => $_POST['tribu'],
             'sous_famille' => $_POST['sous-famille'],
             'code_statut' => $statut[0]->get('id_statut_genre'),
+            'ordre_taxo' => $_POST['tribeID'],
+            'code_famille' => 1,
+            'code_reference' => $_POST['code_biblio'],
             //'id_espece_valide' => $especeV[0]->get('id_espece_valide'),
             'page' => $_POST['page'],
             'utilisateur' => $_SESSION['login'],
             'date_maj' => date('d/m/Y', time()) 
          );   
-        ModelGenres::save($data);
+         ModelNomenclature_genre::save($data);
         require_once File::build_path(array("view", "view.php"));
     }
 
@@ -79,7 +95,7 @@ class ControllerNomenclature_genre {
             self::errorConnecte();
             exit();
         }
-        $action = "create";
+        $action = "created";
         $view="update";
         $pagetitle="Update gender";
         require_once File::build_path(array("view", "view.php"));
@@ -97,7 +113,7 @@ class ControllerNomenclature_genre {
             self::error();
             exit();
         }
-        $genus = ModelGenres::select($_GET['id']);
+        $genus = ModelNomenclature_genre::select($_GET['id']);
 
         $bibliography_id = $genus->get('code_reference');
 
@@ -139,16 +155,17 @@ class ControllerNomenclature_genre {
             'code_reference' => $code_biblio[0]->get('code_bibliographie'),
             'page' => $_POST['page'],
             'utilisateur' => $_SESSION['login'],
+            'date_maj' => date('d/m/Y', time()),
         );
 
-        ModelGenres::update($data);
+        ModelNomenclature_genre::update($data);
         $view="updated";
         $pagetitle="Genus Updated";
         require_once File::build_path(array('view', "view.php"));
     }
 
     public static function autocomplete() {
-        $tab_gen = ModelGenres::selectALL();
+        $tab_gen = ModelNomenclature_genre::selectALL();
 
 
         $tabjson = array();

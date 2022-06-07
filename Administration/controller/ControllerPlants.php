@@ -7,7 +7,7 @@ require_once File::build_path(array("model", "ModelNomenclature_genre.php"));
 require_once File::build_path(array("model", "ModelEspece_valide.php"));
 require_once File::build_path(array("model", "ModelGenre_valide.php"));
 require_once File::build_path(array("model", "ModelBibliographie.php"));
-require_once File::build_path(array("model", "ModelGenres.php"));
+require_once File::build_path(array("model", "ModelGenre.php"));
 require_once File::build_path(array("model", "ModelFamilles.php"));
 require_once File::build_path(array("model", "ModelPlants.php"));
 require_once File::build_path(array("model", "ModelPlante_hote.php"));
@@ -57,7 +57,7 @@ class ControllerPlants {
             'utilisateur' => $_SESSION['login'],
             'date_maj' => date('d/m/Y', time()) 
          );   
-        ModelGenres::save($data);
+         ModelNomenclature_genre::save($data);
         require_once File::build_path(array("view", "view.php"));
     }
 

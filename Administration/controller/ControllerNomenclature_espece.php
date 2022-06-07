@@ -98,7 +98,7 @@ class ControllerNomenclature_espece {
             'code_bibliographie' => $code_biblio[0]->get('code_bibliographie'),
             'reference_page' => $_POST['page'],
             'utilisateur' => $_SESSION['login'],
-            //'dateadd' => date('d/m/Y', time()),
+            'dateadd' => date('d/m/Y', time()),
         );
         ModelNomenclature_espece::update($data);
         $view = "updated";
@@ -214,11 +214,17 @@ class ControllerNomenclature_espece {
 
     //CALL FOR autocompletion in JS request (url from js)
     public static function autocompleteGen() {
-        $tabG = ModelNomenclature_genre::selectAllNomGen();
+        $tabG = ModelNomenclature_genre::selectAll();
         
         sleep(0.5);
+
+        $tabjson = array();
+        
+        foreach($tabG as $gen) {
+            array_push($tabjson, $gen->get('genre'));
+        }
        
-        echo json_encode($tabG);
+        echo json_encode($tabjson);
     }
 
     //CALL FOR autocompletion in JS request (url from js)

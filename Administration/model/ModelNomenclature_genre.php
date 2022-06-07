@@ -1,87 +1,82 @@
 <?php
-
-/*
-Nomenclatures acts :
-*/
-
-
+// THIS WILL BE THE FUTURE NOMENCLATURE GENRE
 require_once File::build_path(array("config", "Conf.php"));
 require_once File::build_path(array("model" ,"Model.php"));
+require_once File::build_path(array("model", "ModelStatut_genre.php"));
 
 class ModelNomenclature_genre extends Model {
 
     //id Espece Valide
-    private $id_nomenclature_genre;
+    private $code_genre;
     //nom Genre
-    private $nom_genre;
-
-    private $id_nomenclature_espece;
+    private $genre;
+    //nom Espece
+    private $tribu;
+    //Author_Date;
+    private $sous_famille;
     //id de la note
-    private $id_note;
+    private $code_genre_valide;
     //ref_page
-    private $reference_page;
+    private $code_famille;
     //Code bibliographie
-    private $code_bibliographie;
-    //Bolland (à supprimer)
-    private $id_statut;
+    private $code_reference;
+    
+    private $page;
     //Id Genre Valide
-    private $id_genre_valide;
+    private $code_statut;
+
+    private $code_espece_type;
+
+    private $ordre_taxonomique;
+
+    private $note_imp;
+
+    private $note_enr;
+
+    private $date_maj;
+
+    private $utilisateur;
 
     protected static $object = "Nomenclature_genre";
     protected static $primary='id_nomenclature_genre';
 
 
-    public function __construct($idG=NULL, $idE=NULL, $nomG=NULL, $note=NULL, $ref=NULL, $bibli=NULL, $statut=NULL, $idGV=NULL) {
-        if (!is_null($idG) || !is_null($nomG) || !is_null($idE) || !is_null($note) || !is_null($ref) ||
-        !is_null($bibli) || !is_null($statut) || !is_null($idGV)) {
-            $this->id_nomenclature_genre = $idG;
-            $this->id_nomenclature_espece = $idE;
-            $this->nom_genre = $nomG;
-            $this->id_note = $note;
-            $this->reference_page = $ref;
-            $this->code_bibliographie = $bibli;
-            $this->id_statut = $statut;
-            $this->id_genre_valide = $idGV;
+    public function __construct($cg=NULL, $nomG=NULL, $tribu=NULL, $sous_famille=NULL, $code_genre_valide=NULL, $code_famille=NULL, 
+    $code_reference=NULL, $page=NULL, $code_statut=NULL, $code_espece_type 	=NULL, $ordre_taxonomique=NULL, $note_imp=NULL, $note_enr=NULL, $date_maj=NULL,
+    $utilisateur=NULL) {
+        if (!is_null($cg) || !is_null($nomG) || !is_null($tribu) || !is_null($sous_famille) || !is_null($code_genre_valide) || !is_null($code_famille) ||
+        !is_null($code_reference) || !is_null($page) || !is_null($code_statut) ||!is_null($code_espece_type) || !is_null($ordre_taxonomique) || 
+        !is_null($note_imp) || !is_null($note_enr) || !is_null($date_maj) || !is_null($utilisateur)) {
+            $this->code_genre = $cg;
+            $this->genre = $nomG;
+            $this->tribu = $tribu;
+            $this->sous_famille = $sous_famille;
+            $this->code_genre_valide = $code_genre_valide;
+            $this->code_famille = $code_famille;
+            $this->code_reference = $code_reference;
+            $this->page = $page;
+            $this->code_statut = $code_statut;
+            $this->code_espece_type = $code_espece_type;
+            $this->ordre_taxonomique = $ordre_taxonomique;
+            $this->note_imp = $note_imp; 
+            $this->note_enr = $note_enr;
+            $this->date_maj = $date_maj;
+            $this->utilisateur = $utilisateur;
         }
-    }
-
-    public static function selectByName($name) {
-        try {
-            // préparation de la requête
-            $sql = "SELECT DISTINCT * FROM nomenclature_genre WHERE nom_genre LIKE :name_tag LIMIT 5";
-            $req_prep = Model::getPDO()->prepare($sql);
-            // passage de la valeur de name_tag 
-            $values = array("name_tag" => ucfirst($name)."%");//UCFIRST Bc you enter in lowercase from form but in Uppercase from DB
-            // exécution de la requête préparée
-            $req_prep->execute($values);
-            $req_prep->setFetchMode(PDO::FETCH_OBJ);
-            $tabResults = $req_prep->fetchAll();
-            // renvoi du tableau de résultats
-            return $tabResults;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            die("Erreur lors de la recherche dans la base de données.");
-        }
-    }
-
-    public static function selectAllNomGen() {
-        try {
-            $sql ="SELECT DISTINCT nom_genre FROM nomenclature_genre";
-            $req_prep = Model::getPDO()->query($sql);
-            $req_prep->setFetchMode(PDO::FETCH_OBJ);
-            $tab = $req_prep->fetchAll();
-            return $tab;
-            } catch (PDOException $e){
-                echo $e->getMessage()."\n";
-                die("Erreur lors de la recherche dans la base de données.");
-            }
     }
 
     public function get($attribute) {
         return $this->$attribute;
     }
 
-    public function set($attribute) {
-        $this->$attribute = $attribute;
+    //I serialise by myself
+    public function getAll() {
+        $array = array(
+            "genre" => $this->get("genre"),
+            "tribu" => $this->get("tribu"),
+            "sous_famille" => $this->get("sous_famille"),
+            "statut" => ModelStatut_genre::selectNameById($this->get("code_statut"))[0]->get("nom_statut_genre")
+        );
+        return $array;
     }
 }

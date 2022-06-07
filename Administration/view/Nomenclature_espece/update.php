@@ -118,6 +118,7 @@
             echo $biblio->get('auteur')." - ".$biblio->get('annee')." - ".$biblio->get('titre')." - ".$biblio->get('source');
                 } ?>
             </textarea>
+            <input id="code_biblio" name="code_biblio" type="hidden" />
         <br>
         <label for="number">Page : </label>
         <input id="number" name="page" type="number"

@@ -200,7 +200,6 @@ tribeSelect.addEventListener("change", hiddenFunc);
 function hiddenFunc() {
     var hiddenId = document.getElementById('tribeID');
     hiddenId.value = tribe.options[tribe.items].idTrib;
-    console.log(hiddenId.value);
 }
 
 

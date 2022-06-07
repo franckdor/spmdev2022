@@ -117,15 +117,29 @@ var other_species = document.getElementById("button");
 other_species.addEventListener("click", requeteOtherSpe);
 
 
+
+
 function callbackOS(req) {
   videdivp();
   let tab = JSON.parse(req.response);
   for(let i=0; i<tab.length; i++) {
+    var button = document.createElement("button");
+    button.innerText = "> > >";
+    button.addEventListener("click", () => {
+      window.open("index.php?action=update&controller=nomenclature_espece&id=" + encodeURIComponent(tab[i].id),'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
+    });
+    console.log(tab[i].id);
     var p = document.createElement("p");
     p.innerText = tab[i].espece + " -- " + tab[i].genre + " -- " + tab[i].auteur_date + " -- " + tab[i].statut + "\n";
+    p.appendChild(button);
     divp.appendChild(p);
   }
 }
+
+function updateSpecy(id) {
+  
+}
+
 
 function videdivp() {
   divp.innerHTML="";

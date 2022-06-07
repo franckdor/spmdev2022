@@ -4,6 +4,7 @@
 <script type="text/javascript" src="controller/NomenclatureJS/scriptStat.js" defer></script>
 <script type="text/javascript" src="controller/NomenclatureJS/scriptBiblio.js" defer></script>
 
+
 <div>
     <label for="select">Recherche : </label>
     <div>  

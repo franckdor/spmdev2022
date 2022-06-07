@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="view/styles/styles.css">
         <link rel="stylesheet" type="text/css" href="view/styles/completion.css">
+        <link rel="stylesheet" type="text/css" href="view/styles/nomenclature_espece.css">
         <title><?php echo $pagetitle; ?></title>
     </head>
     <body>

@@ -13,23 +13,25 @@
 <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
 
-<?php //if($action == "create") { ?>
-    
-<div>
-    <label for="search-species">Search by Species: </label>
-    <div>  
-        <select id="search-species" name="searchs"  required></select>    
+<?php if($action !== "create") { ?>
+
+<section id="section-search">
+    <div>
+        <label for="search-species">Search by Species: </label>
+        <div>  
+            <select id="search-species" name="searchs"  required></select>    
+        </div>
     </div>
-</div>
 
 
-<div>
-    <label for="search-genus">Search by Genus : </label>  
-    <div>  
-        <select id="search-genus" name="searchg"  required></select>    
+    <div>
+        <label for="search-genus">Search by Genus : </label>  
+        <div>  
+            <select id="search-genus" name="searchg"  required></select>    
+        </div>
     </div>
-</div>
-<?php// } ?>
+</section>
+<?php } ?>
    
 
 <form method="POST" action= <?php echo "index.php?controller=". self::$object . "&action=" . $action . '>'?>
@@ -122,9 +124,7 @@
         <br>
         <label for="number">Page : </label>
         <input id="number" name="page" type="number"
-        <?php if(isset($page)) { ?> min="<?php echo $page[0]; ?>" 
-        max="<?php echo $page[1]; ?>" 
-        <?php } ?>/>
+        <?php if(isset($page)) { ?> min="<?php echo $page[0]; }?>" />
         <br>
         <input type="submit" value="Envoyer" />
     </fieldset>

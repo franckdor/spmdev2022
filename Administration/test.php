@@ -1,3 +1,5 @@
+
+
 <?php
 
 
@@ -15,21 +17,9 @@ require_once File::build_path(array("model", "ModelStatut_espece.php"));
 require_once File::build_path(array("model", "Modelris.php"));
 require_once File::build_path(array('vendor', 'autoload.php'));
 
-$statut = ModelStatut_genre::SelectIdByName("Valid name");
+$statut = ModelNomenclature_genre::Select(95);
 var_dump($statut);
 
-$tab = ModelClassification::selectTribe();
+?>
 
-        $tabjson = array();
-        foreach($tab as $tribe) {
-            array_push($tabjson, $tribe->getIDandName());
-        }
-        var_dump($tabjson);
-/*
-foreach($tab as $esp) {
-    array_push($tabjson, $esp->getAll());
-}
-
-var_dump($tabjson);
-*/
-
+<a href="index.php?action=delete&controller=admin&id=2" OnClick="return confirm('Effacer la le bazarre n°2')">HEHEHEHE</a>

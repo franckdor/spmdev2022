@@ -2,3 +2,13 @@
     width: 700px;
     height: 20px;
 }
+
+#textSource {
+    width: 350px;
+}
+
+#textResume {
+    height: 100px;
+    width: 500px;
+    overflow-y: scroll;
+}

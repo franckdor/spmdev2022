@@ -19,12 +19,16 @@ class ModelBibliographie extends Model {
 
     private $id_note;
 
+    private $occurences;
+
+    private $tap;
+
     protected static $object = "bibliographie";
     protected static $primary='code_bibliographie';
 
-    public function __construct($code=NULL, $ref=NULL, $aut=NULL, $ann=NULL, $tit=NULL, $sourc=NULL, $idn=NULL) {
+    public function __construct($code=NULL, $ref=NULL, $aut=NULL, $ann=NULL, $tit=NULL, $sourc=NULL, $idn=NULL, $occurences=NULL, $tap=NULL) {
         if (!is_null($code) && !is_null($ref) && !is_null($aut) && !is_null($ann) && !is_null($idn) && !is_null($tit)
-        && !is_null($sourc)) {
+        && !is_null($sourc) && !is_null($occurences) && !is_null($tap)) {
             $this->code_bibliographie = $code;
             $this->reference = $ref;
             $this->auteur = $aut;
@@ -32,6 +36,8 @@ class ModelBibliographie extends Model {
             $this->titre = $tit;
             $this->source = $sourc;
             $this->id_note = $idn;
+            $this->occurences = $occurences;
+            $this->tap = $tap;
         }
     }
 
@@ -106,6 +112,37 @@ class ModelBibliographie extends Model {
 
             $data = array(
                 'title' => $title
+            );
+
+            $req_prep->execute($data);
+
+            $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelBibliographie");
+            return $req_prep->fetchAll();
+        } catch(PDOException $e) {
+            if (Conf::getDebug())
+                echo $e->getMessage();
+            else {
+                echo '<br>Une erreur est survenue - <a href="">Retour à la page d\'accueil</a>';
+            }
+            die();
+        }
+    }
+
+
+    static public function selectIdByAut($title) {
+        try {
+
+            $tab = explode(" - ", $title);
+            
+
+            $sql = "SELECT code_bibliographie FROM bibliographie WHERE auteur=:aut";
+
+            $pdo = Model::getPDO();
+            
+            $req_prep = $pdo->prepare($sql);
+
+            $data = array(
+                'aut' => $tab[0],
             );
 
             $req_prep->execute($data);

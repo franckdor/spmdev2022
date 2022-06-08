@@ -91,11 +91,10 @@ class ModelPlants extends Model {
     public static function selectId($plant) {
         try {
             $tab = explode(" - ", $plant);
-            $sql = "SELECT DISTINCT * FROM plants WHERE genus=:genus AND species=:species";
+            $sql = "SELECT DISTINCT * FROM plants WHERE scientific_name=:scientific_name";
             $req_prep = Model::getPDO()->prepare($sql);
             $data = array(
-                'genus' => $tab[1],
-                'species' => $tab[0],
+                'scientific_name' => $tab[0],
             );
             $req_prep->execute($data);
             $req_prep->setFetchMode(PDO::FETCH_CLASS, "ModelPlants");

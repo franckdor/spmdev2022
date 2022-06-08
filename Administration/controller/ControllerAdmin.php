@@ -53,7 +53,6 @@ class ControllerAdmin {
         $view="created";
         $pagetitle="Admin créé";
         $data = array(
-            'id' => $_POST['id'],
             'login' => $_POST['log'],
             'mdp' => Security::hacher($_POST['pswd'])
         );   

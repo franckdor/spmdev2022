@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="view/styles/completion.css">
         <link rel="stylesheet" type="text/css" href="view/styles/nomenclature_espece.css">
         <link rel="stylesheet" type="text/css" href="view/styles/bibliographie.css">
+        <script type="text/javascript" src="view/confirmation.js" defer></script>
         <title><?php echo $pagetitle; ?></title>
     </head>
     <body>
@@ -20,7 +21,7 @@
                 if (Security::is_connected()) {
                     echo '<li><a href="index.php?action=create&controller=admin">Add Admin</a></li>';
                     //echo " ";
-                    echo '<li id="aled"><a href="index.php?action=signOut&controller=admin">Deconnect</a></li>';
+                    ?><li id="aled"><a href="index.php?action=signOut&controller=admin" OnClick='return confirm("Etes vous sur ?")'>Deconnect</a></li><?php
                     echo '<div class="dropdown-form">';
                     echo '<li class="parent-form"><p>Formulaires</p></li>';
                     echo '<div class="formulaires">';

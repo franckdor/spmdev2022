@@ -7,9 +7,9 @@
     
 
     echo "<br>";
-    if (isset($_SESSION['id'])) 
-        echo "<a href=?action=delete&id=" . rawurlencode($biblio->get('code_bibliographie')). ">Supprimer</a>";
-        echo "<br>";
+    if (isset($_SESSION['id'])) ?> 
+        <a href="?action=delete&id= <?php echo rawurlencode($biblio->get('code_bibliographie')); ?> " OnClick='return confirm("Etes vous sur ?")'>Supprimer</a>
+        <?php echo "<br>";
         echo "<a href=?action=update&controller=bibliographie&id=" . rawurlencode($biblio->get('code_bibliographie')).  ">Update</a";
 
 ?>

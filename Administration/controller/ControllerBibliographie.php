@@ -34,10 +34,6 @@ class ControllerBibliographie {
             self::errorConnecte();
             exit();
         }
-
-
-
-
         $action = "created";
         $view = "update";
         $pagetitle = "Bibliographie";
@@ -52,12 +48,32 @@ class ControllerBibliographie {
             self::errorConnecte();
             exit();
         }
+
+        if(!isset($_GET['id'])) {
+            echo "ERREUR LORS DU CHARGEMENT";
+        }
+        $biblio = ModelBibliographie::select($_GET['id']);
         $action = "updated";
         $view = "update";
         $pagetitle = "Bibliographie";
 
         require_once File::build_path(array("view", "view.php"));
     }
+
+    public static function delete() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
+        $log = $_GET['id'];
+        $pagetitle="suppression";
+        $view="deleted";
+        ModelBibliographie::delete($_GET['id']);
+        require_once File::build_path(array("view", "view.php"));
+    }
+
+
+    
 
     public static function addRis() {
         $view = "addRis";

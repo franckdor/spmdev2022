@@ -17,12 +17,20 @@ var year = document.getElementById("date");
 selectBiblio.addEventListener("change", listener);
 
 function listener() {
+    document.getElementById("id").innerHTML = "";
     var option = selectBiblio.options[selectBiblio.selectedIndex];
     const tab = option.value.split(" - ");
     author.value = tab[0];
     title.value = tab[2];
     source.value = tab[3];
     id.value = selectBiblio.tomselect.options[selectBiblio.tomselect.items].attr;
+    var button = document.createElement("button");
+    document.getElementById("id").appendChild(button);
+    button.type = "button";
+    button.innerText = ">>>";
+    button.addEventListener("click", () => {
+        window.open("index.php?action=read&controller=bibliographie&code_bibliographie=" + encodeURIComponent(id.value),'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
+      });
     year.value = selectBiblio.tomselect.options[selectBiblio.tomselect.items].year;
     requeteSpe(callbackSpecies);
     requeteRepartition(callbackRepart);
@@ -89,6 +97,7 @@ function requeteSpe(callback) {
     requeteSpecies = new XMLHttpRequest();
     requeteSpecies.open("GET", url, true);
     requeteSpecies.addEventListener("load",  function () {
+        console.log(requeteSpecies);
         callback(requeteSpecies);
     });
     requeteSpecies.send(null);
@@ -102,6 +111,10 @@ function callbackSpecies(req) {
     specy.innerHTML = "";
     synonyms.innerHTML = "";
 
+    if (tab.length===0) {
+        return;
+    }
+
     let labelSpecy = document.createElement("label");
             labelSpecy.htmlFor = "specy";
             labelSpecy.innerText = "Espèce";
@@ -112,20 +125,26 @@ function callbackSpecies(req) {
             labelSyno.innerText = "Synonyme";
             synonyms.appendChild(labelSyno);
 
-    
-
     for (var i=0; i<tab.length; i++) {
         
         if (tab[i].statut === "Valid name") {
+
+            
             
             let p = document.createElement("p");
             p.innerText = tab[i].genre + " - " + tab[i].espece;
             specy.appendChild(p);
         } else {
+            if (tab[i].statut === "Valid nomenclatural act") {
+                
+            } else {
+            
+
             let p = document.createElement("p");
 
             p.innerText = tab[i].genre + " - " + tab[i].espece;
             synonyms.appendChild(p);
+            }
         }
     }
 
@@ -142,7 +161,6 @@ function requeteRepartition(callback) {
     requeteRepart = new XMLHttpRequest();
     requeteRepart.open("GET", url, true);
     requeteRepart.addEventListener("load",  function () {
-        console.log(requeteRepart);
         callback(requeteRepart);
     });
     requeteRepart.send(null);
@@ -186,6 +204,10 @@ function callbackHP(req) {
     var HP = document.getElementById("plants");
 
     HP.innerHTML = "";
+
+    if (tab.length===0) {
+        return;
+    }
 
     let labelHP = document.createElement("label");
     labelHP.htmlFor = "plants";

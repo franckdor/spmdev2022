@@ -83,10 +83,9 @@ class ControllerPlants {
         }
         $view="created";
         $pagetitle="Create Nomenclature Host Plant";
-        var_dump($_POST);
         $id_plant = ModelPlants::SelectId($_POST['plants']);
         $id_species = ModelNomenclature_espece::SelectID_GenusSpeciesStatusRef($_POST['searchs']);
-        $id_bibliographie = ModelBibliographie::selectIdByTitle($_POST['ref']);
+        $id_bibliographie = ModelBibliographie::selectIdByAut($_POST['ref']);
         
         $data = array(
             "id_plante" => $id_plant[0]->get('plant_ID'),

@@ -106,6 +106,16 @@ class ControllerNomenclature_espece {
         require_once File::build_path(array("view", "view.php"));
     }
 
+    public static function delete() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
+        $pagetitle="suppression";
+        $view="deleted";
+        ModelNomenclature_espece::delete($_GET['id']);
+        require_once File::build_path(array("view", "view.php"));
+    }
     
     
     //Species form

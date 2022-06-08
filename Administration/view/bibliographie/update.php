@@ -8,37 +8,39 @@
     <form method="POST" enctype="multipart/form-data" action= <?php echo "index.php?controller=". self::$object . "&action=" . $action . '>'?>
 
         <fieldset>
-    
+
+        
         <legend>Biblio</legend>
 
-        <input type="text" id="id_biblio" name="code" readonly />
-        
+        <input type="text" id="id_biblio" name="code" value="<?php if(isset($biblio)) echo $biblio->get('code_bibliographie'); ?>" readonly />
+        <div id="id">
+        </div>
         <section>
             <label for="selectBiblio">Search :</label>    
             <select id="selectBiblio" name="searchs"  ></select>
 
             <label for="textTap">TAP :</label>
-            <input id="textTap" placeholder="oui/non" name="tap" type="text" />
+            <input id="textTap" placeholder="oui/non" name="tap" value="<?php if(isset($biblio)) echo $biblio->get('tap'); ?>" type="text" />
 
             <label for="textOcc">Occ :</label>
-            <input id="textOcc" placeholder="RAS" name="occ" type="text" />
+            <input id="textOcc" placeholder="RAS" name="occ" value="<?php if(isset($biblio)) echo $biblio->get('occurences'); ?>" type="text" />
         </section>
         
         <section id="AATS">
                 
                 <label for="textAuthor">Author :</label>
-                <input id="searchAuthor" name="author"  type="text"/>
+                <input id="searchAuthor" name="author" value="<?php if(isset($biblio)) echo $biblio->get('auteur'); ?>"  type="text"/>
 
                 <br>
                 <label for="date">Year :</label> 
-                <input id="date" name="year" type="text" minlength="4" maxlength="4" />
+                <input id="date" name="year" value="<?php if(isset($biblio)) echo $biblio->get('annee'); ?>" type="text" minlength="4" maxlength="4" />
 
                 <label for="textSource">Source :</label>
-                <input id="textSource" name="source" type="text" />
+                <input id="textSource" name="source" value="<?php if(isset($biblio)) echo $biblio->get('source'); ?>" type="text" />
 
                 <br>
                 <label for="textTitle">Title :</label> 
-                <input id="textTitle" name="title" type="text" />
+                <input id="textTitle" name="title" value="<?php if(isset($biblio)) echo $biblio->get('titre'); ?>" type="text" />
 
 
                 
@@ -47,9 +49,9 @@
 
         <section id="resume">
             <label for="textResume">resume :</label>
-            <textarea id="textResume" name="resume"  ></textarea>
+            <textarea id="textResume" name="resume"  ><?php if(isset($biblio)) echo $biblio->get('reference'); ?>
+            </textarea>
 
-            
         </section>
 
         <section>
@@ -59,7 +61,7 @@
             <div id="plants"></div>
 
         </section>
-                
+            <br>
             <input type="submit" value="Envoyer" />
         </fieldset>
 

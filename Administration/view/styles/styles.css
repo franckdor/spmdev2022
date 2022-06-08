@@ -11,6 +11,8 @@ html, body {
     min-height: 100vh;
 }
 
+
+
 #boxCenter {
     width: 100%;
     gap: 30px;
@@ -86,3 +88,69 @@ ul {
     width: 40%;
   }
   
+  li p {
+      color: white;
+      padding: 0px 16px;
+  }
+
+.parent-form {
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.parent-form:hover {
+        background-color: #111;
+}
+
+.formulaires {
+    display: none;
+    background-color: #f28c8c;
+    min-width: 50px;
+    }
+
+.dropdown-form a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    }
+
+.dropdown-form {
+position: relative;
+display: inline-flex;
+}
+
+.dropdown-form:hover .formulaires {
+    display: block;
+}
+
+.parent-form {
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.parent-infos:hover {
+        background-color: #111;
+}
+
+.infos {
+    display: none;
+    background-color: #f28c8c;
+    min-width: 50px;
+    }
+
+.dropdown-infos a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    }
+
+.dropdown-infos {
+position: relative;
+display: inline-flex;
+}
+
+.dropdown-infos:hover .infos {
+    display: block;
+}

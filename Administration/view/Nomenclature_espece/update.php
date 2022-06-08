@@ -19,7 +19,8 @@
     <div>
         <label for="search-species">Search by Species: </label>
         <div>  
-            <select id="search-species" name="searchs"  required></select>    
+            <select id="search-species" name="searchs"  required></select> 
+            <button type="button" id="host_plant">HOST_PLANT</button>   
         </div>
     </div>
 

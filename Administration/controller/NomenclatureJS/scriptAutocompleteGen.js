@@ -69,18 +69,19 @@ function callback(req) {
     
     var sous_famille = [];
     var recherche = [];
+    
 
     let tab = JSON.parse(req.response);
     for (var i=0; i<tab.length; i++) {
         var titleGen = [];
-        
         var titleSF = [];
         var titleR = [];
-
+        var idGen = [];
         titleGen.push(tab[i].genre);
-        
+        idGen.push(tab[i].id);
         titleSF.push(tab[i].sous_famille);
         titleR.push(tab[i].genre + " - " + tab[i].tribu + " - " + tab[i].sous_famille + " - " + tab[i].statut);
+        
 
         
 
@@ -92,16 +93,17 @@ function callback(req) {
         recherche.push({
             id: i+'-'+titleR.join(''),
             title: titleR.join(''),
+            idGen: idGen.join(''),
         });
 
         //genus.addOption(genre);
 
         
-
         sub_fam.addOption(sous_famille);
 
 
         select.addOption(recherche);
+        
     }
 
 }
@@ -202,31 +204,40 @@ function hiddenFunc() {
     hiddenId.value = tribe.options[tribe.items].idTrib;
 }
 
+var buttGenus = document.getElementById("infos_genus");
+
+buttGenus.addEventListener("click", () => {
+    window.open("index.php?action=update&controller=nomenclature_genre&id=" + encodeURIComponent(select.options[select.items].idGen),'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
+})
 
 
 function filler() {
     var option = selection.options[selection.selectedIndex].value;
     tabFill = option.split(" - ");
-    console.log(tabFill);
     genusItem = tabFill[0];
     tribeItem = tabFill[1];
     subFItem = tabFill[2];
+    statItem = tabFill[3];
 
     var tribeOption = document.createElement("option");
     var genusOption = document.createElement("option");
     var subFOption = document.createElement("option");
+    var statOption = document.createElement("option");
 
     genusOption.setAttribute("title", genusItem);
     tribeOption.setAttribute("title", tribeItem);
     subFOption.setAttribute("title", subFItem);
+    statOption.setAttribute("title", statItem);
 
     var tribeNode = document.createTextNode(tribeItem);
     var genusNode = document.createTextNode(genusItem);
     var subFNode = document.createTextNode(subFItem);
+    var statNode = document.createTextNode(statItem);
 
     genusOption.appendChild(genusNode);
     tribeOption.appendChild(tribeNode);
     subFOption.appendChild(subFNode);
+    statOption.appendChild(statNode)
 
 
     genus.addOption(genusOption);
@@ -235,6 +246,8 @@ function filler() {
     tribe.addItem(tribeItem);
     sub_fam.addOption(subFOption);
     sub_fam.addItem(subFItem);
+    select_status.addOption(statOption);
+    select_status.addItem(statItem);
 }
 
 

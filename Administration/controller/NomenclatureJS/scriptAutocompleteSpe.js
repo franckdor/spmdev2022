@@ -10,7 +10,6 @@ let requeteOtherSpecies;
 
 
 
-
 let tableau = [];
 
 //Using TomSelect API for better searching settings
@@ -367,9 +366,6 @@ function fillerGenus() {
   select_VSpe.addItem(VspeciesItem);
   select_status.addOption(statOption);
   select_status.addItem(statItem);
-
-  var id = search_genus.options[search_genus.items].idEsp;
-  window.open("index.php?action=update&controller=nomenclature_espece&id=" + encodeURIComponent(id));
 }
 
 function fillerSpecies() {

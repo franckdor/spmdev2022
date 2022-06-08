@@ -33,12 +33,15 @@
                 <label for="date">Year :</label> 
                 <input id="date" name="year" type="text" minlength="4" maxlength="4" />
 
+                <label for="textSource">Source :</label>
+                <input id="textSource" name="source" type="text" />
+
+                <br>
                 <label for="textTitle">Title :</label> 
                 <input id="textTitle" name="title" type="text" />
 
 
-                <label for="textSource">Source :</label>
-                <input id="textSource" name="source" type="text" />
+                
         
         </section>
 

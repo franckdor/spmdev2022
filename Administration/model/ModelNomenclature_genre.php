@@ -38,7 +38,7 @@ class ModelNomenclature_genre extends Model {
     private $utilisateur;
 
     protected static $object = "Nomenclature_genre";
-    protected static $primary='id_nomenclature_genre';
+    protected static $primary='code_genre';
 
 
     public function __construct($cg=NULL, $nomG=NULL, $tribu=NULL, $sous_famille=NULL, $code_genre_valide=NULL, $code_famille=NULL, 
@@ -72,6 +72,7 @@ class ModelNomenclature_genre extends Model {
     //I serialise by myself
     public function getAll() {
         $array = array(
+            "id" => $this->get("code_genre"),
             "genre" => $this->get("genre"),
             "tribu" => $this->get("tribu"),
             "sous_famille" => $this->get("sous_famille"),

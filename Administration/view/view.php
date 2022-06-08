@@ -5,6 +5,7 @@
         <link rel="stylesheet" type="text/css" href="view/styles/styles.css">
         <link rel="stylesheet" type="text/css" href="view/styles/completion.css">
         <link rel="stylesheet" type="text/css" href="view/styles/nomenclature_espece.css">
+        <link rel="stylesheet" type="text/css" href="view/styles/bibliographie.css">
         <title><?php echo $pagetitle; ?></title>
     </head>
     <body>
@@ -20,15 +21,27 @@
                     echo '<li><a href="index.php?action=create&controller=admin">Add Admin</a></li>';
                     //echo " ";
                     echo '<li id="aled"><a href="index.php?action=signOut&controller=admin">Deconnect</a></li>';
-                    echo '<li><a href="index.php?action=readAll&controller=nomenclature_espece">Species</a></li>';
+                    echo '<div class="dropdown-form">';
+                    echo '<li class="parent-form"><p>Formulaires</p></li>';
+                    echo '<div class="formulaires">';
                     echo '<li><a href="index.php?action=create&controller=nomenclature_espece">Species Add</a></li>';
                     echo '<li><a href="index.php?action=create&controller=nomenclature_genre">Genus Add</a></li>';
-                    echo '<li><a href="index.php?action=readAll&controller=nomenclature_genre">Genus</a></li>';
-                    echo '<li><a href="index.php?action=readAll&controller=plants">Plants</a></li>';
                     echo '<li><a href="index.php?action=update&controller=plants">HostPlants Add</a></li>';
-                    echo '<li><a href="index.php?action=readAll&controller=bibliographie">Biblio</a></li>';
                     echo '<li><a href="index.php?action=create&controller=bibliographie">Biblio Add</a></li>';
                     echo '<li><a href="index.php?action=addRis&controller=bibliographie">Ris ADD</a></li>';
+                    echo '</div>';
+                    echo '</div>';
+
+                    echo '<div class="dropdown-infos">';
+                    echo '<li class="parent-form"><p>Infos</p></li>';
+                    echo '<div class="infos">';
+                    echo '<li><a href="index.php?action=readAll&controller=nomenclature_espece">Species</a></li>';
+                    echo '<li><a href="index.php?action=readAll&controller=nomenclature_genre">Genus</a></li>';
+                    echo '<li><a href="index.php?action=readAll&controller=plants">Plants</a></li>';
+                    echo '<li><a href="index.php?action=readAll&controller=bibliographie">Biblio</a></li>';
+                    echo '</div>';
+                    echo '</div>';
+                    
                 }
                 ?>
             </ul>    

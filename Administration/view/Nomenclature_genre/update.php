@@ -9,6 +9,7 @@
     <label for="select">Recherche : </label>
     <div>  
         <select id="select" name="select"  required></select>    
+        <button type="button" id="infos_genus">Genre</button>
     </div>
 </div>
 

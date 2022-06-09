@@ -6,7 +6,7 @@
         <link rel="stylesheet" type="text/css" href="view/styles/completion.css">
         <link rel="stylesheet" type="text/css" href="view/styles/nomenclature_espece.css">
         <link rel="stylesheet" type="text/css" href="view/styles/bibliographie.css">
-        <script type="text/javascript" src="view/confirmation.js" defer></script>
+
         <title><?php echo $pagetitle; ?></title>
     </head>
     <body>
@@ -30,6 +30,7 @@
                     echo '<li><a href="index.php?action=update&controller=plants">HostPlants Add</a></li>';
                     echo '<li><a href="index.php?action=create&controller=bibliographie">Biblio Add</a></li>';
                     echo '<li><a href="index.php?action=addRis&controller=bibliographie">Ris ADD</a></li>';
+                    echo '<li><a href="index.php?action=create&controller=repartition">Repartition</a></li>';
                     echo '</div>';
                     echo '</div>';
 

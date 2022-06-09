@@ -61,6 +61,20 @@ class ControllerRepartition {
     }
 
 
+    public static function updated() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
+        $view = "updated";
+        $pagetitle = "Repartition";
+
+        $data = array(
+
+        );
+    }
+
+
     public static function read() {
         if (!isset($_GET['id'])) {
             self::error("");
@@ -95,6 +109,22 @@ class ControllerRepartition {
         $pagetitle="Detail ". $repart->get("id_repartition");
 
         require_once File::build_path(array("view", "view.php")); 
+    }
+
+
+    public static function selectCountry() {
+        $tab = ModelPays::selectAll();
+
+        $tabjson = array();
+        foreach($tab as $country) {
+            
+            array_push($tabjson, array('pays' => $country->get('nom_pays'),
+            'zone_biogeo' => ModelZone_biogeographique::select($country->get('id_zone_biogeographique'))->get('nom_zone_biogeographique'),)
+            );
+            
+        }
+
+        echo json_encode($tabjson);
     }
 
 }

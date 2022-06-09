@@ -50,13 +50,13 @@
                 </div>
                 <textarea wrap="hard" id="biblio" readonly></textarea>
 
-                <label for="search-plants">Search by Plant : </label>
+                <label for="search-plants">Search by Country : </label>
 
                 <div>  
-                    <select id="search-plants" name="plants"  required></select> 
+                    <select id="search-country" name="country"  required></select> 
                     <!--<button id="buttonPlants" class="plants" type="button">>>></button>-->
                 </div>
-                <textarea wrap="hard" id="plant" readonly></textarea>
+                <textarea wrap="hard" id="country" readonly></textarea>
                 <br>
                 <input type="submit" value="Envoyer" />
         </fieldset>

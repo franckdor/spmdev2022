@@ -7,6 +7,7 @@ require_once File::build_path(array("controller", "ControllerNomenclature_espece
 require_once File::build_path(array("controller", "ControllerNomenclature_genre.php"));
 require_once File::build_path(array("controller", "ControllerPlants.php"));
 require_once File::build_path(array("controller", "ControllerBibliographie.php"));
+require_once File::build_path(array("controller", "ControllerRepartition.php"));
 
 $controller_default = 'Admin';
 

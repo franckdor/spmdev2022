@@ -1,4 +1,4 @@
-<script type="text/javascript" src="controller/NomenclatureJS/scriptPlante.js" defer></script>
+<script type="text/javascript" src="controller/NomenclatureJS/scriptRepartition.js" defer></script>
 <script type="text/javascript" src="controller/NomenclatureJS/scriptBiblio.js" defer></script>
 <!-- Library for INPUT SELECTOR -->
 <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">

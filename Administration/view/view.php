@@ -40,6 +40,7 @@
                     echo '<li><a href="index.php?action=readAll&controller=nomenclature_genre">Genus</a></li>';
                     echo '<li><a href="index.php?action=readAll&controller=plants">Plants</a></li>';
                     echo '<li><a href="index.php?action=readAll&controller=bibliographie">Biblio</a></li>';
+                    echo '<li><a href="index.php?action=readAll&controller=repartition">Repartition</a></li>';
                     echo '</div>';
                     echo '</div>';
                     

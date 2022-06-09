@@ -2,7 +2,6 @@
 let requeteBiblio;
 requeteB(callbackBiblio);
 
-let hiddenBiblio = document.getElementById("code_biblio");
 
 
 let selectBiblio = document.getElementById("bibliographie");
@@ -18,8 +17,10 @@ function listener() {
     var option = selectBiblio.options[selectBiblio.selectedIndex].value;
     textareab.innerText=option;
     textareab.focus();
-    hiddenBiblio.value = selectBiblio.tomselect.options[selectBiblio.tomselect.items].attr;
-    console.log(hiddenBiblio.value);
+    if (document.getElementById("code_biblio") !== null) {
+        let hiddenBiblio = document.getElementById("code_biblio");
+        hiddenBiblio.value = selectBiblio.tomselect.options[selectBiblio.tomselect.items].attr;
+    }
 }
 
 

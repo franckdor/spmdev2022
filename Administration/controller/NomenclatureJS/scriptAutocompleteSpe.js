@@ -78,42 +78,14 @@ var search_species = new TomSelect('#search-species',{
 
 });
 
-requeteESP(callback_ESP);
-requeteGEN(callback_GEN);
-requeteAut(callbackAut);
-requeteESPVALID(callbackESPVALID);
-requete(callbackSearch);
+requete(callback_ESP, requeteESPE, "nomenclature_espece", "autocompleteEsp");
+requete(callback_GEN, requeteGEND, "nomenclature_espece", "autocompleteGen");
+requete(callbackAut, requeteAute , "nomenclature_espece", "autocompleteAut");
+requete(callbackESPVALID, requeteEspV, "nomenclature_espece" , "autocompleteEspVALID");
+requete(callbackSearch, requeteFill, "nomenclature_espece", "filler");
 
-function requete(callback) {
-  let url = "index.php?controller=nomenclature_espece&action=filler";
-  if (requeteFill && requeteFill.readyState !== XMLHttpRequest.DONE) {
-    requeteFill.abort();
-  }
-  requeteFill = new XMLHttpRequest();
-  requeteFill.open("GET", url, true);
-  requeteFill.addEventListener("load", function () {
-    callback(requeteFill);
-  });
-  requeteFill.send(null);
-}
 
-function requeteOtherSpe() {
-  
-  let url = "index.php?controller=nomenclature_espece&action=OtherSpecies&other=" + encodeURIComponent(select_VSpe.items[0]);
-  if (requeteOtherSpecies && requeteOtherSpecies.readyState !== XMLHttpRequest.DONE) {
-    requeteOtherSpecies.abort();
-  }
-  requeteOtherSpecies = new XMLHttpRequest();
-  requeteOtherSpecies.open("GET", url, true);
-  requeteOtherSpecies.addEventListener("load", function () {
-    callbackOS(requeteOtherSpecies);
-  });
-  requeteOtherSpecies.send(null);
-  
-}
 
-var other_species = document.getElementById("button");
-other_species.addEventListener("click", requeteOtherSpe);
 
 
 
@@ -175,25 +147,11 @@ function callbackSearch(req) {
 
 }
 
-//Getting data from DB via action autocomplete in CONTROLLER
-function requeteGEN(callback) {
-  let url = "index.php?controller=nomenclature_espece&action=autocompleteGen";
-  if (requeteGEND && requeteGEND.readyState !== XMLHttpRequest.DONE) {
-    requeteGEND.abort();
-  }
-  requeteGEND = new XMLHttpRequest();
-  requeteGEND.open("GET", url, true);
-  requeteGEND.addEventListener("load", function () {
-      callback(requeteGEND);
-  });
-  requeteGEND.send(null);
-}
 
 //Called function to fulfill the options
 function callback_GEN(req) {
   var options = [];
   let tab = JSON.parse(req.response);
-  console.log(tab);
 
   for (var i=0; i<tab.length; i++) {
     var title = [];
@@ -208,22 +166,6 @@ function callback_GEN(req) {
   select_genus.addOption(options);
 }
 
-
-
-
-
-function requeteESP(callback) {
-    let url = "index.php?controller=nomenclature_espece&action=autocompleteEsp";
-    if (requeteESPE && requeteESPE.readyState !== XMLHttpRequest.DONE) {
-      requeteESPE.abort();
-    }
-    requeteESPE = new XMLHttpRequest();
-    requeteESPE.open("GET", url, true);
-    requeteESPE.addEventListener("load", function () {
-        callback(requeteESPE);
-    });
-    requeteESPE.send(null);
-}
 
 
 
@@ -264,20 +206,6 @@ function callbackAut(req) {
 
 }
 
-function requeteAut(callback) {
-    let url = "index.php?controller=nomenclature_espece&action=autocompleteAut";// + encodeURIComponent(stringAut);
-    if (requeteAute && requeteAute.readyState !== XMLHttpRequest.DONE) {
-      requeteAute.abort();
-    }
-    requeteAute = new XMLHttpRequest();
-    requeteAute.open("GET", url, true);
-    requeteAute.addEventListener("load", function () {
-        callback(requeteAute);
-    });
-    requeteAute.send(null);
-}
-
-
 
 function callbackESPVALID(req) {
     var options = [];
@@ -293,20 +221,6 @@ function callbackESPVALID(req) {
 
     select_VSpe.addOption(options);
 
-}
-
-
-function requeteESPVALID(callback) {
-    let url = "index.php?controller=nomenclature_espece&action=autocompleteEspVALID";// + encodeURIComponent(stringAut);
-    if (requeteEspV && requeteEspV.readyState !== XMLHttpRequest.DONE) {
-        requeteEspV.abort();
-    }
-    requeteEspV = new XMLHttpRequest();
-    requeteEspV.open("GET", url, true);
-    requeteEspV.addEventListener("load", function () {
-        callback(requeteEspV);
-    });
-    requeteEspV.send(null);
 }
 
 
@@ -413,5 +327,25 @@ function fillerSpecies() {
   select_status.addOption(statOption);
   select_status.addItem(statItem);
 }
+
+
+
+function requeteOtherSpe() {
+  
+  let url = "index.php?controller=nomenclature_espece&action=OtherSpecies&other=" + encodeURIComponent(select_VSpe.items[0]);
+  if (requeteOtherSpecies && requeteOtherSpecies.readyState !== XMLHttpRequest.DONE) {
+    requeteOtherSpecies.abort();
+  }
+  requeteOtherSpecies = new XMLHttpRequest();
+  requeteOtherSpecies.open("GET", url, true);
+  requeteOtherSpecies.addEventListener("load", function () {
+    callbackOS(requeteOtherSpecies);
+  });
+  requeteOtherSpecies.send(null);
+  
+}
+
+var other_species = document.getElementById("button");
+other_species.addEventListener("click", requeteOtherSpe);
   
 

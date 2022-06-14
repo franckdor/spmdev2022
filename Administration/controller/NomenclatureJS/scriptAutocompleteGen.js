@@ -60,12 +60,12 @@ var familyS = new TomSelect("#select-family", {
 
 
 
-requete(callback);
-requeteFam(callbackF);
-requeteTribe(callbackTribe);
+requete(callbackGenus,requeteGen ,"nomenclature_genre", "autocomplete");
+requete(callbackF, requeteF, "nomenclature_genre", "autocompleteF");
+requete(callbackTribe, requeteT, "nomenclature_genre", "selectTribe");
 
 
-function callback(req) {
+function callbackGenus(req) {
     
     var sous_famille = [];
     var recherche = [];
@@ -109,32 +109,6 @@ function callback(req) {
 }
 
 
-function requete(callback) {
-    let url = "index.php?controller=nomenclature_genre&action=autocomplete";
-    if (requeteGen && requeteGen.readyState !== XMLHttpRequest.DONE) {
-        requeteGen.abort();
-    }
-    requeteGen = new XMLHttpRequest();
-    requeteGen.open("GET", url, true);
-    requeteGen.addEventListener("load", function () {
-        callback(requeteGen);
-    });
-    requeteGen.send(null);
-}
-
-function requeteFam(callback) {
-    let url = "index.php?controller=nomenclature_genre&action=autocompleteF";
-    if (requeteF && requeteF.readyState !== XMLHttpRequest.DONE) {
-        requeteF.abort();
-    }
-    requeteF = new XMLHttpRequest();
-    requeteF.open("GET", url, true);
-    requeteF.addEventListener("load", function () {
-        callback(requeteF);
-    });
-    requeteF.send(null);
-}
-
 function callbackF(req) {
     let tab = JSON.parse(req.response);
     let family = [];
@@ -154,19 +128,6 @@ function callbackF(req) {
     familyS.addOption(family);
     familyS.addItem(['Tetranychidae']);
     
-}
-
-function requeteTribe(callback) {
-    let url = "index.php?controller=nomenclature_genre&action=selectTribe";
-    if (requeteT && requeteT.readyState !== XMLHttpRequest.DONE) {
-        requeteT.abort();
-    }
-    requeteT = new XMLHttpRequest();
-    requeteT.open("GET", url, true);
-    requeteT.addEventListener("load", function () {
-        callback(requeteT);
-    });
-    requeteT.send(null);
 }
 
 

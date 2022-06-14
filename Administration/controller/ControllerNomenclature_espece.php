@@ -170,7 +170,6 @@ class ControllerNomenclature_espece {
         foreach($biblio as $ref) {
             array_push($tabjson, $ref->getAll());
         }
-
         echo json_encode($tabjson);
     }
 

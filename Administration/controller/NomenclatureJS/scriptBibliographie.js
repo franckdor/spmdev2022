@@ -4,7 +4,7 @@ let requeteSpecies;
 let requeteRepart;
 let requeteHostP;
 
-requeteB(callbackBiblio);
+requete(callbackBiblio, requeteBiblio, "nomenclature_espece", "autocompleteBiblio")
 
 
 var selectBiblio = document.getElementById("selectBiblio");
@@ -32,22 +32,12 @@ function listener() {
         window.open("index.php?action=read&controller=bibliographie&code_bibliographie=" + encodeURIComponent(id.value),'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
       });
     year.value = selectBiblio.tomselect.options[selectBiblio.tomselect.items].year;
-    requeteSpe(callbackSpecies);
-    requeteRepartition(callbackRepart);
-    requeteHP(callbackHP);
-}
-
-function requeteB(callback) {
-    let url = "index.php?controller=nomenclature_espece&action=autocompleteBiblio";
-    if (requeteBiblio && requeteBiblio.readyState !== XMLHttpRequest.DONE) {
-        requeteBiblio.abort();
-    }
-    requeteBiblio = new XMLHttpRequest();
-    requeteBiblio.open("GET", url, true);
-    requeteBiblio.addEventListener("load",  function () {
-        callback(requeteBiblio);
-    });
-    requeteBiblio.send(null);
+    //requeteSpe(callbackSpecies);
+    requeteValue(callbackSpecies, requeteSpecies, "nomenclature_espece", "searchSpeciesCode", id.value)
+    //requeteRepartition(callbackRepart);
+    requeteValue(callbackRepart, requeteRepart, "bibliographie", "searchRepart", id.value)
+    //requeteHP(callbackHP);
+    requeteValue(callbackHP, requeteHostP, "bibliographie", "searchHostPlant", id.value);
 }
 
 function callbackBiblio(req) {
@@ -88,20 +78,6 @@ function callbackBiblio(req) {
   
 }
 
-//FIND ALL SPECIES THAT HAVE SAME CODE_BIBLIO FROM NOMENCLATURE_SPECIES
-function requeteSpe(callback) {
-    let url = "index.php?controller=nomenclature_espece&action=searchSpeciesCode&code=" + encodeURI(id.value);
-    if (requeteSpecies && requeteSpecies.readyState !== XMLHttpRequest.DONE) {
-        requeteSpecies.abort();
-    }
-    requeteSpecies = new XMLHttpRequest();
-    requeteSpecies.open("GET", url, true);
-    requeteSpecies.addEventListener("load",  function () {
-        console.log(requeteSpecies);
-        callback(requeteSpecies);
-    });
-    requeteSpecies.send(null);
-}
 
 function callbackSpecies(req) {
     let tab = JSON.parse(req.response);
@@ -152,19 +128,7 @@ function callbackSpecies(req) {
   
 }
 
-//FIND REPARTITION FROM A CODE BIBLIO
-function requeteRepartition(callback) {
-    let url = "index.php?controller=bibliographie&action=searchRepart&code=" + encodeURI(id.value);
-    if (requeteRepart && requeteRepart.readyState !== XMLHttpRequest.DONE) {
-        requeteRepart.abort();
-    }
-    requeteRepart = new XMLHttpRequest();
-    requeteRepart.open("GET", url, true);
-    requeteRepart.addEventListener("load",  function () {
-        callback(requeteRepart);
-    });
-    requeteRepart.send(null);
-}
+
 
 function callbackRepart(req) {
     let tab = JSON.parse(req.response);
@@ -185,19 +149,6 @@ function callbackRepart(req) {
 
 }
 
-function requeteHP(callback) {
-    let url = "index.php?controller=bibliographie&action=searchHostPlant&code=" + encodeURI(id.value);
-    if (requeteHostP && requeteHostP.readyState !== XMLHttpRequest.DONE) {
-        requeteHostP.abort();
-    }
-    requeteHostP = new XMLHttpRequest();
-    requeteHostP.open("GET", url, true);
-    requeteHostP.addEventListener("load",  function () {
-        console.log(requeteHostP);
-        callback(requeteHostP);
-    });
-    requeteHostP.send(null);
-}
 
 function callbackHP(req) {
     let tab = JSON.parse(req.response);

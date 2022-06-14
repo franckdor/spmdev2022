@@ -1,5 +1,7 @@
 
-
+<script type="text/javascript" src="controller/NomenclatureJS/scriptRecherche.js" defer></script>
+<link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
 <?php
 
 
@@ -19,8 +21,8 @@ require_once File::build_path(array("model", "Modelris.php"));
 require_once File::build_path(array('vendor', 'autoload.php'));
 
 $statut = ModelPays::SelectAll();
-var_dump($statut);
+
 
 ?>
 
-<a href="index.php?action=delete&controller=admin&id=2" OnClick="return confirm('Effacer la le bazarre n°2')">HEHEHEHE</a>
+<select id="bibliographie"></select>

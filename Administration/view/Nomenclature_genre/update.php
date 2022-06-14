@@ -1,8 +1,10 @@
 <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+<script type="text/javascript" src="controller/NomenclatureJS/requete.js" defer></script>
 <script type="text/javascript" src="controller/NomenclatureJS/scriptAutocompleteGen.js" defer></script>
 <script type="text/javascript" src="controller/NomenclatureJS/scriptStat.js" defer></script>
 <script type="text/javascript" src="controller/NomenclatureJS/scriptBiblio.js" defer></script>
+
 
 
 <div>

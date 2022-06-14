@@ -1,6 +1,6 @@
 "use strict";
 let requeteBiblio;
-requeteB(callbackBiblio);
+requete(callbackBiblio, requeteBiblio, "nomenclature_espece", "autocompleteBiblio");
 
 
 
@@ -11,7 +11,7 @@ setTimeout(() => {
 }, 2000);
 
 
-selectBiblio.addEventListener("change", listener)
+selectBiblio.addEventListener("change", listener);
 
 function listener() {
     var option = selectBiblio.options[selectBiblio.selectedIndex].value;
@@ -23,19 +23,6 @@ function listener() {
     }
 }
 
-
-function requeteB(callback) {
-    let url = "index.php?controller=nomenclature_espece&action=autocompleteBiblio";
-    if (requeteBiblio && requeteBiblio.readyState !== XMLHttpRequest.DONE) {
-        requeteBiblio.abort();
-    }
-    requeteBiblio = new XMLHttpRequest();
-    requeteBiblio.open("GET", url, true);
-    requeteBiblio.addEventListener("load",  function () {
-        callback(requeteBiblio);
-    });
-    requeteBiblio.send(null);
-}
 
 
 function callbackBiblio(req) {

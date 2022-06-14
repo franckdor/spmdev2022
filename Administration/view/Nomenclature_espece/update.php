@@ -1,5 +1,5 @@
 <!-- We load JS here -->
-
+<script type="text/javascript" src="controller/NomenclatureJS/requete.js" defer></script>
 <script type="text/javascript" src="controller/NomenclatureJS/scriptAutocompleteSpe.js" defer></script>
 <script type="text/javascript" src="controller/NomenclatureJS/scriptBiblio.js" defer></script>
 <script type="text/javascript" src="controller/NomenclatureJS/scriptStat.js" defer></script>

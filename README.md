@@ -36,7 +36,7 @@ Partie implémentée sur le site : <br>
 
 
 Le patron de conception utilisé est le MVC. 
-J'utilise l'API ![TomSelect](https://tom-select.js.org/) pour créer des listes de recherches.
+J'utilise l'API [TomSelect](https://tom-select.js.org/) pour créer des listes de recherches.
 L'utilisation d'Ajax permet de réaliser des requêtes vers le serveur pour l'autocomplétion des champs du formulaire. <br/>
 Le travail est toujours en cours...
 

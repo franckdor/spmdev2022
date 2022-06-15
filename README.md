@@ -19,15 +19,23 @@ développer en PhP, une partie d'administration permettant d’interroger et d�
 Le site SpiderMitesWeb permet à des chercheurs du monde entier ou des professionnels de la protection des végétaux, travaillant sur les acariens ravageurs de plantes, d’obtenir des informations sur ces organismes.
 
 
-## Implémentations
+## Exemple d'implémentation
 
-Partie existante :
-![Formulaire insertion de genre sous Access](https://user-images.githubusercontent.com/78204251/173911838-69029dd4-05aa-4f34-bacb-f862c3a06da7.png)
+Partie existante : <br/>
+![Formulaire insertion de genre sous Access](https://user-images.githubusercontent.com/78204251/173914866-3e53e9d3-a6e4-429b-9b48-2408e7e5d4a3.png)
 
-Partie implémentée sur le site :
-![Formulaire insertion de genre sous PostgreSQL](https://user-images.githubusercontent.com/78204251/173912251-57cafb90-c841-4448-8f6d-6772d7f3d1c0.png)
 
-Le patron de conception utilisé est le MVC.
+
+
+Partie implémentée sur le site : <br>
+
+
+![Espece ajout](https://user-images.githubusercontent.com/78204251/173915234-069cf615-8120-44c3-bfd4-6e44950f6680.png)
+
+![Formulaire insertion de genre sous PostgreSQL](https://user-images.githubusercontent.com/78204251/173914890-49abcb0f-0fb6-4ec7-be83-d52026dfde8f.png)
+
+
+Le patron de conception utilisé est le MVC. L'utilisation d'Ajax permet de réaliser des requêtes vers le serveur pour l'autocomplétion des champs du formulaire. <br/>
 Le travail est toujours en cours...
 
 

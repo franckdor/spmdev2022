@@ -35,7 +35,9 @@ Partie implémentée sur le site : <br>
 ![Formulaire insertion de genre sous PostgreSQL](https://user-images.githubusercontent.com/78204251/173914890-49abcb0f-0fb6-4ec7-be83-d52026dfde8f.png)
 
 
-Le patron de conception utilisé est le MVC. L'utilisation d'Ajax permet de réaliser des requêtes vers le serveur pour l'autocomplétion des champs du formulaire. <br/>
+Le patron de conception utilisé est le MVC. 
+J'utilise l'API ![TomSelect](https://tom-select.js.org/) pour créer des listes de recherches.
+L'utilisation d'Ajax permet de réaliser des requêtes vers le serveur pour l'autocomplétion des champs du formulaire. <br/>
 Le travail est toujours en cours...
 
 

@@ -1,6 +1,6 @@
 # Bienvenue sur le projet SpiderMitesWeb !
 
-![SpiderMites]()
+![SpiderMites](https://www1.montpellier.inra.fr/CBGP/spmweb/)
 
 
 ## Langages utilisés ?

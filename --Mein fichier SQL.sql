@@ -16,11 +16,7 @@ ADD date_maj DATE,
 ADD tribu VARCHAR(32),
 ADD sous_famille VARCHAR(32);
 
-ALTER TABLE nomenclature_genre
-RENAME TO genre;
 
-ALTER TABLE genres
-RENAME TO nomenclature_genre;
 
 
 ALTER TABLE plante_hote

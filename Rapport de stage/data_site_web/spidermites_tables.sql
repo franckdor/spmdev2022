@@ -40,7 +40,7 @@ CREATE TABLE "public"."classification_superieure" (
     CONSTRAINT "cp_id_classification_superieure" PRIMARY KEY ("id_classification_fils", "id_classification_pere")
 ) WITH (oids = false);
 
-
+--A détruire
 DROP TABLE IF EXISTS "compteur";
 CREATE TABLE "public"."compteur" (
     "ip" character varying(15) NOT NULL,

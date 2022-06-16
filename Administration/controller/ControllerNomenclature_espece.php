@@ -185,14 +185,12 @@ class ControllerNomenclature_espece {
     //Action for JS autocompletion :
     public static function autocompleteEsp() {
         $tabE = ModelNomenclature_espece::selectAllNomEsp();
-        sleep(0.5);
         echo json_encode($tabE);
         
     }
 
     public static function autocompleteEspV() {
         $tabE = ModelEspece_valide::selectAllNomEsp();
-        sleep(0.5);
         echo json_encode($tabE);
         
     }
@@ -200,7 +198,6 @@ class ControllerNomenclature_espece {
     public static function autocompleteEspVALID() {
         $tab = ModelEspece_valide::selectALL();
 
-        sleep(0.5);
         $tabEV = array();
         foreach($tab as $EV) {
             array_push($tabEV, $EV->get('nom_espece') . " - " . $EV->get('nom_genre'));
@@ -212,7 +209,6 @@ class ControllerNomenclature_espece {
     public static function autocompleteGenVALID() {
         $tab = ModelGenre_valide::selectALL();
 
-        sleep(0.5);
         $tabGV = array();
         foreach($tab as $GV) {
             array_push($tabGV, $GV->get('nom_genre'));
@@ -225,7 +221,6 @@ class ControllerNomenclature_espece {
     public static function autocompleteGen() {
         $tabG = ModelNomenclature_genre::selectAll();
         
-        sleep(0.5);
 
         $tabjson = array();
         
@@ -240,7 +235,6 @@ class ControllerNomenclature_espece {
     public static function autocompleteSTAT() {
         $tabS = ModelStatut_espece::selectALL();
         $tab = array();
-        sleep(0.5);
         foreach($tabS as $stat) {
             array_push($tab, $stat->get('nom_statut_espece'));
         }
@@ -254,13 +248,11 @@ class ControllerNomenclature_espece {
         foreach($tabSpecies as $spe) {
             array_push($tab, $spe->getAll());
         }
-        sleep(0.5);
         echo json_encode($tab);
     }
 
     public static function autocompleteAut() {
         $tabA = ModelNomenclature_espece::selectALLauthordate();
-        sleep(0.5);
         echo json_encode($tabA);
     }
 

@@ -69,7 +69,11 @@ class ControllerAdmin {
         $log = $_GET['id'];
         $pagetitle="suppression";
         $view="deleted";
-        ModelAdmin::delete($_GET['id']);
+        if ($_SESSION['id'] !== $_GET['id']) {
+            ModelAdmin::delete($_GET['id']);
+        } else {
+            echo "La tentative est impossible à réaliser";
+        }
         $tab_admin = ModelAdmin::selectALL();
         require_once File::build_path(array("view", "view.php"));
     }
@@ -123,14 +127,14 @@ class ControllerAdmin {
 
         if (!$_POST['pswd'] == "") {
             $data['mdp'] = Security::hacher($_POST['pswd']);
+
         }
 
         ModelAdmin::update($data);
 
         if ($_SESSION['id'] == $_POST['id']) {
             $view = "home";
-
-        } else {$view = 'list';}
+        }
         
         $pagetitle = "Admin modified";
         require_once File::build_path(array("view", "view.php"));

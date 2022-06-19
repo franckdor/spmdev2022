@@ -43,11 +43,17 @@ class ControllerNomenclature_genre {
             exit();
         }
         $genus = ModelNomenclature_genre::select($_GET['id']);
+    
+        if ($genus) {
+            $view="detail";
+            $pagetitle="Detail ". $genus->get("genre");
 
-        $view="detail";
-        $pagetitle="Detail ". $genus->get("genre");
+            require_once File::build_path(array("view", "view.php")); 
+        } else {
 
-        require_once File::build_path(array("view", "view.php")); 
+            $view = "errorGenus";
+            require_once File::build_path(array("view", "view.php")); 
+        }
     }
 
     public static function created() {
@@ -57,9 +63,7 @@ class ControllerNomenclature_genre {
         }
         $view="updated";
         $pagetitle="Genus created";
-        var_dump($_POST);
         $statut = ModelStatut_genre::SelectIdByName($_POST['statut']);
-
         //REGISTER IN VALID_GENUS
         if ($statut[0]->get('id_statut_genre') == 10) {
             $data = array(
@@ -69,7 +73,7 @@ class ControllerNomenclature_genre {
                 'reference_page' => $_POST['page'],
                 'nom_genre' => $_POST['genre'],
             );
-
+            $msg = "Un nouveau genre a été ajouté dans genre valide";
             ModelGenre_valide::save($data);
         }
         //$GenreV = ModelEspece_valide::SelectIdByName($_POST['espece_valide'], $_POST['genre_valide']);
@@ -78,7 +82,7 @@ class ControllerNomenclature_genre {
             'tribu' => $_POST['tribu'],
             'sous_famille' => $_POST['sous-famille'],
             'code_statut' => $statut[0]->get('id_statut_genre'),
-            'ordre_taxo' => $_POST['tribeID'],
+            
             'code_famille' => 1,
             'code_reference' => $_POST['code_biblio'],
             //'id_espece_valide' => $especeV[0]->get('id_espece_valide'),
@@ -117,17 +121,11 @@ class ControllerNomenclature_genre {
 
         $bibliography_id = $genus->get('code_reference');
 
-        
-
-        if (!is_null($bibliography_id)) {
-            $biblio = ModelBibliographie::select($bibliography_id);
-
-            $page = explode(', ', $biblio->get('source'));
-            $page =$page[count($page)-1];
-            $page = explode("-", $page);
-        } else {
-            $page[0] = 0;
+        if (isset($bibliography_id)) {
+        $biblio = ModelBibliographie::select($bibliography_id);
         }
+
+       
         
 
         $action = "updated";
@@ -144,35 +142,83 @@ class ControllerNomenclature_genre {
         }
 
         $statut = ModelStatut_genre::SelectIdByName($_POST['statut']);
-        $code_biblio = ModelBibliographie::selectByAuthorYearTitleSource($_POST['biblio']);
+        if ($_POST['biblio'] !== '') {
+            $code_biblio = ModelBibliographie::selectByAuthorYearTitleSource($_POST['biblio']);
+        }
 
-        $data = array(
-            'code_genre' => $_POST['id'],
-            'genre' => $_POST['genre'],
-            'tribu' => $_POST['tribu'],
-            'sous_famille' => $_POST['sous-famille'],
-            'code_statut' => $statut[0]->get('id_statut_genre'),
-            'code_reference' => $code_biblio[0]->get('code_bibliographie'),
-            'page' => $_POST['page'],
-            'utilisateur' => $_SESSION['login'],
-            'date_maj' => date('d/m/Y', time()),
-        );
-
+        if (empty($code_biblio)) {
+            $data = array(
+                'code_genre' => $_POST['id'],
+                'genre' => $_POST['genre'],
+                'tribu' => $_POST['tribu'],
+                'sous_famille' => $_POST['sous-famille'],
+                'code_statut' => $statut[0]->get('id_statut_genre'),
+                'page' => $_POST['page'],
+                'utilisateur' => $_SESSION['login'],
+                'date_maj' => date('d/m/Y', time()),
+            );
+        } else {        
+            $data = array(
+                'code_genre' => $_POST['id'],
+                'genre' => $_POST['genre'],
+                'tribu' => $_POST['tribu'],
+                'sous_famille' => $_POST['sous-famille'],
+                'code_statut' => $statut[0]->get('id_statut_genre'),
+                'code_reference' => $code_biblio[0]->get('code_bibliographie'),
+                'page' => $_POST['page'],
+                'utilisateur' => $_SESSION['login'],
+                'date_maj' => date('d/m/Y', time()),
+            );
+        }
         ModelNomenclature_genre::update($data);
         $view="updated";
         $pagetitle="Genus Updated";
         require_once File::build_path(array('view', "view.php"));
     }
 
+    public static function delete() {
+        if (Security::is_connected() == false) {
+            self::errorConnecte();
+            exit();
+        }
+        $id = $_GET['id'];
+        $pagetitle="suppression";
+        $view="deleted";
+
+        $gen = ModelNomenclature_genre::select($id);
+
+        if (isset($gen)) {
+            ModelNomenclature_genre::delete($id);
+        }
+
+        if ($gen->get('code_genre_valide') !== null) {
+            ModelGenre_valide::delete($gen->get('code_genre_valide'));
+        }
+        
+        require_once File::build_path(array("view", "view.php"));
+    }
+
     public static function autocomplete() {
+
         $tab_gen = ModelNomenclature_genre::selectALL();
 
 
-        $tabjson = array();
-        foreach($tab_gen as $gen) {
-            array_push($tabjson, $gen->getAll());
+    $tabjson = array();
+    foreach($tab_gen as $gen) {
+        $biblio = ModelBibliographie::select($gen->get('code_reference'));
+        if ($biblio == false) {
+            $array = array(
+                'gen' => $gen->getAll(),
+            );
+        } else {
+            $array = array(
+                'gen' => $gen->getAll(),
+                'biblio' => $biblio->getAll(),
+            );
         }
-        echo json_encode($tabjson);
+        array_push($tabjson, $array);
+    }
+    echo json_encode($tabjson);
     }
 
     public static function autocompleteF() {

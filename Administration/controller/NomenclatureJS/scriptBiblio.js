@@ -10,12 +10,12 @@ var selBiblio = new TomSelect('#bibliographie',{
     searchField: ['title'],
     sortField: 'title',
     persist: false,
-    create: true,
     hideSelected: true,
   });
 
 let selectBiblio = document.getElementById("bibliographie");
-let textareab = document.getElementById("biblio");
+var textareab = document.getElementById("biblio");
+
 setTimeout(() => {
     textareab.focus();
 }, 2000);
@@ -26,14 +26,24 @@ selectBiblio.addEventListener("change", () => {
 });
 
 function listener() {
-    var option = selBiblio.options[selBiblio.items].value;
-    textareab.innerText=option;
-    textareab.focus();
-    if (document.getElementById("code_biblio") !== null) {
-        let hiddenBiblio = document.getElementById("code_biblio");
-        hiddenBiblio.value = selBiblio.options[selBiblio.items].attr;
+
+    if (selBiblio.options[selBiblio.items] !== undefined) {
+        var option = selBiblio.options[selBiblio.items].value;
+        textareab.innerText=option;
+        textareab.focus();
+        if (document.getElementById("code_biblio") !== null) {
+            let hiddenBiblio = document.getElementById("code_biblio");
+            hiddenBiblio.value = selBiblio.options[selBiblio.items].attr;
+        } 
+    }
+
+    if (selBiblio.options[selBiblio.items] === undefined) {
+        textareab.innerHTML = "";
     }
 }
+
+
+
 
 
 
@@ -63,6 +73,7 @@ function callbackBiblio(req) {
   
 
 }
+
 
 let textarea = document.getElementById("biblio");
         textarea.addEventListener('focus', autoResize, false);

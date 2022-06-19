@@ -10,6 +10,7 @@ require_once File::build_path(array("model", "ModelBibliographie.php"));
 require_once File::build_path(array("model", "ModelGenre.php"));
 require_once File::build_path(array("model", "ModelFamilles.php"));
 require_once File::build_path(array("model", "ModelPlants.php"));
+require_once File::build_path(array("model", "ModelPlante.php"));
 require_once File::build_path(array("model", "ModelPlante_hote.php"));
 
 class ControllerPlants {
@@ -83,12 +84,12 @@ class ControllerPlants {
         }
         $view="created";
         $pagetitle="Create Nomenclature Host Plant";
-        $id_plant = ModelPlants::SelectId($_POST['plants']);
+        $id_plant = ModelPlante::select($_POST['plants']);
         $id_species = ModelNomenclature_espece::SelectID_GenusSpeciesStatusRef($_POST['searchs']);
         $id_bibliographie = ModelBibliographie::selectIdByAut($_POST['ref']);
-        
+       
         $data = array(
-            "id_plante" => $id_plant[0]->get('plant_ID'),
+            "id_plante" => $id_plant[0]->get('id_plante'),
             "id_nomenclature_espece" => $id_species[0]->get('id_nomenclature_espece'),
             "code_bibliographie" => $id_bibliographie[0]->get('code_bibliographie'),
             "utilisateur" => $_SESSION['login'],
@@ -113,8 +114,20 @@ class ControllerPlants {
         echo json_encode($tabjson);
     }
 
+    //Action for JS autocompletion :
+        public static function autocompleteEsp() {
+            $tabE = ModelNomenclature_espece::selectAll();
+            
+            $tabjson = array();
+            foreach($tabE as $spe) {
+                array_push($tabjson, $spe->getAll());
+            }
+            
+            echo json_encode($tabjson);
+        }
+
     public static function searchPlant() {
-        $tab = ModelPlants::SelectAll();
+        $tab = ModelPlante::SelectAll();
         $tabjson = array();
         foreach($tab as $plant) {
             array_push($tabjson, $plant->getSpeGen());

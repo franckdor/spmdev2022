@@ -60,7 +60,7 @@ var familyS = new TomSelect("#select-family", {
 
 
 
-requete(callbackGenus,requeteGen ,"nomenclature_genre", "autocomplete");
+requete(callbackGenus, requeteGen, "nomenclature_genre", "autocomplete");
 requete(callbackF, requeteF, "nomenclature_genre", "autocompleteF");
 requete(callbackTribe, requeteT, "nomenclature_genre", "selectTribe");
 
@@ -72,18 +72,22 @@ function callbackGenus(req) {
     
 
     let tab = JSON.parse(req.response);
+
     for (var i=0; i<tab.length; i++) {
         var titleGen = [];
         var titleSF = [];
         var titleR = [];
         var idGen = [];
-        titleGen.push(tab[i].genre);
-        idGen.push(tab[i].id);
-        titleSF.push(tab[i].sous_famille);
-        titleR.push(tab[i].genre + " - " + tab[i].tribu + " - " + tab[i].sous_famille + " - " + tab[i].statut);
-        
-
-        
+        var biblio = [];
+        var idB = [];
+        titleGen.push(tab[i].gen.genre);
+        idGen.push(tab[i].gen.id);
+        titleSF.push(tab[i].gen.sous_famille);
+        titleR.push(tab[i].gen.genre + " - " + tab[i].gen.tribu + " - " + tab[i].gen.sous_famille + " - " + tab[i].gen.statut);
+        if (tab[i].biblio !== undefined) {
+            biblio.push(tab[i].biblio.reference + " - " + tab[i].biblio.auteur + " - " +  tab[i].biblio.annee + " - " + tab[i].biblio.titre + " - " + tab[i].biblio.source);
+            idB.push(tab[i].biblio.code_bibliographie);
+        }
 
         sous_famille.push({
             id: i+'-'+titleSF.join(''),
@@ -94,9 +98,9 @@ function callbackGenus(req) {
             id: i+'-'+titleR.join(''),
             title: titleR.join(''),
             idGen: idGen.join(''),
+            idB: idB.join(''),
+            biblio: biblio.join(''),
         });
-
-        //genus.addOption(genre);
 
         
         sub_fam.addOption(sous_famille);
@@ -162,53 +166,37 @@ tribeSelect.addEventListener("change", hiddenFunc);
 
 function hiddenFunc() {
     var hiddenId = document.getElementById('tribeID');
-    hiddenId.value = tribe.options[tribe.items].idTrib;
+    if (tribe.options[tribe.items] !== undefined) {
+        hiddenId.value = tribe.options[tribe.items].idTrib;
+    }
 }
 
 var buttGenus = document.getElementById("infos_genus");
 
 buttGenus.addEventListener("click", () => {
-    window.open("index.php?action=update&controller=nomenclature_genre&id=" + encodeURIComponent(select.options[select.items].idGen),'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
+    window.open("index.php?action=read&controller=nomenclature_genre&id=" + encodeURIComponent(select.options[select.items].idGen),'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
 })
 
+function clear() {
+    genus.clear();
+    tribe.clear();
+    select_status.clear();
+    sub_fam.clear();
+    selBiblio.clear();
+}
 
 function filler() {
-    var option = selection.options[selection.selectedIndex].value;
-    tabFill = option.split(" - ");
-    genusItem = tabFill[0];
-    tribeItem = tabFill[1];
-    subFItem = tabFill[2];
-    statItem = tabFill[3];
+    clear();
 
-    var tribeOption = document.createElement("option");
-    var genusOption = document.createElement("option");
-    var subFOption = document.createElement("option");
-    var statOption = document.createElement("option");
+    if (select.options[select.items] !== undefined) {
+        var optionGen = select.options[select.items].title;
+        var optionBiblio = select.options[select.items].biblio;
 
-    genusOption.setAttribute("title", genusItem);
-    tribeOption.setAttribute("title", tribeItem);
-    subFOption.setAttribute("title", subFItem);
-    statOption.setAttribute("title", statItem);
-
-    var tribeNode = document.createTextNode(tribeItem);
-    var genusNode = document.createTextNode(genusItem);
-    var subFNode = document.createTextNode(subFItem);
-    var statNode = document.createTextNode(statItem);
-
-    genusOption.appendChild(genusNode);
-    tribeOption.appendChild(tribeNode);
-    subFOption.appendChild(subFNode);
-    statOption.appendChild(statNode)
-
-
-    genus.addOption(genusOption);
-    genus.addItem(genusItem);
-    tribe.addOption(tribeOption);
-    tribe.addItem(tribeItem);
-    sub_fam.addOption(subFOption);
-    sub_fam.addItem(subFItem);
-    select_status.addOption(statOption);
-    select_status.addItem(statItem);
+        let tabBiblio = optionBiblio.split(" - ");
+        let tabFill = optionGen.split(" - ");
+        setTimeout(completeGen(tabFill, tabBiblio), 550);
+    }
+  
 }
 
 

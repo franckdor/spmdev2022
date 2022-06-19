@@ -13,5 +13,6 @@ if(isset($_SESSION['login'])) {
         echo $key . " => " . $gen . "<br>";
     }
     echo('<a href="?controller=nomenclature_genre&action=update&id=' . $rawUrlIdGen . '"     >Update</a>');
-    echo '<br>';
-}
+    echo '<br>'; ?>
+    <a href="?action=delete&controller=nomenclature_genre&id=<?php echo rawurlencode($idGen);   ?> " OnClick='return confirm("Etes vous sur ?")'>Supprimer</a>
+<?php } ?>

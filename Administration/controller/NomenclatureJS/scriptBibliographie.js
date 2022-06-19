@@ -8,6 +8,7 @@ requete(callbackBiblio, requeteBiblio, "nomenclature_espece", "autocompleteBibli
 
 
 var selectBiblio = document.getElementById("selectBiblio");
+var reference = document.getElementById("ref");
 var author = document.getElementById("searchAuthor");
 var title = document.getElementById("textTitle");
 var source = document.getElementById("textSource");
@@ -18,12 +19,17 @@ selectBiblio.addEventListener("change", listener);
 
 function listener() {
     document.getElementById("id").innerHTML = "";
+
+
     var option = selectBiblio.options[selectBiblio.selectedIndex];
+    if (selectBiblio.tomselect.options[selectBiblio.tomselect.items] !== undefined) {
     const tab = option.value.split(" - ");
     author.value = tab[0];
     title.value = tab[2];
     source.value = tab[3];
+    reference.value = tab[4];
     id.value = selectBiblio.tomselect.options[selectBiblio.tomselect.items].attr;
+    year.value = selectBiblio.tomselect.options[selectBiblio.tomselect.items].year;
     var button = document.createElement("button");
     document.getElementById("id").appendChild(button);
     button.type = "button";
@@ -31,13 +37,21 @@ function listener() {
     button.addEventListener("click", () => {
         window.open("index.php?action=read&controller=bibliographie&code_bibliographie=" + encodeURIComponent(id.value),'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
       });
-    year.value = selectBiblio.tomselect.options[selectBiblio.tomselect.items].year;
+    
     //requeteSpe(callbackSpecies);
     requeteValue(callbackSpecies, requeteSpecies, "nomenclature_espece", "searchSpeciesCode", id.value)
     //requeteRepartition(callbackRepart);
     requeteValue(callbackRepart, requeteRepart, "bibliographie", "searchRepart", id.value)
     //requeteHP(callbackHP);
-    requeteValue(callbackHP, requeteHostP, "bibliographie", "searchHostPlant", id.value);
+    //requeteValue(callbackHP, requeteHostP, "bibliographie", "searchHostPlant", id.value);
+    } else {
+        author.value = "";
+        title.value = "";
+        source.value = "";
+        reference.value = "";
+        id.value = "";
+        year.value = "";
+    }
 }
 
 function callbackBiblio(req) {
@@ -48,17 +62,20 @@ function callbackBiblio(req) {
         var attr = [];
         var value = [];
         var year = [];
-  
+        var ref = [];
+
+            ref.push(tab[i].reference);
           title.push(tab[i].reference + " - " + tab[i].titre);
           attr.push(tab[i].code_bibliographie);
           year.push(tab[i].annee);
-          value.push(tab[i].auteur + " - " +  tab[i].annee + " - " + tab[i].titre + " - " + tab[i].source);
+          value.push(tab[i].auteur + " - " +  tab[i].annee + " - " + tab[i].titre + " - " + tab[i].source + " - " + tab[i].reference);
           options.push({
               id: i+'-'+title.join(''),
               title: title.join(''),
               value: value.join(''),
               attr: attr.join(''),
               year: year.join(''),
+              ref: ref.join(''),
           }); 
     }
   
@@ -96,11 +113,7 @@ function callbackSpecies(req) {
             labelSpecy.innerText = "Espèce";
             specy.appendChild(labelSpecy);
 
-    let labelSyno = document.createElement("label");
-            labelSyno.htmlFor = "specy";
-            labelSyno.innerText = "Synonyme";
-            synonyms.appendChild(labelSyno);
-
+    
     for (var i=0; i<tab.length; i++) {
         
         if (tab[i].statut === "Valid name") {
@@ -118,7 +131,7 @@ function callbackSpecies(req) {
 
             let p = document.createElement("p");
 
-            p.innerText = tab[i].genre + " - " + tab[i].espece;
+            p.innerText = tab[i].genre + " - " + tab[i].espece; + " (synonym)"
             synonyms.appendChild(p);
             }
         }

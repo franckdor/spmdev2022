@@ -1,6 +1,6 @@
 <script type="text/javascript" src="controller/NomenclatureJS/requete.js" defer></script>
-<script type="text/javascript" src="controller/NomenclatureJS/scriptPlante.js" defer></script>
 <script type="text/javascript" src="controller/NomenclatureJS/scriptBiblio.js" defer></script>
+<script type="text/javascript" src="controller/NomenclatureJS/scriptPlante.js" defer></script>
 
 <!-- Library for INPUT SELECTOR -->
 <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
@@ -55,8 +55,9 @@
                 <label for="search-plants">Search by Plant : </label>
 
                 <div>  
-                    <select id="search-plants" name="plants"  required></select> 
+                    <select id="search-plants" name="plante"  required></select> 
                     <!--<button id="buttonPlants" class="plants" type="button">>>></button>-->
+                    <input type="hidden" name="plants" id="id_plant"/>
                 </div>
                 <textarea wrap="hard" id="plant" readonly></textarea>
                 <br>

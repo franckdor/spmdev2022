@@ -50,11 +50,10 @@ class ControllerNomenclature_espece {
         }
         $view="created";
         $pagetitle="Admin créé";
-
         $espv = explode(" ", $_POST['espece_valide']); //The format of $_POST is "species" - "Genus" 
         $statut = ModelStatut_espece::SelectIdByName($_POST['statut']);
         $especeV = ModelEspece_valide::SelectIdByName($espv[0]);
-        $code_biblio = ModelBibliographie::selectByAuthorYearTitleSource($_POST['biblio']);
+        $code_biblio = ModelBibliographie::selectByAuthorYearTitleSource($_POST['bib']);
         
         $data = array(
             'nom_espece' => $_POST['espece'],
@@ -64,7 +63,7 @@ class ControllerNomenclature_espece {
             'id_espece_valide' => $especeV[0]->get('id_espece_valide'),
             'reference_page' => $_POST['page'],
             'utilisateur' => $_SESSION['login'],
-            'dateadd' => date('d/m/Y', time()) ,
+            'date_add' => date('d/m/Y', time()) ,
             'code_bibliographie' => $code_biblio[0]->get('code_bibliographie'),
          );   
         ModelNomenclature_espece::save($data);
@@ -83,10 +82,11 @@ class ControllerNomenclature_espece {
             exit();
         }
 
+    
         $espv = explode(" ", $_POST['espece_valide']); //The format of $_POST is "species" - "Genus" 
         $statut = ModelStatut_espece::SelectIdByName($_POST['statut']);
         $especeV = ModelEspece_valide::SelectIdByName($espv[0]);
-        $code_biblio = ModelBibliographie::selectByAuthorYearTitleSource($_POST['biblio']);
+        $code_biblio = ModelBibliographie::selectByAuthorYearTitleSource($_POST['bib']);
 
         $data = array(
             'id_nomenclature_espece' => $_POST['id'],
@@ -98,7 +98,7 @@ class ControllerNomenclature_espece {
             'code_bibliographie' => $code_biblio[0]->get('code_bibliographie'),
             'reference_page' => $_POST['page'],
             'utilisateur' => $_SESSION['login'],
-            'dateadd' => date('d/m/Y', time()),
+            'date_add' => date('d/m/Y', time()),
         );
         ModelNomenclature_espece::update($data);
         $view = "updated";
@@ -182,12 +182,7 @@ class ControllerNomenclature_espece {
             "title" => $title));
     }
 
-    //Action for JS autocompletion :
-    public static function autocompleteEsp() {
-        $tabE = ModelNomenclature_espece::selectAllNomEsp();
-        ncode($tabE);
-        
-    }
+    
 
     public static function autocompleteEspV() {
         $tabE = ModelEspece_valide::selectAllNomEsp();

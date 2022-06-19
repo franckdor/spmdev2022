@@ -177,22 +177,6 @@ function callback_GEN(req) {
 
 
 
-function callback_ESP(req) {
-  var options = [];
-  let tab = JSON.parse(req.response);
-  for (var i=0; i<tab.length; i++) {
-      var title = [];
-      title.push(tab[i].nom_espece);
-      options.push({
-          id: i+'-'+title.join(''),
-          title: title.join(''),
-      });
-  }
-  select_spe.addOption(options);
-}
-
-
-
 function callbackAut(req) {
     var options = [];
     let tab = JSON.parse(req.response);

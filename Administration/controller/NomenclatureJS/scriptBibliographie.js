@@ -35,7 +35,7 @@ function listener() {
     button.type = "button";
     button.innerText = ">>>";
     button.addEventListener("click", () => {
-        window.open("index.php?action=read&controller=bibliographie&code_bibliographie=" + encodeURIComponent(id.value),'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
+        window.open("index.php?action=read&controller=bibliographie&id=" + encodeURIComponent(id.value),'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
       });
     
     //requeteSpe(callbackSpecies);

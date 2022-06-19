@@ -73,7 +73,7 @@ class ControllerNomenclature_genre {
                 'reference_page' => $_POST['page'],
                 'nom_genre' => $_POST['genre'],
             );
-            $msg = "Un nouveau genre a été ajouté dans genre valide";
+            $msg = "A new relation with Valid Genus has been created";
             ModelGenre_valide::save($data);
         }
         //$GenreV = ModelEspece_valide::SelectIdByName($_POST['espece_valide'], $_POST['genre_valide']);
@@ -125,8 +125,6 @@ class ControllerNomenclature_genre {
         $biblio = ModelBibliographie::select($bibliography_id);
         }
 
-       
-        
 
         $action = "updated";
         $view="update";

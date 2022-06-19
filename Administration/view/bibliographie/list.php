@@ -8,7 +8,7 @@ foreach($biblio as $ref) {
 
     if (isset($_SESSION['login'])) { ?>
         
-            identifiant : <a href="http://admin/index.php?action=read&controller=bibliographie&code_bibliographie=<?php echo $urlprimary; ?>">
+            identifiant : <a href="index.php?action=read&controller=bibliographie&id=<?php echo $urlprimary; ?>">
             <?php echo $htmlprimary; ?> </a> <br>
             <?php echo $htmlAuthor . "<br>" . $htmlTitle  ?> </p>
 

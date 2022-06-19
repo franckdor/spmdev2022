@@ -1,3 +1,2 @@
-<h1>La référence bibliographique a été ajoutée<h1>
-
+Reference has been succesfully created
 

@@ -94,9 +94,26 @@ class ControllerBibliographie {
         require_once File::build_path(array("view", "view.php"));
     }
 
-    public static function created() {
- 
+    public static function updated() {
+       var_dump($_POST);
         $data = array(
+            'reference' => $_POST['reference'],
+            'auteur' => $_POST['author'],
+            'annee' => $_POST['year'],
+            'titre' => $_POST['title'],
+            'source' => $_POST['source'],
+            'occurences' => $_POST['occ'],
+            'tap' => $_POST['tap'],
+            'resume' => $_POST['resume'],
+            'code_bibliographie' => $_POST['code'],
+        );       
+        ModelBibliographie::update($data);
+    }
+
+    public static function created() {
+        
+        $data = array(
+            'code_bibliographie' => $_POST['code'],
             'reference' => $_POST['reference'],
             'auteur' => $_POST['author'],
             'annee' => $_POST['year'],

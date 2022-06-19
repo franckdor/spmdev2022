@@ -49,6 +49,48 @@ class ModelBibliographie extends Model {
         return $this->$nom_attribut;
     }
 
+    static public function update($data) {
+        try {
+            var_dump($data);
+        if($data['occurences']=="") {
+            $data['occurences'] = "false";
+        } 
+        if ($data['tap'] == "") {
+            $data['tap'] = "false";
+        }
+        
+        $data['resume'] = $data['resume']. " . " . $data['reference'];
+        $resume = $data['resume'];
+        $code = $data['code_bibliographie'];
+        $value = array(
+            "titre" => $data['titre'],
+            'reference' => $data['reference'],
+            'source' => $data['source'],
+            'auteur' => $data['auteur'],
+            'annee' => $data['annee'],
+            'occurences' => $data['occurences'],
+            'tap' => $data['tap'],
+
+        );
+        $sql = "UPDATE bibliographie SET 
+            reference=:reference,
+            auteur=:auteur,
+            annee=:annee,
+            titre=:titre,
+            source=:source,
+            occurences=:occurences,
+            tap=:tap
+            WHERE code_bibliographie=$code";
+
+            $pdo = Model::getPdo()->prepare($sql);
+            $pdo->execute($value);
+        } catch (PDOException $e) {
+            if (Conf::getDebug())
+                echo $e->getMessage();
+        }
+
+    }
+
     //RETRIEVE ALL DATA WITH  ORDER BY 
     //function overloaded 
     //return an object with all its info

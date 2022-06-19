@@ -1,1 +1,6 @@
-<h1>Genus succesfully created</h1>
+Genus succesfully created.
+<?php
+if (isset($msg)) {
+    echo "<br>";
+    echo $msg;
+}

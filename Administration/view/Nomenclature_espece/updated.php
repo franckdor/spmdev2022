@@ -1,3 +1,3 @@
 <?php 
 
-echo "<h1> Specy successfully updated </h1>";
+echo "Specy successfully updated";

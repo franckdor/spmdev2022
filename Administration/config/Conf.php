@@ -10,7 +10,7 @@ class Conf {
         'hostname' => "localhost",
         // A l'IUT, vous avez une BDD nommee comme votre login
         // Sur votre machine, vous devrez creer une BDD
-        'database' => "postgres",
+        'database' => "spidermites",
         // A l'IUT, c'est votre login
         // Sur votre machine, vous avez surement un compte 'root'
         'login' => "postgres",

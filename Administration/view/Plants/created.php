@@ -1,1 +1,1 @@
-<h1>Host Plant succesfully created</h1>
+Host Plant succesfully created

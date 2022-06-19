@@ -1,1 +1,1 @@
-<h1>Reference succesfully deleted</h1>
+Reference succesfully deleted

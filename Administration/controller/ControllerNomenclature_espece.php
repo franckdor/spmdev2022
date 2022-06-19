@@ -49,7 +49,7 @@ class ControllerNomenclature_espece {
             exit();
         }
         $view="created";
-        $pagetitle="Admin créé";
+        $pagetitle="Espèce créé";
         $espv = explode(" ", $_POST['espece_valide']); //The format of $_POST is "species" - "Genus" 
         $statut = ModelStatut_espece::SelectIdByName($_POST['statut']);
         $especeV = ModelEspece_valide::SelectIdByName($espv[0]);
@@ -86,7 +86,7 @@ class ControllerNomenclature_espece {
         $espv = explode(" ", $_POST['espece_valide']); //The format of $_POST is "species" - "Genus" 
         $statut = ModelStatut_espece::SelectIdByName($_POST['statut']);
         $especeV = ModelEspece_valide::SelectIdByName($espv[0]);
-        $code_biblio = ModelBibliographie::selectByAuthorYearTitleSource($_POST['bib']);
+        $code_biblio = ModelBibliographie::selectByAuthorYearTitleSource($_POST['biblio']);
 
         $data = array(
             'id_nomenclature_espece' => $_POST['id'],

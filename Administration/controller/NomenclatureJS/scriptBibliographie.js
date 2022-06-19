@@ -37,7 +37,7 @@ function listener() {
     //requeteRepartition(callbackRepart);
     requeteValue(callbackRepart, requeteRepart, "bibliographie", "searchRepart", id.value)
     //requeteHP(callbackHP);
-    requeteValue(callbackHP, requeteHostP, "bibliographie", "searchHostPlant", id.value);
+    //requeteValue(callbackHP, requeteHostP, "bibliographie", "searchHostPlant", id.value);
 }
 
 function callbackBiblio(req) {
@@ -96,11 +96,7 @@ function callbackSpecies(req) {
             labelSpecy.innerText = "Espèce";
             specy.appendChild(labelSpecy);
 
-    let labelSyno = document.createElement("label");
-            labelSyno.htmlFor = "specy";
-            labelSyno.innerText = "Synonyme";
-            synonyms.appendChild(labelSyno);
-
+    
     for (var i=0; i<tab.length; i++) {
         
         if (tab[i].statut === "Valid name") {
@@ -118,7 +114,7 @@ function callbackSpecies(req) {
 
             let p = document.createElement("p");
 
-            p.innerText = tab[i].genre + " - " + tab[i].espece;
+            p.innerText = tab[i].genre + " - " + tab[i].espece; + " (synonym)"
             synonyms.appendChild(p);
             }
         }

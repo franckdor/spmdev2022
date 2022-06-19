@@ -6,6 +6,7 @@ function requete(callback, requete, controller, action) {
     requete = new XMLHttpRequest();
     requete.open("GET", url, true);
     requete.addEventListener("load", function () {
+        
         callback(requete);
     });
     requete.send(null);
@@ -20,6 +21,7 @@ function requeteValue(callback, requete, controller, action, value) {
     requete = new XMLHttpRequest();
     requete.open("GET", url, true);
     requete.addEventListener("load",  function () {
+        console.log(requete)
         callback(requete);
     });
     requete.send(null);
@@ -34,7 +36,7 @@ function complete(tab, tabBiblio) {
     let VspeciesItem = tab[4] + " - " + tab[5];
     let biblioItem = {
       "item" : tabBiblio[0],
-      "value" : tabBiblio[1] + " - " + tabBiblio[2] + " - " + tabBiblio[3] + " - " + tabBiblio[4],
+      "infos" : tabBiblio[1] + " - " + tabBiblio[2] + " - " + tabBiblio[3] + " - " + tabBiblio[4],
     };
     
     
@@ -78,6 +80,49 @@ function complete(tab, tabBiblio) {
     select_VSpe.addItem(VspeciesItem);
     select_status.addOption(statOption);
     select_status.addItem(statItem);
-    selBiblio.addItem(biblioItem.value);
+    selBiblio.addItem(biblioItem.infos);
   
+    }
+
+    function completeGen(tab, tabBiblio) {
+    
+    genusItem = tab[0];
+    tribeItem = tab[1];
+    subFItem = tab[2];
+    statItem = tab[3];
+    let biblioItem = {
+        "item" : tabBiblio[0],
+        "infos" : tabBiblio[1] + " - " + tabBiblio[2] + " - " + tabBiblio[3] + " - " + tabBiblio[4],
+      };
+
+    var tribeOption = document.createElement("option");
+    var genusOption = document.createElement("option");
+    var subFOption = document.createElement("option");
+    var statOption = document.createElement("option");
+
+    genusOption.setAttribute("title", genusItem);
+    tribeOption.setAttribute("title", tribeItem);
+    subFOption.setAttribute("title", subFItem);
+    statOption.setAttribute("title", statItem);
+
+    var tribeNode = document.createTextNode(tribeItem);
+    var genusNode = document.createTextNode(genusItem);
+    var subFNode = document.createTextNode(subFItem);
+    var statNode = document.createTextNode(statItem);
+
+    genusOption.appendChild(genusNode);
+    tribeOption.appendChild(tribeNode);
+    subFOption.appendChild(subFNode);
+    statOption.appendChild(statNode)
+
+
+    genus.addOption(genusOption);
+    genus.addItem(genusItem);
+    tribe.addOption(tribeOption);
+    tribe.addItem(tribeItem);
+    sub_fam.addOption(subFOption);
+    sub_fam.addItem(subFItem);
+    select_status.addOption(statOption);
+    select_status.addItem(statItem);
+    selBiblio.addItem(biblioItem.value);
     }

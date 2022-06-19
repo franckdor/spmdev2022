@@ -252,26 +252,29 @@ function clear() {
 function fillerGenus() {
   clear();
   
+  if (search_genus.options[search_genus.items] !== undefined ) {
   var optionSpe = searchGen.options[searchGen.selectedIndex].value;
   var optionBiblio = search_genus.options[search_genus.items].biblio;
 
   let tabBiblio = optionBiblio.split(" - ");
   let tabFill = optionSpe.split(" - ");
 
-  setTimeout(complete(tabFill, tabBiblio), 550);
+    setTimeout(complete(tabFill, tabBiblio), 550);
+  } 
 
 }
 
 function fillerSpecies() {
   clear();
 
-  var option = searchSpe.options[searchSpe.selectedIndex].value;
-  var optionBiblio = search_species.options[search_species.items].biblio;
+  if (search_species.options[search_species.items] !== undefined) {
+    var option = searchSpe.options[searchSpe.selectedIndex].value;
+    var optionBiblio = search_species.options[search_species.items].biblio;
 
-  let tabBiblio = optionBiblio.split(" - ");
-  let tabFill = option.split(" - ");
-  setTimeout(complete(tabFill, tabBiblio), 550);
-  
+    let tabBiblio = optionBiblio.split(" - ");
+    let tabFill = option.split(" - ");
+    setTimeout(complete(tabFill, tabBiblio), 550);
+  }
 }
 
 

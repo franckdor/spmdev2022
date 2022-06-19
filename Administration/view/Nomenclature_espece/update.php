@@ -20,7 +20,7 @@
         <label for="search-species">Search by Species: </label>
         <div>  
             <select id="search-species" name="searchs"  required></select> 
-            <button type="button" id="host_plant">HOST_PLANT</button>   
+            <!--<button type="button" id="host_plant">HOST_PLANT</button> -->  
         </div>
     </div>
 
@@ -109,12 +109,17 @@
         <label for="bibliographie">Bibliographie : </label> 
         <br>
         <div>
-            <select id="bibliographie" name="biblio">
+            <select id="bibliographie" name="bib">
                 <?php if(isset($biblio)) { ?>
-                    <option value="<?php echo htmlspecialchars($biblio->get('auteur')." - ".$biblio->get('annee')." - ".$biblio->get('titre')." - ".$biblio->get('source')); ?>"
+                    <option value="<?php echo htmlspecialchars($biblio->get('reference')); ?>"
                     attr="<?php echo $biblio->get('code_bibliographie') ?>"></option>
-                <?php } ?>
+                    <?php } ?>
             </select>
+            <br>
+            <?php if (isset($biblio)) { ?>
+            <input type="hidden" value="<?php echo htmlspecialchars($biblio->get('auteur')." - ".$biblio->get('annee')." - ".$biblio->get('titre')." - ".$biblio->get('source')); ?>"
+            name ="biblio">
+            <?php } ?>
         </div>
         <br>
             <textarea wrap="soft" id="biblio" readonly><?php if(isset($biblio)) {

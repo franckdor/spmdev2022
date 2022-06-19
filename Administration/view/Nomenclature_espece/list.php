@@ -8,7 +8,7 @@ foreach($tab_esp as $spe) {
 
     if (isset($_SESSION['login'])) { ?>
         
-            <a href="http://admin/index.php?action=read&controller=nomenclature_espece&id_nomenclature_espece=<?php echo $urlprimary; ?>">
+            <a href="index.php?action=read&controller=nomenclature_espece&id_nomenclature_espece=<?php echo $urlprimary; ?>">
                 <?php echo $htmlSpecies . " " . $htmlGenus  ?> </a>et d'identifiant <?php echo $htmlprimary; ?> </p>
 
 <?php

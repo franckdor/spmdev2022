@@ -182,12 +182,7 @@ class ControllerNomenclature_espece {
             "title" => $title));
     }
 
-    //Action for JS autocompletion :
-    public static function autocompleteEsp() {
-        $tabE = ModelNomenclature_espece::selectAllNomEsp();
-        ncode($tabE);
-        
-    }
+    
 
     public static function autocompleteEspV() {
         $tabE = ModelEspece_valide::selectAllNomEsp();

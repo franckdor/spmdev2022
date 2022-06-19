@@ -97,26 +97,27 @@ class ControllerBibliographie {
     public static function created() {
  
         $data = array(
-            'reference' => $_POST['tap'],
+            'reference' => $_POST['reference'],
             'auteur' => $_POST['author'],
             'annee' => $_POST['year'],
             'titre' => $_POST['title'],
             'source' => $_POST['source'],
             'occurences' => $_POST['occ'],
             'tap' => $_POST['tap'],
-        );      
+            'resume' => $_POST['resume'],
+        );       
         ModelBibliographie::save($data);
         $view = "created";
-        $pagetitle = "test";
+        $pagetitle = "Bibliographie Added";
         
         require_once File::build_path(array("view", "view.php"));
     }
 
     public static function read() {
-        if (!isset($_GET['code_bibliographie'])) {
+        if (!isset($_GET['id'])) {
             self::error("Id non présent");
         }
-        $biblio = ModelBibliographie::select($_GET['code_bibliographie']);
+        $biblio = ModelBibliographie::select($_GET['id']);
         $view = "detail";
         $pagetitle = "Info Reference";
         

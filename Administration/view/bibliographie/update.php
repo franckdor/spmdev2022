@@ -28,6 +28,11 @@
         </section>
         
         <section id="AATS">
+
+                <br>
+                <label for="ref">Reference :</label>
+            <input id="ref" placeholder="reference" name="reference" value="<?php if(isset($biblio)) echo $biblio->get('reference'); ?>" type="text" />
+                <br>
                 
                 <label for="textAuthor">Author :</label>
                 <input id="searchAuthor" name="author" value="<?php if(isset($biblio)) echo $biblio->get('auteur'); ?>"  type="text"/>
@@ -50,7 +55,7 @@
 
         <section id="resume">
             <label for="textResume">resume :</label>
-            <textarea id="textResume" name="resume"  ><?php if(isset($biblio)) echo $biblio->get('reference'); ?>
+            <textarea id="textResume" name="resume"  ><?php if(isset($biblio)) echo $biblio->get('resume'); ?>
             </textarea>
 
         </section>

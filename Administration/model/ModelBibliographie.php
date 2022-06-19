@@ -23,12 +23,15 @@ class ModelBibliographie extends Model {
 
     private $tap;
 
+    private $resume;
+
     protected static $object = "bibliographie";
     protected static $primary='code_bibliographie';
 
-    public function __construct($code=NULL, $ref=NULL, $aut=NULL, $ann=NULL, $tit=NULL, $sourc=NULL, $idn=NULL, $occurences=NULL, $tap=NULL) {
+    public function __construct($code=NULL, $ref=NULL, $aut=NULL, $ann=NULL, $tit=NULL, $sourc=NULL, $idn=NULL, $occurences=NULL, $tap=NULL,
+    $resume=NULL) {
         if (!is_null($code) && !is_null($ref) && !is_null($aut) && !is_null($ann) && !is_null($idn) && !is_null($tit)
-        && !is_null($sourc) && !is_null($occurences) && !is_null($tap)) {
+        && !is_null($sourc) && !is_null($occurences) && !is_null($tap) && !is_null($resume)) {
             $this->code_bibliographie = $code;
             $this->reference = $ref;
             $this->auteur = $aut;
@@ -38,6 +41,7 @@ class ModelBibliographie extends Model {
             $this->id_note = $idn;
             $this->occurences = $occurences;
             $this->tap = $tap;
+            $this->resume = $resume;
         }
     }
 

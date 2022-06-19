@@ -1,12 +1,13 @@
 let requeteFill;
 let requetePlant;
+let requeteSpe
 
 const buttonPlants = document.getElementById("buttonPlants");
 const buttonRef = document.getElementById("buttonRef");
 const buttonSpecies = document.getElementById("buttonSpecies");
 
-requetePlants(callbackPlant);
-requete(callbackSearch);
+requete(callbackPlant, requetePlant, "plants", "searchPlant");
+requete(callbackSearch, requeteSpe, "plants", "autocompleteEsp");
 
 let selectSpecies = document.getElementById("search-species");
 let textSpe = document.getElementById("species");
@@ -19,15 +20,15 @@ textPlant.addEventListener('focus', autoResize, false);
 selectSpecies.addEventListener("change", textSpeFill);
 selectPlants.addEventListener("change", textPlantFill);
 
-buttonPlants.addEventListener("click", () => {
-  window.open("index.php?action=update&controller=plants",'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
-  return false;
-});
+var id_plante = document.getElementById("id_plant");
 
-buttonRef.addEventListener("click", () => {
-  window.open("index.php?action=read&controller=bibliographie&code_bibliographie="+encodeURIComponent(selectBiblio.tomselect.options[selectBiblio.tomselect.items].attr),'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
-  return false;
-});
+
+
+  buttonRef.addEventListener("click", () => {
+    window.open("index.php?action=read&controller=bibliographie&id="+encodeURIComponent(selectBiblio.tomselect.options[selectBiblio.tomselect.items].attr),'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
+    return false;
+  });
+
 
 buttonSpecies.addEventListener("click", () => {
   window.open("index.php?action=read&controller=nomenclature_espece&id_nomenclature_espece="+selectSpecies.tomselect.options[selectSpecies.tomselect.items].attr,'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
@@ -43,36 +44,16 @@ function textSpeFill() {
 function textPlantFill() {
   var option = selectPlants.tomselect.options[selectPlants.tomselect.items].value;
   textPlant.innerText = option;
+  id_plante.value = selectPlants.tomselect.options[selectPlants.tomselect.items].attr;
   textPlant.focus();
 }
+/*
+buttonPlants.addEventListener("click", () => {
+  window.open("index.php?action=update&controller=plants",'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
+  return false;
+});
+*/
 
-
-function requete(callback) {
-  let url = "index.php?controller=nomenclature_espece&action=all";
-  if (requeteFill && requeteFill.readyState !== XMLHttpRequest.DONE) {
-    requeteFill.abort();
-  }
-  requeteFill = new XMLHttpRequest();
-  requeteFill.open("GET", url, true);
-  requeteFill.addEventListener("load", function () {
-
-    callback(requeteFill);
-  });
-  requeteFill.send(null);
-}
-
-function requetePlants(callback) {
-  let url = "index.php?controller=plants&action=searchPlant";
-  if (requetePlant && requetePlant.readyState !== XMLHttpRequest.DONE) {
-    requetePlant.abort();
-  }
-  requetePlant = new XMLHttpRequest();
-  requetePlant.open("GET", url, true);
-  requetePlant.addEventListener("load", function () {
-    callback(requetePlant);
-  });
-  requetePlant.send(null);
-}
 
 
 
@@ -81,7 +62,7 @@ function callbackSearch(req) {
     
     let tab = JSON.parse(req.response);
 
-    console.log(tab);
+
     for (var i=0; i<tab.length; i++) {
         var titleRS = [];
         var value = [];
@@ -102,7 +83,7 @@ function callbackSearch(req) {
   
     new TomSelect('#search-species',{
       maxItems: 1,
-      maxOptions: 800,
+      maxOptions: 14000,
       valueField: 'value',
       labelField: 'title',
       searchField: ['title'],

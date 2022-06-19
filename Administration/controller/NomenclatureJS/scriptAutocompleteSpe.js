@@ -21,7 +21,7 @@ var select_genus = new TomSelect('#select-genre',{
   searchField: ['title'],
   sortField: 'title',
   hideSelected: true,
-  create: true
+  create: false,
 });
 
 var select_spe = new TomSelect('#select-espece',{
@@ -43,7 +43,7 @@ var select_aut = new TomSelect("#select-authd", {
   sortField: 'title',
   searchField: ['title'],
   hideSelected: true,
-  create: true,
+  create: false,
 });
 
 var select_VSpe = new TomSelect("#select-espece-valide", {
@@ -64,6 +64,7 @@ var search_genus = new TomSelect('#search-genus',{
   searchField: ['title'],
   sortField: 'title',
   hideSelected: true,
+  create: false,
 
 });
 
@@ -75,6 +76,7 @@ var search_species = new TomSelect('#search-species',{
   searchField: ['title'],
   sortField: 'title',
   hideSelected: true,
+  create: false,
 
 });
 

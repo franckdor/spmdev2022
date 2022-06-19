@@ -185,7 +185,7 @@ class ControllerNomenclature_espece {
     //Action for JS autocompletion :
     public static function autocompleteEsp() {
         $tabE = ModelNomenclature_espece::selectAllNomEsp();
-        echo json_encode($tabE);
+        ncode($tabE);
         
     }
 
@@ -260,11 +260,15 @@ class ControllerNomenclature_espece {
         $tab_fill = ModelNomenclature_espece::selectAll();
 
         $tabjson = array();
-
-        foreach($tab_fill as $fill)  {
-            array_push($tabjson, $fill->getAll());
+        foreach($tab_fill as $spe) {
+            $biblio = ModelBibliographie::select($spe->get('code_bibliographie'));
+            $array = array(
+                'spe' => $spe->getAll(),
+                'biblio' => $biblio->getAll(),
+            );
+            array_push($tabjson, $array);
         }
-
+        
         echo json_encode($tabjson);
     }
     

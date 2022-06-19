@@ -16,7 +16,7 @@ class Conf {
         'login' => "postgres",
         // A l'IUT, c'est votre mdp (INE par defaut)
         // Sur votre machine personelle, vous avez creez ce mdp a l'installation
-        'password' => "postgresql"
+        'password' => "postgres"
     );
 
     static public function getDebug() {

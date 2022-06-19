@@ -2,7 +2,17 @@
 let requeteBiblio;
 requete(callbackBiblio, requeteBiblio, "nomenclature_espece", "autocompleteBiblio");
 
-
+var selBiblio = new TomSelect('#bibliographie',{
+    maxItems: 1,
+	maxOptions: 6000,
+	valueField: 'value',
+	labelField: 'title',
+    searchField: ['title'],
+    sortField: 'title',
+    persist: false,
+    create: true,
+    hideSelected: true,
+  });
 
 let selectBiblio = document.getElementById("bibliographie");
 let textareab = document.getElementById("biblio");
@@ -11,15 +21,17 @@ setTimeout(() => {
 }, 2000);
 
 
-selectBiblio.addEventListener("change", listener);
+selectBiblio.addEventListener("change", () => {
+    setTimeout(listener, 200);
+});
 
 function listener() {
-    var option = selectBiblio.options[selectBiblio.selectedIndex].value;
+    var option = selBiblio.options[selBiblio.items].value;
     textareab.innerText=option;
     textareab.focus();
     if (document.getElementById("code_biblio") !== null) {
         let hiddenBiblio = document.getElementById("code_biblio");
-        hiddenBiblio.value = selectBiblio.tomselect.options[selectBiblio.tomselect.items].attr;
+        hiddenBiblio.value = selBiblio.options[selBiblio.items].attr;
     }
 }
 
@@ -37,26 +49,18 @@ function callbackBiblio(req) {
         attr.push(tab[i].code_bibliographie);
         value.push(tab[i].auteur + " - " +  tab[i].annee + " - " + tab[i].titre + " - " + tab[i].source);
         options.push({
-            id: i+'-'+title.join(''),
+            id: title.join(''),
             title: title.join(''),
             value: value.join(''),
             attr: attr.join(''),
         }); 
+        
   }
 
+  selBiblio.addOption(options);
 
-  new TomSelect('#bibliographie',{
-    maxItems: 1,
-	maxOptions: 6000,
-	valueField: 'value',
-	labelField: 'title',
-    searchField: ['title'],
-    sortField: 'title',
-    options: options,
-    persist: false,
-    create: true,
-    hideSelected: true,
-  });
+
+  
 
 }
 

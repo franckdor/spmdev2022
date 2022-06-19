@@ -95,6 +95,32 @@ class ModelBibliographie extends Model {
         }
     }
 
+    static public function selectFromRef($ref) {
+        try {
+            $sql = "SELECT * FROM bibliographie WHERE reference=:ref";
+
+            $pdo = Model::getPDO();
+            
+            $req_prep = $pdo->prepare($sql);
+
+            $data = array(
+                'ref' => $ref
+            );
+
+            $req_prep->execute($data);
+
+            $req_prep->setFetchMode(PDO::FETCH_ASSOC);
+            return $req_prep->fetchAll();
+        } catch(PDOException $e) {
+            if (Conf::getDebug())
+                echo $e->getMessage();
+            else {
+                echo '<br>Une erreur est survenue - <a href="">Retour à la page d\'accueil</a>';
+            }
+            die();
+        }
+    }
+
     //Uses the default model  
     //A faire évoluer
     public function getAll() {

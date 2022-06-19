@@ -15,13 +15,11 @@ require_once File::build_path(array("model", "ModelPlants.php"));
 require_once File::build_path(array("model", "ModelPlante_hote.php"));
 require_once File::build_path(array("model", "ModelClassification.php"));
 require_once File::build_path(array("model", "ModelStatut_espece.php"));
+require_once File::build_path(array("model", "ModelBibliographie.php"));
 require_once File::build_path(array("model", "ModelPays.php"));
 
 require_once File::build_path(array("model", "Modelris.php"));
 require_once File::build_path(array('vendor', 'autoload.php'));
-
-$statut = ModelPays::SelectAll();
-
 
 ?>
 

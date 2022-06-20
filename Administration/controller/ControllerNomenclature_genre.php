@@ -61,7 +61,7 @@ class ControllerNomenclature_genre {
             self::errorConnecte();
             exit();
         }
-        $view="updated";
+        $view="created";
         $pagetitle="Genus created";
         $statut = ModelStatut_genre::SelectIdByName($_POST['statut']);
         //REGISTER IN VALID_GENUS

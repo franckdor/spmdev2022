@@ -51,7 +51,6 @@ class ModelBibliographie extends Model {
 
     static public function update($data) {
         try {
-            var_dump($data);
         if($data['occurences']=="") {
             $data['occurences'] = "false";
         } 

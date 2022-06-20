@@ -53,8 +53,9 @@ class ControllerNomenclature_espece {
         $espv = explode(" ", $_POST['espece_valide']); //The format of $_POST is "species" - "Genus" 
         $statut = ModelStatut_espece::SelectIdByName($_POST['statut']);
         $especeV = ModelEspece_valide::SelectIdByName($espv[0]);
+
+        if ($_POST['bib'] !== '') {
         $code_biblio = ModelBibliographie::selectByAuthorYearTitleSource($_POST['bib']);
-        
         $data = array(
             'nom_espece' => $_POST['espece'],
             'nom_genre' => $_POST['genre'],
@@ -66,7 +67,20 @@ class ControllerNomenclature_espece {
             'date_add' => date('d/m/Y', time()) ,
             'code_bibliographie' => $code_biblio[0]->get('code_bibliographie'),
          );   
-        ModelNomenclature_espece::save($data);
+            ModelNomenclature_espece::save($data);
+        } else {
+            $data = array(
+                'nom_espece' => $_POST['espece'],
+                'nom_genre' => $_POST['genre'],
+                'auteur_date' => $_POST['auteur'],
+                'id_statut' => $statut[0]->get('id_statut_espece'),
+                'id_espece_valide' => $especeV[0]->get('id_espece_valide'),
+                'reference_page' => $_POST['page'],
+                'utilisateur' => $_SESSION['login'],
+                'date_add' => date('d/m/Y', time()) ,
+             );   
+                ModelNomenclature_espece::save($data);
+        }
         require_once File::build_path(array("view", "view.php"));
     }
 

@@ -90,7 +90,7 @@ function complete(tab, tabBiblio) {
     statItem = tab[3];
     let biblioItem = {
         "item" : tabBiblio[0],
-        "infos" : tabBiblio[1] + " - " + tabBiblio[2] + " - " + tabBiblio[3] + " - " + tabBiblio[4],
+        "value" : tabBiblio[1] + " - " + tabBiblio[2] + " - " + tabBiblio[3] + " - " + tabBiblio[4],
       };
 
     var tribeOption = document.createElement("option");

@@ -95,7 +95,6 @@ class ControllerBibliographie {
     }
 
     public static function updated() {
-       var_dump($_POST);
         $data = array(
             'reference' => $_POST['reference'],
             'auteur' => $_POST['author'],
@@ -107,7 +106,11 @@ class ControllerBibliographie {
             'resume' => $_POST['resume'],
             'code_bibliographie' => $_POST['code'],
         );       
+        $view = "updated";
+        $pagetitle = "Reference updated";
         ModelBibliographie::update($data);
+
+        require_once File::build_path(array("view", "view.php"));
     }
 
     public static function created() {

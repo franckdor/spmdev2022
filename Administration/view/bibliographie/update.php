@@ -31,22 +31,22 @@
 
                 <br>
                 <label for="ref">Reference :</label>
-            <input id="ref" placeholder="reference" name="reference" value="<?php if(isset($biblio)) echo $biblio->get('reference'); ?>" type="text" />
+            <input id="ref" placeholder="reference" name="reference" value="<?php if(isset($biblio)) echo $biblio->get('reference'); ?>" type="text" required/>
                 <br>
                 
                 <label for="textAuthor">Author :</label>
-                <input id="searchAuthor" name="author" value="<?php if(isset($biblio)) echo $biblio->get('auteur'); ?>"  type="text"/>
+                <input id="searchAuthor" name="author" value="<?php if(isset($biblio)) echo $biblio->get('auteur'); ?>"  type="text" required/>
 
                 <br>
                 <label for="date">Year :</label> 
-                <input id="date" name="year" value="<?php if(isset($biblio)) echo $biblio->get('annee'); ?>" type="text" minlength="4" maxlength="4" />
+                <input id="date" name="year" value="<?php if(isset($biblio)) echo $biblio->get('annee'); ?>" type="text" minlength="4" maxlength="4" required/>
 
                 <label for="textSource">Source :</label>
-                <input id="textSource" name="source" value="<?php if(isset($biblio)) echo $biblio->get('source'); ?>" type="text" />
+                <input id="textSource" name="source" value="<?php if(isset($biblio)) echo $biblio->get('source'); ?>" type="text" required/>
 
                 <br>
                 <label for="textTitle">Title :</label> 
-                <input id="textTitle" name="title" value="<?php if(isset($biblio)) echo $biblio->get('titre'); ?>" type="text" />
+                <input id="textTitle" name="title" value="<?php if(isset($biblio)) echo $biblio->get('titre'); ?>" type="text" required/>
 
 
                 

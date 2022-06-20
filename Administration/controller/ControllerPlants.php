@@ -23,7 +23,7 @@ class ControllerPlants {
         $view="list";   
         $pagetitle="Liste des plantes";
 
-        $tab_plante = ModelPlants::selectAll();
+        $tab_plante = ModelPlante::selectAll();
 
         $tab_spe = ModelNomenclature_espece::selectALL();
 

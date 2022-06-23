@@ -81,7 +81,7 @@ class ControllerNomenclature_genre {
             'genre' => $_POST['genre'],
             'tribu' => $_POST['tribu'],
             'sous_famille' => $_POST['sous-famille'],
-            'code_statut' => $statut[0]->get('id_statut_genre'),
+            'id_statut' => $statut[0]->get('id_statut_genre'),
             
             'code_famille' => 1,
             'code_reference' => $_POST['code_biblio'],
@@ -161,7 +161,7 @@ class ControllerNomenclature_genre {
                 'genre' => $_POST['genre'],
                 'tribu' => $_POST['tribu'],
                 'sous_famille' => $_POST['sous-famille'],
-                'code_statut' => $statut[0]->get('id_statut_genre'),
+                'id_statut' => $statut[0]->get('id_statut_genre'),
                 'code_reference' => $code_biblio[0]->get('code_bibliographie'),
                 'page' => $_POST['page'],
                 'utilisateur' => $_SESSION['login'],

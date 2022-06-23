@@ -6,6 +6,7 @@ function requete(callback, requete, controller, action) {
     requete = new XMLHttpRequest();
     requete.open("GET", url, true);
     requete.addEventListener("load", function () {
+        console.log(requete);
         callback(requete);
     });
     requete.send(null);

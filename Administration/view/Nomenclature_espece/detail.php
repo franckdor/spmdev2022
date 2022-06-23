@@ -12,5 +12,8 @@ if(isset($_SESSION['login'])) {
         echo $key . " => " . $esp . "<br>";
     }
     echo('<a href="?controller=nomenclature_espece&action=update&id=' . $rawUrlIdSpe . '"     >Modifier</a>');
+    
     echo '<br>';
-}
+    ?>
+    <a href="?action=delete&controller=nomenclature_espece&id= <?php echo rawurlencode($idSpe);   ?> " OnClick='return confirm("Etes vous sur ?")'>Supprimer</a>
+<?php }

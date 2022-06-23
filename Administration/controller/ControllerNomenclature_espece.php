@@ -35,7 +35,7 @@ class ControllerNomenclature_espece {
     public static function read()
     {   
         
-        $esp = ModelNomenclature_espece::select($_GET['id_nomenclature_espece']);
+        $esp = ModelNomenclature_espece::select($_GET['id']);
         
         $view = 'detail';
         $pagetitle = 'Détails de espèce';

@@ -99,7 +99,7 @@ function callbackOS(req) {
     button.innerText = "> > >";
     button.type = "button";
     button.addEventListener("click", () => {
-      window.open("index.php?action=update&controller=nomenclature_espece&id=" + encodeURIComponent(tab[i].id),'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
+      window.open("index.php?action=read&controller=nomenclature_espece&id=" + encodeURIComponent(tab[i].id),'popUpWindow','height=600,width=800,left=10,top=10,,scrollbars=no,menubar=no');
     });
     var p = document.createElement("p");
     p.innerText = tab[i].espece + " -- " + tab[i].genre + " -- " + tab[i].auteur_date + " -- " + tab[i].statut + "\n";

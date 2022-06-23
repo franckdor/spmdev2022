@@ -23,7 +23,7 @@ class ModelNomenclature_genre extends Model {
     
     private $page;
     //Id Genre Valide
-    private $code_statut;
+    private $id_statut;
 
     private $code_espece_type;
 
@@ -42,10 +42,10 @@ class ModelNomenclature_genre extends Model {
 
 
     public function __construct($cg=NULL, $nomG=NULL, $tribu=NULL, $sous_famille=NULL, $code_genre_valide=NULL, $code_famille=NULL, 
-    $code_reference=NULL, $page=NULL, $code_statut=NULL, $code_espece_type 	=NULL, $ordre_taxonomique=NULL, $note_imp=NULL, $note_enr=NULL, $date_maj=NULL,
+    $code_reference=NULL, $page=NULL, $id_statut=NULL, $code_espece_type 	=NULL, $ordre_taxonomique=NULL, $note_imp=NULL, $note_enr=NULL, $date_maj=NULL,
     $utilisateur=NULL) {
         if (!is_null($cg) || !is_null($nomG) || !is_null($tribu) || !is_null($sous_famille) || !is_null($code_genre_valide) || !is_null($code_famille) ||
-        !is_null($code_reference) || !is_null($page) || !is_null($code_statut) ||!is_null($code_espece_type) || !is_null($ordre_taxonomique) || 
+        !is_null($code_reference) || !is_null($page) || !is_null($id_statut) ||!is_null($code_espece_type) || !is_null($ordre_taxonomique) || 
         !is_null($note_imp) || !is_null($note_enr) || !is_null($date_maj) || !is_null($utilisateur)) {
             $this->code_genre = $cg;
             $this->genre = $nomG;
@@ -55,7 +55,7 @@ class ModelNomenclature_genre extends Model {
             $this->code_famille = $code_famille;
             $this->code_reference = $code_reference;
             $this->page = $page;
-            $this->code_statut = $code_statut;
+            $this->id_statut = $id_statut;
             $this->code_espece_type = $code_espece_type;
             $this->ordre_taxonomique = $ordre_taxonomique;
             $this->note_imp = $note_imp; 
@@ -76,7 +76,7 @@ class ModelNomenclature_genre extends Model {
             "genre" => $this->get("genre"),
             "tribu" => $this->get("tribu"),
             "sous_famille" => $this->get("sous_famille"),
-            "statut" => ModelStatut_genre::selectNameById($this->get("code_statut"))[0]->get("nom_statut_genre"),
+            "statut" => ModelStatut_genre::selectNameById($this->get("id_statut"))[0]->get("nom_statut_genre"),
         );
         return $array;
     }
